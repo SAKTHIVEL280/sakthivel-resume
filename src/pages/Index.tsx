@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -252,12 +251,14 @@ const Index = () => {
                 <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                   <div>
                     <h3 className="text-2xl font-bold mb-2">K.S. Rangasamy College of Technology</h3>
-                    <p className="text-lg text-muted-foreground">2nd Year (2025)</p>
+                    <p className="text-lg text-muted-foreground mb-2">AIML Department</p>
                   </div>
                   <div className="text-right">
-                    <Badge className="bg-green-500 text-white mb-2">1st Year CGPA: 8.75</Badge>
+                    <Badge className="bg-green-500 text-white mb-2">1st Year CGPA: 8.78</Badge>
                     <br />
-                    <Badge className="bg-blue-500 text-white">3rd Sem: 9.0</Badge>
+                    <Badge className="bg-blue-500 text-white mb-2">3rd Sem CGPA: 9.0</Badge>
+                    <br />
+                    <Badge className="bg-purple-500 text-white">4th Sem: Completed</Badge>
                   </div>
                 </div>
               </CardContent>
@@ -265,12 +266,24 @@ const Index = () => {
             
             <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
               <CardContent className="p-8">
+                <div className="flex flex-col md:flex-row justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
+                    <p className="text-lg text-muted-foreground">12th Grade - 2023</p>
+                  </div>
+                  <Badge className="bg-orange-500 text-white">77%</Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+              <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row justify-between items-start">
                   <div>
                     <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
-                    <p className="text-lg text-muted-foreground">2023</p>
+                    <p className="text-lg text-muted-foreground">10th Grade - 2021</p>
                   </div>
-                  <Badge className="bg-purple-500 text-white">78%</Badge>
+                  <Badge className="bg-cyan-500 text-white">75%</Badge>
                 </div>
               </CardContent>
             </Card>
