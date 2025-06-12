@@ -92,14 +92,7 @@ const Index = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 relative ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-      {/* Background Waves Effect */}
-      <Waves 
-        lineColor={isDark ? '#3b82f6' : '#6366f1'} 
-        backgroundColor="transparent"
-        className="fixed inset-0 z-0"
-      />
-
+    <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Fixed Theme Toggle and Resume Button */}
       <div className="fixed top-6 right-6 z-50 flex items-center gap-4">
         <Button
@@ -116,16 +109,23 @@ const Index = () => {
         </Button>
       </div>
 
-      {/* Hero Section */}
-      <section className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Hero Section with Waves Background */}
+      <section className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
+        {/* Background Waves Effect - Only for Hero */}
+        <Waves 
+          lineColor={isDark ? 'rgba(156, 163, 175, 0.3)' : 'rgba(107, 114, 128, 0.2)'} 
+          backgroundColor="transparent"
+          className="absolute inset-0 z-0"
+        />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
             {/* Interactive TextPressure for main title */}
             <div className="h-32 md:h-40 mb-12">
               <TextPressure 
                 text="SAKTHIVEL E"
-                textColor={isDark ? '#ffffff' : '#000000'}
-                strokeColor={isDark ? '#3b82f6' : '#6366f1'}
+                textColor={isDark ? '#ffffff' : '#1f2937'}
+                strokeColor={isDark ? '#4b5563' : '#6b7280'}
                 stroke={true}
                 minFontSize={48}
                 className="mb-4"
@@ -137,14 +137,14 @@ const Index = () => {
               <div className="h-20 md:h-24 mb-8">
                 <TextPressure 
                   text="AI ENTHUSIAST"
-                  textColor={isDark ? '#3b82f6' : '#6366f1'}
-                  strokeColor={isDark ? '#ffffff' : '#000000'}
+                  textColor={isDark ? '#9ca3af' : '#374151'}
+                  strokeColor={isDark ? '#6b7280' : '#4b5563'}
                   stroke={false}
                   minFontSize={32}
                   className="mb-4"
                 />
               </div>
-              <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-600 mx-auto my-6"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-gray-400 to-gray-600 mx-auto my-6"></div>
             </div>
 
             {/* Description */}
@@ -160,11 +160,11 @@ const Index = () => {
 
             {/* Action buttons */}
             <div className="flex flex-wrap justify-center gap-6">
-              <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
+              <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6 bg-gray-800 hover:bg-gray-700 text-white">
                 <Mail className="w-5 h-5 mr-2" />
                 Get In Touch
               </Button>
-              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
+              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6 border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
                 <ExternalLink className="w-5 h-5 mr-2" />
                 View Projects
               </Button>
@@ -174,7 +174,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-20 px-6 relative z-10">
+      <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="About Me" 
@@ -196,7 +196,7 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 px-6 bg-muted/30 relative z-10">
+      <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Skills & Expertise" 
@@ -224,7 +224,7 @@ const Index = () => {
       </section>
 
       {/* Tools Section */}
-      <section className="py-20 px-6 relative z-10">
+      <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Tools & Technologies" 
@@ -247,7 +247,7 @@ const Index = () => {
       </section>
 
       {/* Interests Section */}
-      <section className="py-20 px-6 bg-muted/30 relative z-10">
+      <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Interests" 
@@ -276,7 +276,7 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="py-20 px-6 relative z-10">
+      <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Featured Projects" 
@@ -318,7 +318,7 @@ const Index = () => {
       </section>
 
       {/* Education Section */}
-      <section className="py-20 px-6 bg-muted/30 relative z-10">
+      <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Education" 
@@ -403,7 +403,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6 relative z-10">
+      <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <SplitText 
             text="Let's Connect" 
@@ -476,7 +476,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-muted/50 border-t border-border relative z-10">
+      <footer className="py-12 px-6 bg-muted/50 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
           <BlurText
             text="© 2025 Sakthivel E. Built with passion and AI."
