@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import SplitText from '@/components/SplitText';
 import BlurText from '@/components/BlurText';
 import TextPressure from '@/components/TextPressure';
+import Waves from '@/components/Waves';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -91,7 +92,14 @@ const Index = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`min-h-screen transition-colors duration-500 relative ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+      {/* Background Waves Effect */}
+      <Waves 
+        lineColor={isDark ? '#3b82f6' : '#6366f1'} 
+        backgroundColor="transparent"
+        className="fixed inset-0 z-0"
+      />
+
       {/* Fixed Theme Toggle and Resume Button */}
       <div className="fixed top-6 right-6 z-50 flex items-center gap-4">
         <Button
@@ -109,8 +117,8 @@ const Index = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="pt-20 pb-20 px-6 text-center min-h-screen flex items-center justify-center">
-        <div className="max-w-4xl mx-auto">
+      <section className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
           <div className="animate-fade-in">
             {/* Interactive TextPressure for main title */}
             <div className="h-32 md:h-40 mb-12">
@@ -124,21 +132,19 @@ const Index = () => {
               />
             </div>
             
-            {/* Structured subtitle section */}
+            {/* AI Enthusiast with TextPressure effect */}
             <div className="mb-16 space-y-4">
-              <SplitText 
-                text="AI Enthusiast"
-                className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent"
-                delay={50}
-                duration={0.8}
-              />
+              <div className="h-20 md:h-24 mb-8">
+                <TextPressure 
+                  text="AI ENTHUSIAST"
+                  textColor={isDark ? '#3b82f6' : '#6366f1'}
+                  strokeColor={isDark ? '#ffffff' : '#000000'}
+                  stroke={false}
+                  minFontSize={32}
+                  className="mb-4"
+                />
+              </div>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-600 mx-auto my-6"></div>
-              <SplitText 
-                text="& Python Developer"
-                className="text-2xl md:text-4xl font-medium text-muted-foreground"
-                delay={75}
-                duration={0.8}
-              />
             </div>
 
             {/* Description */}
@@ -168,7 +174,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="About Me" 
@@ -190,7 +196,7 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-6 bg-muted/30 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Skills & Expertise" 
@@ -218,7 +224,7 @@ const Index = () => {
       </section>
 
       {/* Tools Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Tools & Technologies" 
@@ -241,7 +247,7 @@ const Index = () => {
       </section>
 
       {/* Interests Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-6 bg-muted/30 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Interests" 
@@ -270,7 +276,7 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Featured Projects" 
@@ -312,7 +318,7 @@ const Index = () => {
       </section>
 
       {/* Education Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-6 bg-muted/30 relative z-10">
         <div className="max-w-6xl mx-auto">
           <SplitText 
             text="Education" 
@@ -397,7 +403,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           <SplitText 
             text="Let's Connect" 
@@ -470,7 +476,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-muted/50 border-t border-border">
+      <footer className="py-12 px-6 bg-muted/50 border-t border-border relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           <BlurText
             text="© 2025 Sakthivel E. Built with passion and AI."
