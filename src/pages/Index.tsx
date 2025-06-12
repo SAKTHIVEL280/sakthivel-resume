@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import SplitText from '@/components/SplitText';
 import BlurText from '@/components/BlurText';
+import TextPressure from '@/components/TextPressure';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -119,15 +119,27 @@ const Index = () => {
       <section className="pt-32 pb-20 px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <div className="animate-fade-in">
+            {/* Interactive TextPressure for main title */}
+            <div className="h-32 md:h-40 mb-8">
+              <TextPressure 
+                text="Sakthivel E."
+                textColor={isDark ? '#ffffff' : '#000000'}
+                strokeColor={isDark ? '#3b82f6' : '#6366f1'}
+                stroke={true}
+                minFontSize={48}
+                className="mb-4"
+              />
+            </div>
+            
             <SplitText 
               text="AI Enthusiast &"
-              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent"
               delay={50}
               duration={0.8}
             />
             <SplitText 
               text="Python Developer"
-              className="text-4xl md:text-6xl font-bold mb-8 text-foreground"
+              className="text-3xl md:text-5xl font-bold mb-8 text-foreground"
               delay={75}
               duration={0.8}
             />
