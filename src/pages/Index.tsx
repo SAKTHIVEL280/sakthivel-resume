@@ -92,37 +92,30 @@ const Index = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-background/80 border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-            Sakthivel E.
-          </h1>
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsDark(!isDark)}
-              className="hover:scale-110 transition-transform duration-200"
-            >
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </Button>
-            <Button onClick={handleDownloadResume} className="hover:scale-105 transition-transform duration-200">
-              <Download className="w-4 h-4 mr-2" />
-              Resume
-            </Button>
-          </div>
-        </div>
-      </nav>
+      {/* Fixed Theme Toggle and Resume Button */}
+      <div className="fixed top-6 right-6 z-50 flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsDark(!isDark)}
+          className="hover:scale-110 transition-transform duration-200 backdrop-blur-md bg-background/80"
+        >
+          {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        </Button>
+        <Button onClick={handleDownloadResume} className="hover:scale-105 transition-transform duration-200 backdrop-blur-md">
+          <Download className="w-4 h-4 mr-2" />
+          Resume
+        </Button>
+      </div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 text-center">
+      <section className="pt-20 pb-20 px-6 text-center min-h-screen flex items-center justify-center">
         <div className="max-w-4xl mx-auto">
           <div className="animate-fade-in">
             {/* Interactive TextPressure for main title */}
-            <div className="h-32 md:h-40 mb-8">
+            <div className="h-32 md:h-40 mb-12">
               <TextPressure 
-                text="Sakthivel E."
+                text="SAKTHIVEL E"
                 textColor={isDark ? '#ffffff' : '#000000'}
                 strokeColor={isDark ? '#3b82f6' : '#6366f1'}
                 stroke={true}
@@ -131,31 +124,41 @@ const Index = () => {
               />
             </div>
             
-            <SplitText 
-              text="AI Enthusiast &"
-              className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent"
-              delay={50}
-              duration={0.8}
-            />
-            <SplitText 
-              text="Python Developer"
-              className="text-3xl md:text-5xl font-bold mb-8 text-foreground"
-              delay={75}
-              duration={0.8}
-            />
-            <BlurText 
-              text="Passionate AI & Python developer with hands-on experience building innovative tools and platforms blending artificial intelligence, automation, and user-focused design."
-              className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto"
-              animateBy="words"
-              delay={100}
-              direction="bottom"
-            />
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="hover:scale-105 transition-transform duration-200">
+            {/* Structured subtitle section */}
+            <div className="mb-16 space-y-4">
+              <SplitText 
+                text="AI Enthusiast"
+                className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent"
+                delay={50}
+                duration={0.8}
+              />
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-600 mx-auto my-6"></div>
+              <SplitText 
+                text="& Python Developer"
+                className="text-2xl md:text-4xl font-medium text-muted-foreground"
+                delay={75}
+                duration={0.8}
+              />
+            </div>
+
+            {/* Description */}
+            <div className="mb-16">
+              <BlurText 
+                text="Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences."
+                className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto"
+                animateBy="words"
+                delay={100}
+                direction="bottom"
+              />
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex flex-wrap justify-center gap-6">
+              <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
                 <Mail className="w-5 h-5 mr-2" />
                 Get In Touch
               </Button>
-              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200">
+              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
                 <ExternalLink className="w-5 h-5 mr-2" />
                 View Projects
               </Button>
