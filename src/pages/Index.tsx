@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,7 +11,7 @@ import BlurText from '@/components/BlurText';
 import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
 import Threads from '@/components/Threads';
-import ScrambledText from '@/components/ScrambledText';
+import GradientText from '@/components/GradientText';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -123,41 +124,36 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
             {/* Interactive TextPressure for main title */}
-            <div className="h-32 md:h-40 mb-12">
+            <div className="h-40 md:h-48 mb-8">
               <TextPressure 
                 text="SAKTHIVEL E"
                 textColor={isDark ? '#ffffff' : '#1f2937'}
                 strokeColor={isDark ? '#4b5563' : '#6b7280'}
                 stroke={true}
-                minFontSize={48}
+                minFontSize={56}
                 className="mb-4"
               />
             </div>
             
             {/* AI Enthusiast with TextPressure effect */}
             <div className="mb-16 space-y-4">
-              <div className="h-20 md:h-24 mb-8">
+              <div className="h-16 md:h-20 mb-8">
                 <TextPressure 
                   text="AI ENTHUSIAST"
                   textColor={isDark ? '#9ca3af' : '#374151'}
                   strokeColor={isDark ? '#6b7280' : '#4b5563'}
                   stroke={false}
-                  minFontSize={32}
+                  minFontSize={24}
                   className="mb-4"
                 />
               </div>
-              <div className="w-24 h-1 bg-gradient-to-r from-gray-400 to-gray-600 mx-auto my-6"></div>
             </div>
 
             {/* Description */}
             <div className="mb-16">
-              <BlurText 
-                text="Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences."
-                className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto"
-                animateBy="words"
-                delay={100}
-                direction="bottom"
-              />
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+                Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
+              </p>
             </div>
 
             {/* Action buttons */}
@@ -195,19 +191,14 @@ const Index = () => {
             splitType="words"
             delay={100}
           />
-          <Card className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] bg-background/80 backdrop-blur-md border-border/50">
-            <CardContent className="p-8">
-              <ScrambledText
-                radius={120}
-                duration={1.5}
-                scrambleChars="01.:"
-                className="!text-foreground !max-w-none !margin-0"
-                style={{ margin: 0, color: 'inherit', fontFamily: 'inherit', fontSize: '1.125rem' }}
-              >
-                Strong interest in open-source, multimedia processing, and creating solutions using free, accessible resources. I build smart tools that help people, focusing on innovation through artificial intelligence and automation. My approach combines technical expertise with user-centered design to create meaningful digital experiences.
-              </ScrambledText>
-            </CardContent>
-          </Card>
+          <div className="text-center">
+            <GradientText
+              className="text-lg leading-relaxed max-w-4xl mx-auto"
+              colors={isDark ? ["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"] : ["#2d7a4a", "#2d5a7a", "#2d7a4a", "#2d5a7a", "#2d7a4a"]}
+            >
+              Strong interest in open-source, multimedia processing, and creating solutions using free, accessible resources. I build smart tools that help people, focusing on innovation through artificial intelligence and automation. My approach combines technical expertise with user-centered design to create meaningful digital experiences.
+            </GradientText>
+          </div>
         </div>
       </section>
 
@@ -225,12 +216,7 @@ const Index = () => {
               <Card key={skill.name} className="hover:shadow-lg transition-all duration-300 hover:scale-105 group">
                 <CardContent className="p-6 text-center">
                   <skill.icon className="w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-200" />
-                  <BlurText
-                    text={skill.name}
-                    className="text-xl font-semibold mb-2"
-                    delay={50}
-                    animateBy="chars"
-                  />
+                  <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
                   <Badge variant="secondary">{skill.category}</Badge>
                 </CardContent>
               </Card>
@@ -277,12 +263,7 @@ const Index = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center">
                     <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary to-blue-600 mr-4"></div>
-                    <BlurText
-                      text={interest}
-                      className="text-lg font-medium"
-                      delay={50}
-                      animateBy="words"
-                    />
+                    <p className="text-lg font-medium">{interest}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -314,12 +295,7 @@ const Index = () => {
                     />
                     <Badge variant="outline">{project.year}</Badge>
                   </div>
-                  <BlurText
-                    text={project.description}
-                    className="text-muted-foreground mb-4 leading-relaxed"
-                    delay={30}
-                    animateBy="words"
-                  />
+                  <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
                   <div className="flex justify-between items-center">
                     <Badge className={`bg-gradient-to-r ${project.color} text-white`}>
                       {project.tech}
@@ -347,18 +323,8 @@ const Index = () => {
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                   <div>
-                    <BlurText
-                      text="K.S. Rangasamy College of Technology"
-                      className="text-2xl font-bold mb-2"
-                      delay={50}
-                      animateBy="words"
-                    />
-                    <BlurText
-                      text="AIML Department"
-                      className="text-lg text-muted-foreground mb-2"
-                      delay={70}
-                      animateBy="words"
-                    />
+                    <h3 className="text-2xl font-bold mb-2">K.S. Rangasamy College of Technology</h3>
+                    <p className="text-lg text-muted-foreground mb-2">AIML Department</p>
                   </div>
                   <div className="text-right">
                     <Badge className="bg-green-500 text-white mb-2">1st Year CGPA: 8.78</Badge>
@@ -375,18 +341,8 @@ const Index = () => {
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                   <div>
-                    <BlurText
-                      text="Maharishi Vidya Mandir (CBSE)"
-                      className="text-2xl font-bold mb-2"
-                      delay={50}
-                      animateBy="words"
-                    />
-                    <BlurText
-                      text="12th Grade - 2023"
-                      className="text-lg text-muted-foreground"
-                      delay={70}
-                      animateBy="words"
-                    />
+                    <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
+                    <p className="text-lg text-muted-foreground">12th Grade - 2023</p>
                   </div>
                   <Badge className="bg-orange-500 text-white">77%</Badge>
                 </div>
@@ -397,18 +353,8 @@ const Index = () => {
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row justify-between items-start">
                   <div>
-                    <BlurText
-                      text="Maharishi Vidya Mandir (CBSE)"
-                      className="text-2xl font-bold mb-2"
-                      delay={50}
-                      animateBy="words"
-                    />
-                    <BlurText
-                      text="10th Grade - 2021"
-                      className="text-lg text-muted-foreground"
-                      delay={70}
-                      animateBy="words"
-                    />
+                    <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
+                    <p className="text-lg text-muted-foreground">10th Grade - 2021</p>
                   </div>
                   <Badge className="bg-cyan-500 text-white">75%</Badge>
                 </div>
@@ -429,12 +375,7 @@ const Index = () => {
           />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <BlurText
-                text="Get In Touch"
-                className="text-2xl font-semibold mb-6"
-                delay={50}
-                animateBy="words"
-              />
+              <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Mail className="w-6 h-6 text-primary mr-4" />
@@ -494,12 +435,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-12 px-6 bg-muted/50 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
-          <BlurText
-            text="© 2025 Sakthivel E. Built with passion and AI."
-            className="text-muted-foreground mb-4"
-            delay={50}
-            animateBy="words"
-          />
+          <p className="text-muted-foreground mb-4">© 2025 Sakthivel E. Built with passion and AI.</p>
           <div className="flex justify-center space-x-6">
             <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform duration-200">
               <Github className="w-5 h-5" />
