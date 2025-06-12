@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
+import SplitText from '@/components/SplitText';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -116,15 +118,25 @@ const Index = () => {
       <section className="pt-32 pb-20 px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent">
-              AI Enthusiast &
-            </h1>
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-foreground">
-              Python Developer
-            </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto">
-              Passionate AI & Python developer with hands-on experience building innovative tools and platforms blending artificial intelligence, automation, and user-focused design.
-            </p>
+            <SplitText 
+              text="AI Enthusiast &"
+              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent"
+              delay={50}
+              duration={0.8}
+            />
+            <SplitText 
+              text="Python Developer"
+              className="text-4xl md:text-6xl font-bold mb-8 text-foreground"
+              delay={75}
+              duration={0.8}
+            />
+            <SplitText 
+              text="Passionate AI & Python developer with hands-on experience building innovative tools and platforms blending artificial intelligence, automation, and user-focused design."
+              className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto"
+              splitType="words"
+              delay={30}
+              duration={0.6}
+            />
             <div className="flex flex-wrap justify-center gap-4">
               <Button size="lg" className="hover:scale-105 transition-transform duration-200">
                 <Mail className="w-5 h-5 mr-2" />
