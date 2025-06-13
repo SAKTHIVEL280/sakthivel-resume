@@ -507,7 +507,7 @@ const Index = () => {
               Exploring the intersection of AI, creativity, and innovation through hands-on projects and continuous learning
             </p>
           </div>
-          <div className="h-[500px] md:h-[600px] relative rounded-xl overflow-hidden shadow-2xl">
+          <div className="h-[320px] md:h-[380px] relative rounded-xl overflow-hidden shadow-2xl">
             <FlowingMenu items={interests} />
           </div>
         </div>

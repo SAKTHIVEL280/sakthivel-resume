@@ -12,6 +12,7 @@
   margin: 0;
   padding: 0;
   gap: 0; /* Remove any gaps between items */
+  justify-content: flex-start; /* Align items to top */
 }
 
 .menu__item {
