@@ -10,6 +10,7 @@ import Waves from '@/components/Waves';
 import Threads from '@/components/Threads';
 import GradientText from '@/components/GradientText';
 import Hyperspeed from '@/components/Hyperspeed';
+import DotGrid from '@/components/DotGrid';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -229,9 +230,24 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section - Fixed Icon Alignment */}
-      <section id="skills" className="py-20 px-6 bg-muted/20">
-        <div className="max-w-6xl mx-auto">
+      {/* Skills Section - Fixed Icon Alignment with DotGrid Background */}
+      <section id="skills" className="py-20 px-6 bg-muted/20 relative overflow-hidden">
+        {/* DotGrid Background */}
+        <div className="absolute inset-0 z-0">
+          <DotGrid
+            dotSize={8}
+            gap={20}
+            baseColor={isDark ? "#374151" : "#d1d5db"}
+            activeColor={isDark ? "#60a5fa" : "#3b82f6"}
+            proximity={120}
+            shockRadius={200}
+            shockStrength={3}
+            resistance={500}
+            returnDuration={1.2}
+          />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-foreground">Skills & Expertise</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -248,9 +264,9 @@ const Index = () => {
                   className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  {/* Icon Container - Perfectly Centered with Flexbox */}
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-6 h-6 text-white" />
+                  {/* Icon Container - Fixed Alignment */}
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
+                    <IconComponent className="w-6 h-6 text-white flex-shrink-0" />
                   </div>
 
                   {/* Content */}
