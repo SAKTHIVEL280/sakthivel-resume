@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -133,9 +134,9 @@ const Index = () => {
               />
             </div>
             
-            {/* AI Enthusiast with TextPressure effect - Made smaller and added proper spacing */}
-            <div className="mb-16 space-y-4">
-              <div className="h-8 md:h-10 mb-8">
+            {/* AI Enthusiast with TextPressure effect - Added more spacing */}
+            <div className="mb-20 space-y-6">
+              <div className="h-8 md:h-10 mb-12">
                 <TextPressure 
                   text="AI ENTHUSIAST"
                   textColor={isDark ? '#9ca3af' : '#374151'}
