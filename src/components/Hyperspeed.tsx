@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import * as THREE from 'three';
 import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
@@ -510,7 +509,8 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
         );
         let geometry = new THREE.TubeGeometry(curve, 40, 1, 8, false);
 
-        let instanced = new THREE.InstancedBufferGeometry().copy(geometry);
+        let instanced = new THREE.InstancedBufferGeometry();
+        instanced.copy(geometry);
         instanced.instanceCount = options.lightPairsPerRoadWay * 2;
 
         let laneWidth = options.roadWidth / options.lanesPerRoad;
@@ -610,7 +610,7 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
       }
 
       update(time: number) {
-        this.mesh.material.uniforms.uTime.value = time;
+        (this.mesh.material as THREE.ShaderMaterial).uniforms.uTime.value = time;
       }
     }
 
@@ -627,7 +627,8 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
       init() {
         const options = this.options;
         const geometry = new THREE.PlaneGeometry(1, 1);
-        let instanced = new THREE.InstancedBufferGeometry().copy(geometry);
+        let instanced = new THREE.InstancedBufferGeometry();
+        instanced.copy(geometry);
         let totalSticks = options.totalSideLightSticks;
         instanced.instanceCount = totalSticks;
 
@@ -698,7 +699,7 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
       }
 
       update(time: number) {
-        this.mesh.material.uniforms.uTime.value = time;
+        (this.mesh.material as THREE.ShaderMaterial).uniforms.uTime.value = time;
       }
     }
 
