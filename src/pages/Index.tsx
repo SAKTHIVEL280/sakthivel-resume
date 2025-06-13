@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -36,12 +35,50 @@ const Index = () => {
     { name: 'ComfyUI', icon: Wrench, category: 'Tools' }
   ];
 
-  const skillsForMenu = skills.map(skill => ({
-    image: `https://picsum.photos/600/600?random=${skill.name}`,
-    title: skill.name,
-    description: skill.category,
-    link: '#'
-  }));
+  const skillsForMenu = [
+    {
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+      title: 'Python',
+      description: 'Programming',
+      link: '#'
+    },
+    {
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
+      title: 'C',
+      description: 'Programming',
+      link: '#'
+    },
+    {
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+      title: 'HTML & CSS',
+      description: 'Web',
+      link: '#'
+    },
+    {
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
+      title: 'Applied AI Skills',
+      description: 'AI',
+      link: '#'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=400&fit=crop&crop=center',
+      title: 'Prompt Engineering',
+      description: 'AI',
+      link: '#'
+    },
+    {
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+      title: 'UI/UX Designing',
+      description: 'Design',
+      link: '#'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=400&fit=crop&crop=center',
+      title: 'ComfyUI',
+      description: 'Tools',
+      link: '#'
+    }
+  ];
 
   const tools = [
     'ComfyUI', 'Hugging Face', 'DaVinci Resolve', 
@@ -129,30 +166,30 @@ const Index = () => {
         />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="animate-fade-in">
-            {/* AI Enthusiast first - Made smaller and with proper spacing */}
-            <div className="mb-8">
-              <div className="h-6 md:h-8 mb-4">
-                <TextPressure 
-                  text="AI ENTHUSIAST"
-                  textColor={isDark ? '#9ca3af' : '#374151'}
-                  strokeColor={isDark ? '#6b7280' : '#4b5563'}
-                  stroke={false}
-                  minFontSize={14}
-                  className="mb-4"
-                />
-              </div>
-            </div>
-            
-            {/* Interactive TextPressure for main title - Made larger */}
-            <div className="mb-8">
-              <div className="h-48 md:h-56">
+          <div className="animate-fade-in space-y-12">
+            {/* Main title - SAKTHIVEL E */}
+            <div className="mb-12">
+              <div className="h-32 md:h-40 mb-8">
                 <TextPressure 
                   text="SAKTHIVEL E"
                   textColor={isDark ? '#ffffff' : '#1f2937'}
                   strokeColor={isDark ? '#4b5563' : '#6b7280'}
                   stroke={true}
-                  minFontSize={64}
+                  minFontSize={48}
+                  className="mb-4"
+                />
+              </div>
+            </div>
+            
+            {/* AI Enthusiast subtitle - Smaller and well spaced */}
+            <div className="mb-12">
+              <div className="h-8 md:h-10">
+                <TextPressure 
+                  text="AI ENTHUSIAST"
+                  textColor={isDark ? '#9ca3af' : '#374151'}
+                  strokeColor={isDark ? '#6b7280' : '#4b5563'}
+                  stroke={false}
+                  minFontSize={16}
                   className="mb-4"
                 />
               </div>
@@ -206,11 +243,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section with InfiniteMenu */}
-      <section className="py-20 px-6 bg-muted/30">
+      {/* Skills Section with InfiniteMenu - Enhanced */}
+      <section className="py-20 px-6 bg-muted/30 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Skills & Expertise</h2>
-          <div className="h-96 md:h-[500px] relative">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">Skills & Expertise</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Explore my technical skills through this interactive 3D interface. Click and drag to navigate through my expertise areas.
+            </p>
+          </div>
+          <div className="h-96 md:h-[600px] relative rounded-2xl overflow-hidden bg-transparent backdrop-blur-sm">
             <InfiniteMenu items={skillsForMenu} />
           </div>
         </div>

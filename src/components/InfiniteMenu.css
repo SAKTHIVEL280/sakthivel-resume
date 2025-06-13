@@ -8,6 +8,7 @@
   overflow: hidden;
   position: relative;
   outline: none;
+  background: transparent;
 }
 
 #infinite-grid-menu-canvas:active {
@@ -22,11 +23,19 @@
   height: 60px;
   display: grid;
   place-items: center;
-  background: #5227FF;
+  background: rgba(82, 39, 255, 0.9);
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  border: 5px solid #000;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background: rgba(82, 39, 255, 1);
+  transform: translateX(-50%) scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .face-title {
@@ -36,6 +45,8 @@
   font-size: 4rem;
   left: 1.6em;
   top: 50%;
+  color: var(--foreground);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .action-button-icon {
@@ -44,6 +55,7 @@
   color: #fff;
   top: 2px;
   font-size: 26px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .face-title {
@@ -68,11 +80,14 @@
 .face-description {
   user-select: none;
   position: absolute;
-  max-width: 10ch;
+  max-width: 12ch;
   top: 50%;
   font-size: 1.5rem;
   right: 1%;
   transform: translate(0, -50%);
+  color: var(--muted-foreground);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
 }
 
 .face-description.active {
@@ -113,5 +128,26 @@
 @media (max-width: 1500px) {
   .face-title, .face-description {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .face-title {
+    font-size: 2.5rem;
+    left: 1em;
+  }
+  
+  .face-description {
+    font-size: 1.2rem;
+    max-width: 10ch;
+  }
+  
+  .action-button {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .action-button-icon {
+    font-size: 20px;
   }
 }
