@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -165,11 +166,11 @@ const Index = () => {
 
   const projects = [
     {
-      title: 'T2I – Text to Image Generator',
-      description: 'Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.',
-      tech: 'React + AI',
-      year: '2024',
-      color: 'from-purple-500 to-pink-500'
+      title: 'MediaWeave – AI Multimedia Conversion Platform',
+      description: 'Converts text ↔ audio ↔ video using AI. Supports translations and works on low-GPU setups.',
+      tech: 'Python + AI',
+      year: '2025',
+      color: 'from-green-500 to-emerald-500'
     },
     {
       title: 'Virtual Try-On System',
@@ -179,11 +180,11 @@ const Index = () => {
       color: 'from-blue-500 to-cyan-500'
     },
     {
-      title: 'MediaWeave – AI Multimedia Conversion Platform',
-      description: 'Converts text ↔ audio ↔ video using AI. Supports translations and works on low-GPU setups.',
-      tech: 'Python + AI',
-      year: '2025',
-      color: 'from-green-500 to-emerald-500'
+      title: 'T2I – Text to Image Generator',
+      description: 'Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.',
+      tech: 'React + AI',
+      year: '2024',
+      color: 'from-purple-500 to-pink-500'
     },
     {
       title: 'Personal Markdown Note Taker (PMLNT)',
@@ -583,7 +584,7 @@ const Index = () => {
             centerVignette={true}
             outerVignette={false}
             smooth={true}
-            glitchColors={isDark ? ['#374151', '#6b7280', '#9ca3af'] : ['#e5e7eb', '#d1d5db', '#9ca3af']}
+            glitchColors={isDark ? ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4'] : ['#1d4ed8', '#059669', '#7c3aed', '#d97706', '#dc2626', '#0891b2']}
           />
         </div>
         
