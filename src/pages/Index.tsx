@@ -137,22 +137,22 @@ const Index = () => {
     {
       link: '#',
       text: 'Building AI-Powered Tools & Assistants',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop'
+      image: 'https://picsum.photos/600/400?random=1'
     },
     {
       link: '#',
       text: 'Exploring Open-Source AI Projects',
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop'
+      image: 'https://picsum.photos/600/400?random=2'
     },
     {
       link: '#',
       text: 'Editing with DaVinci Resolve',
-      image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&h=400&fit=crop'
+      image: 'https://picsum.photos/600/400?random=3'
     },
     {
       link: '#',
       text: 'Designing Minimal UI Experiences',
-      image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&h=400&fit=crop'
+      image: 'https://picsum.photos/600/400?random=4'
     }
   ];
 
