@@ -30,24 +30,45 @@ function MenuItem({ link, text, image }: MenuItem) {
   const marqueeRef = React.useRef<HTMLDivElement>(null);
   const marqueeInnerRef = React.useRef<HTMLDivElement>(null);
 
-  const animationDefaults = { duration: 0.8, ease: 'power3.out' };
+  const animationDefaults = { duration: 0.6, ease: 'expo.out' };
 
-  const handleMouseEnter = () => {
-    if (!marqueeRef.current || !marqueeInnerRef.current) return;
-
-    gsap.timeline({ defaults: animationDefaults })
-      .set(marqueeRef.current, { x: '-100%' }, 0)
-      .set(marqueeInnerRef.current, { x: '0%' }, 0)
-      .to(marqueeRef.current, { x: '0%' }, 0)
-      .to(marqueeInnerRef.current, { x: '0%' }, 0);
+  const findClosestEdge = (mouseX: number, mouseY: number, width: number, height: number) => {
+    const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
+    const bottomEdgeDist = distMetric(mouseX, mouseY, width / 2, height);
+    return topEdgeDist < bottomEdgeDist ? 'top' : 'bottom';
   };
 
-  const handleMouseLeave = () => {
-    if (!marqueeRef.current || !marqueeInnerRef.current) return;
+  const distMetric = (x: number, y: number, x2: number, y2: number) => {
+    const xDiff = x - x2;
+    const yDiff = y - y2;
+    return xDiff * xDiff + yDiff * yDiff;
+  };
+
+  const handleMouseEnter = (ev: React.MouseEvent) => {
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
+    
+    const rect = itemRef.current.getBoundingClientRect();
+    const x = ev.clientX - rect.left;
+    const y = ev.clientY - rect.top;
+    const edge = findClosestEdge(x, y, rect.width, rect.height);
 
     gsap.timeline({ defaults: animationDefaults })
-      .to(marqueeRef.current, { x: '100%' }, 0)
-      .to(marqueeInnerRef.current, { x: '100%' }, 0);
+      .set(marqueeRef.current, { y: edge === 'top' ? '-101%' : '101%' }, 0)
+      .set(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0)
+      .to([marqueeRef.current, marqueeInnerRef.current], { y: '0%' }, 0);
+  };
+
+  const handleMouseLeave = (ev: React.MouseEvent) => {
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
+    
+    const rect = itemRef.current.getBoundingClientRect();
+    const x = ev.clientX - rect.left;
+    const y = ev.clientY - rect.top;
+    const edge = findClosestEdge(x, y, rect.width, rect.height);
+
+    gsap.timeline({ defaults: animationDefaults })
+      .to(marqueeRef.current, { y: edge === 'top' ? '-101%' : '101%' }, 0)
+      .to(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0);
   };
 
   const repeatedMarqueeContent = Array.from({ length: 6 }).map((_, idx) => (
@@ -64,12 +85,12 @@ function MenuItem({ link, text, image }: MenuItem) {
     <div 
       className="menu__item" 
       ref={itemRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <a
         className="menu__item-link"
         href={link}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {text}
       </a>
