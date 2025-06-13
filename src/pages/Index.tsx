@@ -15,13 +15,18 @@ import FadeContent from '@/components/FadeContent';
 import Silk from '@/components/Silk';
 import FlowingMenu from '@/components/FlowingMenu';
 import LetterGlitch from '@/components/LetterGlitch';
-import ChromaGrid from '@/components/ChromaGrid';
+import { gsap } from 'gsap';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
   const [isHyperspeedActive, setIsHyperspeedActive] = useState(false);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const hyperspeedRef = useRef<any>(null);
+  const projectsGridRef = useRef<HTMLDivElement>(null);
+  const fadeRef = useRef<HTMLDivElement>(null);
+  const setX = useRef<any>(null);
+  const setY = useRef<any>(null);
+  const pos = useRef({ x: 0, y: 0 });
   const { toast } = useToast();
 
   useEffect(() => {
@@ -189,44 +194,59 @@ const Index = () => {
     }
   ];
 
-  const projectItems = [
-    {
-      image: "https://picsum.photos/300/200?random=1",
-      title: "T2I – Text to Image Generator",
-      subtitle: "Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.",
-      handle: "React + AI",
-      borderColor: "#8B5CF6",
-      gradient: "linear-gradient(145deg, #8B5CF6, #000)",
-      url: "#"
-    },
-    {
-      image: "https://picsum.photos/300/200?random=2",
-      title: "Virtual Try-On System",
-      subtitle: "Built a virtual try-on system for fashion e-commerce using diffusion models and image processing. Used in client project (Thooni.com).",
-      handle: "ComfyUI + Python",
-      borderColor: "#06B6D4",
-      gradient: "linear-gradient(210deg, #06B6D4, #000)",
-      url: "#"
-    },
-    {
-      image: "https://picsum.photos/300/200?random=3",
-      title: "MediaWeave – AI Multimedia Platform",
-      subtitle: "Converts text ↔ audio ↔ video using AI. Supports translations and works on low-GPU setups.",
-      handle: "Python + AI",
-      borderColor: "#10B981",
-      gradient: "linear-gradient(165deg, #10B981, #000)",
-      url: "#"
-    },
-    {
-      image: "https://picsum.photos/300/200?random=4",
-      title: "Personal Markdown Note Taker",
-      subtitle: "Created a structured note-taking app with Markdown and AI-based formatting/export features.",
-      handle: "Python",
-      borderColor: "#F59E0B",
-      gradient: "linear-gradient(195deg, #F59E0B, #000)",
-      url: "#"
+  // ChromaGrid effect initialization
+  useEffect(() => {
+    const el = projectsGridRef.current;
+    if (!el) return;
+    setX.current = gsap.quickSetter(el, "--x", "px");
+    setY.current = gsap.quickSetter(el, "--y", "px");
+    const { width, height } = el.getBoundingClientRect();
+    pos.current = { x: width / 2, y: height / 2 };
+    setX.current(pos.current.x);
+    setY.current(pos.current.y);
+  }, []);
+
+  const moveTo = (x: number, y: number) => {
+    gsap.to(pos.current, {
+      x,
+      y,
+      duration: 0.45,
+      ease: "power3.out",
+      onUpdate: () => {
+        setX.current?.(pos.current.x);
+        setY.current?.(pos.current.y);
+      },
+      overwrite: true,
+    });
+  };
+
+  const handleProjectsMove = (e: React.PointerEvent) => {
+    if (!projectsGridRef.current) return;
+    const r = projectsGridRef.current.getBoundingClientRect();
+    moveTo(e.clientX - r.left, e.clientY - r.top);
+    if (fadeRef.current) {
+      gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
     }
-  ];
+  };
+
+  const handleProjectsLeave = () => {
+    if (fadeRef.current) {
+      gsap.to(fadeRef.current, {
+        opacity: 1,
+        duration: 0.6,
+        overwrite: true,
+      });
+    }
+  };
+
+  const handleCardMove = (e: React.MouseEvent) => {
+    const card = e.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -554,7 +574,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projects Section - Enhanced with LetterGlitch Background and ChromaGrid */}
+      {/* Projects Section - Enhanced with LetterGlitch Background and ChromaGrid Effects */}
       <section id="projects" className="py-20 px-6 relative overflow-hidden">
         {/* LetterGlitch Background */}
         <div className="absolute inset-0 z-0">
@@ -572,15 +592,127 @@ const Index = () => {
         
         <div className="max-w-6xl mx-auto relative z-20">
           <h2 className="text-4xl font-bold text-center mb-16 text-white drop-shadow-lg">Featured Projects</h2>
-          <div style={{ height: '600px', position: 'relative' }}>
-            <ChromaGrid 
-              items={projectItems}
-              radius={300}
-              damping={0.45}
-              fadeOut={0.6}
-              ease="power3.out"
-              columns={2}
-              rows={2}
+          
+          <div 
+            ref={projectsGridRef}
+            className="relative"
+            style={{
+              "--x": "50%",
+              "--y": "50%",
+              "--r": "300px",
+            } as any}
+            onPointerMove={handleProjectsMove}
+            onPointerLeave={handleProjectsLeave}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {projects.map((project, index) => (
+                <Card 
+                  key={index} 
+                  className="group bg-background/90 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden"
+                  style={{
+                    "--mouse-x": "50%",
+                    "--mouse-y": "50%",
+                    "--spotlight-color": "rgba(255, 255, 255, 0.1)",
+                  } as any}
+                  onMouseMove={handleCardMove}
+                >
+                  {/* Spotlight effect */}
+                  <div 
+                    className="absolute inset-0 bg-gradient-radial opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                    style={{
+                      background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)`,
+                    }}
+                  ></div>
+                  
+                  <CardContent className="p-8 relative z-20">
+                    <div className="flex justify-between items-start mb-4">
+                      <Badge className={`bg-gradient-to-r ${project.color} text-white border-none`}>
+                        {project.year}
+                      </Badge>
+                      <Badge variant="outline" className="border-primary/30 text-primary">
+                        {project.tech}
+                      </Badge>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                      {project.description}
+                    </p>
+                    
+                    <div className="flex justify-between items-center">
+                      <Button 
+                        variant="ghost" 
+                        className="hover:bg-primary/10 hover:text-primary transition-all duration-300 group-hover:scale-105"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        View Project
+                      </Button>
+                      <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${project.color} group-hover:scale-110 transition-transform duration-300`}></div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* ChromaGrid overlay effects */}
+            <div 
+              className="absolute inset-0 pointer-events-none z-30"
+              style={{
+                backdropFilter: 'grayscale(1) brightness(0.78)',
+                WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
+                background: 'rgba(0, 0, 0, 0.001)',
+                maskImage: `radial-gradient(circle var(--r) at var(--x) var(--y),
+                  transparent 0%,
+                  transparent 15%,
+                  rgba(0, 0, 0, 0.10) 30%,
+                  rgba(0, 0, 0, 0.22) 45%,
+                  rgba(0, 0, 0, 0.35) 60%,
+                  rgba(0, 0, 0, 0.50) 75%,
+                  rgba(0, 0, 0, 0.68) 88%,
+                  white 100%)`,
+                WebkitMaskImage: `radial-gradient(circle var(--r) at var(--x) var(--y),
+                  transparent 0%,
+                  transparent 15%,
+                  rgba(0, 0, 0, 0.10) 30%,
+                  rgba(0, 0, 0, 0.22) 45%,
+                  rgba(0, 0, 0, 0.35) 60%,
+                  rgba(0, 0, 0, 0.50) 75%,
+                  rgba(0, 0, 0, 0.68) 88%,
+                  white 100%)`,
+              }}
+            />
+            
+            <div 
+              ref={fadeRef}
+              className="absolute inset-0 pointer-events-none z-40"
+              style={{
+                backdropFilter: 'grayscale(1) brightness(0.78)',
+                WebkitBackdropFilter: 'grayscale(1) brightness(0.78)',
+                background: 'rgba(0, 0, 0, 0.001)',
+                maskImage: `radial-gradient(circle var(--r) at var(--x) var(--y),
+                  white 0%,
+                  white 15%,
+                  rgba(255, 255, 255, 0.90) 30%,
+                  rgba(255, 255, 255, 0.78) 45%,
+                  rgba(255, 255, 255, 0.65) 60%,
+                  rgba(255, 255, 255, 0.50) 75%,
+                  rgba(255, 255, 255, 0.32) 88%,
+                  transparent 100%)`,
+                WebkitMaskImage: `radial-gradient(circle var(--r) at var(--x) var(--y),
+                  white 0%,
+                  white 15%,
+                  rgba(255, 255, 255, 0.90) 30%,
+                  rgba(255, 255, 255, 0.78) 45%,
+                  rgba(255, 255, 255, 0.65) 60%,
+                  rgba(255, 255, 255, 0.50) 75%,
+                  rgba(255, 255, 255, 0.32) 88%,
+                  transparent 100%)`,
+                opacity: 1,
+                transition: 'opacity 0.25s ease',
+              }}
             />
           </div>
         </div>
