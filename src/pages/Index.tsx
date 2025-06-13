@@ -12,7 +12,6 @@ import GradientText from '@/components/GradientText';
 import Hyperspeed from '@/components/Hyperspeed';
 import DotGrid from '@/components/DotGrid';
 import FadeContent from '@/components/FadeContent';
-import ScrollVelocity from '@/components/ScrollVelocity';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -80,14 +79,14 @@ const Index = () => {
     }
   ];
 
-  const toolsScrollText = [
-    '🚀 ComfyUI',
-    '🤖 Hugging Face', 
-    '🎬 DaVinci Resolve',
-    '⚡ Cursor AI',
-    '💖 Lovable.dev',
-    '🧠 ChatGPT',
-    '🔮 Claude'
+  const tools = [
+    { name: '🚀 ComfyUI', gradient: 'from-purple-500 to-pink-500' },
+    { name: '🤖 Hugging Face', gradient: 'from-yellow-500 to-orange-500' }, 
+    { name: '🎬 DaVinci Resolve', gradient: 'from-blue-500 to-cyan-500' },
+    { name: '⚡ Cursor AI', gradient: 'from-green-500 to-emerald-500' },
+    { name: '💖 Lovable.dev', gradient: 'from-red-500 to-pink-500' },
+    { name: '🧠 ChatGPT', gradient: 'from-indigo-500 to-purple-500' },
+    { name: '🔮 Claude', gradient: 'from-cyan-500 to-blue-500' }
   ];
 
   const interests = [
@@ -301,46 +300,37 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Tools Section */}
+      {/* Tools Section - Innovative Design */}
       <section id="tools" className="py-20 px-6 relative overflow-hidden bg-muted/10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
           
-          <div className="space-y-8">
-            {/* First row - moving right */}
-            <div className="relative">
-              <ScrollVelocity
-                texts={toolsScrollText}
-                velocity={80}
-                className={`text-3xl md:text-5xl font-bold bg-gradient-to-r ${isDark ? 'from-blue-400 via-purple-500 to-pink-500' : 'from-blue-600 via-purple-600 to-pink-600'} bg-clip-text text-transparent`}
-                parallaxClassName="parallax"
-                scrollerClassName="scroller"
-                numCopies={8}
-              />
-            </div>
-
-            {/* Second row - moving left */}
-            <div className="relative">
-              <ScrollVelocity
-                texts={toolsScrollText.slice().reverse()}
-                velocity={-60}
-                className={`text-2xl md:text-4xl font-semibold bg-gradient-to-r ${isDark ? 'from-green-400 via-cyan-500 to-blue-500' : 'from-green-600 via-cyan-600 to-blue-600'} bg-clip-text text-transparent opacity-80`}
-                parallaxClassName="parallax"
-                scrollerClassName="scroller"
-                numCopies={6}
-              />
-            </div>
-
-            {/* Third row - moving right slower */}
-            <div className="relative">
-              <ScrollVelocity
-                texts={toolsScrollText}
-                velocity={40}
-                className={`text-xl md:text-3xl font-medium bg-gradient-to-r ${isDark ? 'from-orange-400 via-red-500 to-pink-500' : 'from-orange-600 via-red-600 to-pink-600'} bg-clip-text text-transparent opacity-60`}
-                parallaxClassName="parallax"
-                scrollerClassName="scroller"
-                numCopies={10}
-              />
+          {/* Floating Tool Cards */}
+          <div className="relative min-h-[400px] flex items-center justify-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+              {tools.map((tool, index) => (
+                <div
+                  key={tool.name}
+                  className={`group relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-4 md:p-6 transform transition-all duration-500 hover:scale-110 hover:rotate-3 cursor-pointer shadow-lg hover:shadow-2xl`}
+                  style={{
+                    animationDelay: `${index * 200}ms`,
+                    animation: `float-${index % 3} 6s ease-in-out infinite`
+                  }}
+                >
+                  {/* Shimmer Effect */}
+                  <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 text-center">
+                    <p className="text-white font-bold text-sm md:text-base lg:text-lg drop-shadow-md">
+                      {tool.name}
+                    </p>
+                  </div>
+                  
+                  {/* Glow Effect */}
+                  <div className={`absolute -inset-1 bg-gradient-to-r ${tool.gradient} rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300`}></div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -351,6 +341,30 @@ const Index = () => {
             </p>
           </div>
         </div>
+
+        {/* Custom CSS for floating animations */}
+        <style jsx>{`
+          @keyframes float-0 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+          }
+          @keyframes float-1 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(-2deg); }
+          }
+          @keyframes float-2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+          }
+          
+          .group:nth-child(1) { animation: float-0 6s ease-in-out infinite; }
+          .group:nth-child(2) { animation: float-1 7s ease-in-out infinite; }
+          .group:nth-child(3) { animation: float-2 5s ease-in-out infinite; }
+          .group:nth-child(4) { animation: float-0 8s ease-in-out infinite; }
+          .group:nth-child(5) { animation: float-1 6s ease-in-out infinite; }
+          .group:nth-child(6) { animation: float-2 7s ease-in-out infinite; }
+          .group:nth-child(7) { animation: float-0 5s ease-in-out infinite; }
+        `}</style>
       </section>
 
       {/* Interests Section */}
