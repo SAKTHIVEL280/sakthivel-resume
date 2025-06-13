@@ -1,5 +1,5 @@
 import FlowingMenu from "@/components/FlowingMenu";
-import { GradientText } from "@/components/ui/gradient-text";
+import GradientText from "@/components/GradientText";
 
 const interests = [
   {
