@@ -31,57 +31,43 @@ const Index = () => {
       name: 'Python', 
       icon: Code, 
       category: 'Programming', 
-      color: 'from-yellow-400 to-yellow-600',
-      description: 'Building AI tools, automation scripts, and backend systems',
-      level: 90
+      color: 'from-yellow-400 to-yellow-600'
     },
     { 
       name: 'C', 
       icon: Code, 
       category: 'Programming', 
-      color: 'from-blue-400 to-blue-600',
-      description: 'System programming and algorithm implementation',
-      level: 75
+      color: 'from-blue-400 to-blue-600'
     },
     { 
       name: 'HTML & CSS', 
       icon: Code, 
       category: 'Web', 
-      color: 'from-orange-400 to-red-500',
-      description: 'Modern web layouts and responsive design',
-      level: 85
+      color: 'from-orange-400 to-red-500'
     },
     { 
       name: 'Applied AI Skills', 
       icon: Brain, 
       category: 'AI', 
-      color: 'from-purple-400 to-purple-600',
-      description: 'Machine learning, computer vision, and AI integration',
-      level: 95
+      color: 'from-purple-400 to-purple-600'
     },
     { 
       name: 'Prompt Engineering', 
       icon: Brain, 
       category: 'AI', 
-      color: 'from-pink-400 to-pink-600',
-      description: 'Optimizing AI model interactions and outputs',
-      level: 88
+      color: 'from-pink-400 to-pink-600'
     },
     { 
       name: 'UI/UX Designing', 
       icon: Palette, 
       category: 'Design', 
-      color: 'from-green-400 to-green-600',
-      description: 'User-centered design and interface optimization',
-      level: 80
+      color: 'from-green-400 to-green-600'
     },
     { 
       name: 'ComfyUI', 
       icon: Wrench, 
       category: 'Tools', 
-      color: 'from-indigo-400 to-indigo-600',
-      description: 'Advanced AI image generation and workflow creation',
-      level: 92
+      color: 'from-indigo-400 to-indigo-600'
     }
   ];
 
@@ -249,50 +235,30 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-foreground">Skills & Expertise</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A comprehensive toolkit spanning AI, programming, design, and cutting-edge technologies
+              Technologies and skills I work with
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
               <div 
                 key={skill.name}
-                className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Icon */}
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <skill.icon className="w-6 h-6 text-white" />
                 </div>
 
                 {/* Content */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                      {skill.name}
-                    </h3>
-                    <span className="text-sm font-medium text-primary">{skill.level}%</span>
-                  </div>
-
+                <div className="space-y-2">
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                    {skill.name}
+                  </h3>
                   <Badge variant="secondary" className="text-xs">
                     {skill.category}
                   </Badge>
-
-                  {/* Progress Bar */}
-                  <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out rounded-full`}
-                      style={{ 
-                        width: `${skill.level}%`,
-                        transform: 'translateX(-100%)',
-                        animation: `slide-in-right 1s ease-out ${index * 200}ms forwards`
-                      }}
-                    />
-                  </div>
-
-                  <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
-                    {skill.description}
-                  </p>
                 </div>
               </div>
             ))}
