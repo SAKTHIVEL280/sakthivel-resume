@@ -300,70 +300,70 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Tools Section - Innovative Design */}
-      <section id="tools" className="py-20 px-6 relative overflow-hidden bg-muted/10">
+      {/* Tools Section - Rolling Gallery */}
+      <section id="tools" className="py-12 px-6 relative overflow-hidden bg-muted/10">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
+          <h2 className="text-4xl font-bold text-center mb-8 text-foreground">Tools & Technologies</h2>
           
-          {/* Floating Tool Cards */}
-          <div className="relative min-h-[400px] flex items-center justify-center">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-              {tools.map((tool, index) => (
-                <div
-                  key={tool.name}
-                  className={`group relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-4 md:p-6 transform transition-all duration-500 hover:scale-110 hover:rotate-3 cursor-pointer shadow-lg hover:shadow-2xl`}
-                  style={{
-                    animationDelay: `${index * 200}ms`,
-                    animation: `float-${index % 3} 6s ease-in-out infinite`
-                  }}
-                >
-                  {/* Shimmer Effect */}
-                  <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-                  
-                  {/* Content */}
-                  <div className="relative z-10 text-center">
-                    <p className="text-white font-bold text-sm md:text-base lg:text-lg drop-shadow-md">
+          {/* Rolling Gallery Container */}
+          <div className="relative h-20 overflow-hidden">
+            <div className="absolute inset-0 flex items-center">
+              {/* First Set */}
+              <div className="flex animate-scroll-left space-x-6 min-w-max">
+                {tools.map((tool, index) => (
+                  <div
+                    key={`first-${index}`}
+                    className={`flex-shrink-0 bg-gradient-to-r ${tool.gradient} rounded-lg px-6 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300`}
+                  >
+                    <span className="text-white font-semibold text-sm whitespace-nowrap">
                       {tool.name}
-                    </p>
+                    </span>
                   </div>
-                  
-                  {/* Glow Effect */}
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${tool.gradient} rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300`}></div>
-                </div>
-              ))}
+                ))}
+              </div>
+              
+              {/* Second Set for Seamless Loop */}
+              <div className="flex animate-scroll-left space-x-6 min-w-max ml-6">
+                {tools.map((tool, index) => (
+                  <div
+                    key={`second-${index}`}
+                    className={`flex-shrink-0 bg-gradient-to-r ${tool.gradient} rounded-lg px-6 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300`}
+                  >
+                    <span className="text-white font-semibold text-sm whitespace-nowrap">
+                      {tool.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Floating description */}
-          <div className="text-center mt-12">
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          {/* Description */}
+          <div className="text-center mt-6">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               Cutting-edge tools and technologies I work with to create amazing AI-powered experiences
             </p>
           </div>
         </div>
 
-        {/* Custom CSS for floating animations */}
+        {/* Rolling Animation CSS */}
         <style>{`
-          @keyframes float-0 {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
-          }
-          @keyframes float-1 {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(-2deg); }
-          }
-          @keyframes float-2 {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(1deg); }
+          @keyframes scroll-left {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-100%);
+            }
           }
           
-          .group:nth-child(1) { animation: float-0 6s ease-in-out infinite; }
-          .group:nth-child(2) { animation: float-1 7s ease-in-out infinite; }
-          .group:nth-child(3) { animation: float-2 5s ease-in-out infinite; }
-          .group:nth-child(4) { animation: float-0 8s ease-in-out infinite; }
-          .group:nth-child(5) { animation: float-1 6s ease-in-out infinite; }
-          .group:nth-child(6) { animation: float-2 7s ease-in-out infinite; }
-          .group:nth-child(7) { animation: float-0 5s ease-in-out infinite; }
+          .animate-scroll-left {
+            animation: scroll-left 20s linear infinite;
+          }
+          
+          .animate-scroll-left:hover {
+            animation-play-state: paused;
+          }
         `}</style>
       </section>
 
