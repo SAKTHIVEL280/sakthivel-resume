@@ -248,7 +248,7 @@ const Index = () => {
               >
                 {/* Icon */}
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <skill.icon className="w-6 h-6 text-white" />
+                  <skill.icon className="w-6 h-6 text-white flex-shrink-0" />
                 </div>
 
                 {/* Content */}
