@@ -229,7 +229,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section - Completely Rewritten */}
+      {/* Skills Section - Fixed Icon Alignment */}
       <section id="skills" className="py-20 px-6 bg-muted/20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -250,7 +250,7 @@ const Index = () => {
                 >
                   {/* Icon Container - Perfectly Centered */}
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-6 h-6 text-white flex-shrink-0" />
+                    <IconComponent className="w-6 h-6 text-white" style={{ display: 'block' }} />
                   </div>
 
                   {/* Content */}
