@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import * as THREE from 'three';
 import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
@@ -351,11 +350,6 @@ const Hyperspeed = ({ effectOptions = {
       timeOffset: number;
       renderPass: RenderPass;
       bloomPass: EffectPass;
-      tick: () => void;
-      init: () => void;
-      setSize: (width: number, height: number, updateStyles?: boolean) => void;
-      onMouseDown: (ev: MouseEvent) => void;
-      onMouseUp: (ev: MouseEvent) => void;
 
       constructor(container: HTMLElement, options: any = {}) {
         this.options = options;
@@ -646,6 +640,13 @@ const Hyperspeed = ({ effectOptions = {
     }
 
     class CarLights {
+      webgl: App;
+      options: any;
+      colors: any;
+      speed: any;
+      fade: THREE.Vector2;
+      mesh: THREE.Mesh;
+
       constructor(webgl, options, colors, speed, fade) {
         this.webgl = webgl;
         this.options = options;
@@ -662,7 +663,8 @@ const Hyperspeed = ({ effectOptions = {
         );
         let geometry = new THREE.TubeGeometry(curve, 40, 1, 8, false);
 
-        let instanced = new THREE.InstancedBufferGeometry().copy(geometry);
+        let instanced = new THREE.InstancedBufferGeometry();
+        instanced.copy(geometry);
         instanced.instanceCount = options.lightPairsPerRoadWay * 2;
 
         let laneWidth = options.roadWidth / options.lanesPerRoad;
@@ -816,6 +818,10 @@ const Hyperspeed = ({ effectOptions = {
     `;
 
     class LightsSticks {
+      webgl: App;
+      options: any;
+      mesh: THREE.Mesh;
+
       constructor(webgl, options) {
         this.webgl = webgl;
         this.options = options;
@@ -824,7 +830,8 @@ const Hyperspeed = ({ effectOptions = {
       init() {
         const options = this.options;
         const geometry = new THREE.PlaneGeometry(1, 1);
-        let instanced = new THREE.InstancedBufferGeometry().copy(geometry);
+        let instanced = new THREE.InstancedBufferGeometry();
+        instanced.copy(geometry);
         let totalSticks = options.totalSideLightSticks;
         instanced.instanceCount = totalSticks;
 
@@ -951,6 +958,13 @@ const Hyperspeed = ({ effectOptions = {
     `;
 
     class Road {
+      webgl: App;
+      options: any;
+      uTime: { value: number };
+      leftRoadWay: THREE.Mesh;
+      rightRoadWay: THREE.Mesh;
+      island: THREE.Mesh;
+
       constructor(webgl, options) {
         this.webgl = webgl;
         this.options = options;
