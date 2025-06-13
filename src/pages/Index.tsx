@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -13,6 +12,7 @@ import GradientText from '@/components/GradientText';
 import Hyperspeed from '@/components/Hyperspeed';
 import DotGrid from '@/components/DotGrid';
 import FadeContent from '@/components/FadeContent';
+import Silk from '@/components/Silk';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -343,12 +343,26 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Tools Section - Enhanced Professional Rolling Gallery */}
-      <section id="tools" className="py-20 px-6 relative overflow-hidden bg-muted/5">
-        <div className="max-w-6xl mx-auto">
+      {/* Tools Section - Enhanced with Silk Background */}
+      <section id="tools" className="py-20 px-6 relative overflow-hidden">
+        {/* Silk Background */}
+        <div className="absolute inset-0 z-0">
+          <Silk
+            speed={2}
+            scale={0.8}
+            color={isDark ? "#1e293b" : "#f1f5f9"}
+            noiseIntensity={0.8}
+            rotation={0.1}
+          />
+        </div>
+        
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/20 z-10"></div>
+        
+        <div className="max-w-6xl mx-auto relative z-20">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Technology Stack</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4 text-foreground drop-shadow-lg">Technology Stack</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto drop-shadow-md">
               Cutting-edge tools and platforms I leverage to create innovative AI-powered solutions
             </p>
           </div>
