@@ -1,14 +1,14 @@
 
 .menu-wrap {
   width: 100%;
-  height: auto; /* Changed from 100% to auto to fit content */
+  height: 100%;
   overflow: hidden;
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  height: auto; /* Changed from 100% to auto to fit content */
+  height: 100%;
   margin: 0;
   padding: 0;
   gap: 0; /* Remove any gaps between items */
