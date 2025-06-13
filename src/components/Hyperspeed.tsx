@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import * as THREE from 'three';
 import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
@@ -110,25 +111,9 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
       uAmp: { value: new THREE.Vector3(30, 30, 20) }
     };
 
-    const xyUniforms = {
-      uFreq: { value: new THREE.Vector2(5, 2) },
-      uAmp: { value: new THREE.Vector2(25, 15) }
-    };
-
-    const LongRaceUniforms = {
-      uFreq: { value: new THREE.Vector2(2, 3) },
-      uAmp: { value: new THREE.Vector2(35, 10) }
-    };
-
     const turbulentUniforms = {
       uFreq: { value: new THREE.Vector4(4, 8, 8, 1) },
       uAmp: { value: new THREE.Vector4(25, 5, 10, 10) }
-    };
-
-    const deepUniforms = {
-      uFreq: { value: new THREE.Vector2(4, 8) },
-      uAmp: { value: new THREE.Vector2(10, 20) },
-      uPowY: { value: new THREE.Vector2(20, 2) }
     };
 
     let nsin = (val: number) => Math.sin(val) * 0.5 + 0.5;

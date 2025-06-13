@@ -4,7 +4,6 @@ import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code,
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import SplitText from '@/components/SplitText';
 import TextPressure from '@/components/TextPressure';
@@ -15,7 +14,6 @@ import Hyperspeed from '@/components/Hyperspeed';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
-  const [activeSection, setActiveSection] = useState('');
   const [isHyperspeedActive, setIsHyperspeedActive] = useState(false);
   const hyperspeedRef = useRef<any>(null);
   const { toast } = useToast();
@@ -98,7 +96,7 @@ const Index = () => {
 
   const handleCardClick = () => {
     setIsHyperspeedActive(true);
-    setTimeout(() => setIsHyperspeedActive(false), 2000); // Stop effect after 2 seconds
+    setTimeout(() => setIsHyperspeedActive(false), 2000);
   };
 
   return (
@@ -119,9 +117,8 @@ const Index = () => {
         </Button>
       </div>
 
-      {/* Hero Section with Waves Background */}
-      <section className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
-        {/* Background Waves Effect - Only for Hero */}
+      {/* Hero Section */}
+      <section id="hero" className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
         <Waves 
           lineColor={isDark ? 'rgba(156, 163, 175, 0.3)' : 'rgba(107, 114, 128, 0.2)'} 
           backgroundColor="transparent"
@@ -130,7 +127,6 @@ const Index = () => {
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="animate-fade-in space-y-8">
-            {/* Main Title */}
             <div className="mb-4">
               <TextPressure 
                 text="SAKTHIVEL E"
@@ -142,7 +138,6 @@ const Index = () => {
               />
             </div>
             
-            {/* AI Enthusiast Subtitle */}
             <div className="mb-8">
               <TextPressure 
                 text="AI ENTHUSIAST"
@@ -154,20 +149,18 @@ const Index = () => {
               />
             </div>
 
-            {/* Description */}
             <div className="mb-12 max-w-4xl mx-auto">
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
               </p>
             </div>
 
-            {/* Action buttons */}
             <div className="flex flex-wrap justify-center gap-6">
-              <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6 bg-gray-800 hover:bg-gray-700 text-white">
+              <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
                 <Mail className="w-5 h-5 mr-2" />
                 Get In Touch
               </Button>
-              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6 border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
                 <ExternalLink className="w-5 h-5 mr-2" />
                 View Projects
               </Button>
@@ -176,9 +169,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section with Threads Background */}
-      <section className="py-20 px-6 relative overflow-hidden">
-        {/* Threads Background */}
+      {/* About Section */}
+      <section id="about" className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0">
           <Threads 
             color={isDark ? [0.4, 0.5, 0.7] : [0.3, 0.4, 0.6]}
@@ -202,9 +194,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section with Hyperspeed Background */}
-      <section className="py-20 px-6 relative overflow-hidden">
-        {/* Hyperspeed Background */}
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0">
           <Hyperspeed
             ref={hyperspeedRef}
@@ -261,10 +252,7 @@ const Index = () => {
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 }}
               >
-                {/* Gradient overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-                
-                {/* Icon background circle */}
                 <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
                 
                 <CardContent className="p-6 relative z-10">
@@ -290,7 +278,6 @@ const Index = () => {
             ))}
           </div>
           
-          {/* Second row - centered with remaining cards */}
           <div className="flex justify-center mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
               {skills.slice(4).map((skill, index) => (
@@ -303,10 +290,7 @@ const Index = () => {
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   }}
                 >
-                  {/* Gradient overlay */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-                  
-                  {/* Icon background circle */}
                   <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
                   
                   <CardContent className="p-6 relative z-10">
@@ -336,7 +320,7 @@ const Index = () => {
       </section>
 
       {/* Tools Section */}
-      <section className="py-20 px-6">
+      <section id="tools" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
           <div className="flex flex-wrap justify-center gap-4">
@@ -354,7 +338,7 @@ const Index = () => {
       </section>
 
       {/* Interests Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section id="interests" className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Interests</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -373,7 +357,7 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="py-20 px-6">
+      <section id="projects" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Featured Projects</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -402,7 +386,7 @@ const Index = () => {
       </section>
 
       {/* Education Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section id="education" className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Education</h2>
           <div className="space-y-8">
@@ -452,7 +436,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6">
+      <section id="contact" className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Let's Connect</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
