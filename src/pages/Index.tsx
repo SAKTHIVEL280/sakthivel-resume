@@ -14,6 +14,7 @@ import DotGrid from '@/components/DotGrid';
 import FadeContent from '@/components/FadeContent';
 import Silk from '@/components/Silk';
 import FlowingMenu from '@/components/FlowingMenu';
+import LetterGlitch from '@/components/LetterGlitch';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -513,13 +514,27 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Featured Projects</h2>
+      {/* Projects Section - Enhanced with LetterGlitch Background */}
+      <section id="projects" className="py-20 px-6 relative overflow-hidden">
+        {/* LetterGlitch Background */}
+        <div className="absolute inset-0 z-0">
+          <LetterGlitch
+            glitchSpeed={50}
+            centerVignette={true}
+            outerVignette={false}
+            smooth={true}
+            glitchColors={isDark ? ['#374151', '#6b7280', '#9ca3af'] : ['#e5e7eb', '#d1d5db', '#9ca3af']}
+          />
+        </div>
+        
+        {/* Dark overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        
+        <div className="max-w-6xl mx-auto relative z-20">
+          <h2 className="text-4xl font-bold text-center mb-16 text-white drop-shadow-lg">Featured Projects</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <Card key={project.title} className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] group overflow-hidden">
+              <Card key={project.title} className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] group overflow-hidden bg-background/90 backdrop-blur-sm border-white/20">
                 <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start mb-4">
