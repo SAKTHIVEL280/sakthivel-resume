@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
+import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -12,6 +12,7 @@ import GradientText from '@/components/GradientText';
 import Hyperspeed from '@/components/Hyperspeed';
 import DotGrid from '@/components/DotGrid';
 import FadeContent from '@/components/FadeContent';
+import ScrollVelocity from '@/components/ScrollVelocity';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -48,6 +49,12 @@ const Index = () => {
       color: 'from-orange-400 to-red-500'
     },
     { 
+      name: 'SQL', 
+      icon: Database, 
+      category: 'Database', 
+      color: 'from-cyan-400 to-blue-600'
+    },
+    { 
       name: 'Applied AI Skills', 
       icon: Brain, 
       category: 'AI', 
@@ -73,10 +80,8 @@ const Index = () => {
     }
   ];
 
-  const tools = [
-    'ComfyUI', 'Hugging Face', 'DaVinci Resolve', 
-    'Cursor AI', 'Lovable.dev', 'ChatGPT', 'Claude'
-  ];
+  const toolsLine1 = ['ComfyUI', 'Hugging Face', 'DaVinci Resolve'];
+  const toolsLine2 = ['Cursor AI', 'Lovable.dev', 'ChatGPT', 'Claude'];
 
   const interests = [
     'Building AI-Powered Tools & Assistants',
@@ -293,16 +298,17 @@ const Index = () => {
       <section id="tools" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {tools.map((tool, index) => (
-              <Badge 
-                key={tool} 
-                variant="outline" 
-                className="text-lg py-3 px-6 hover:scale-110 transition-transform duration-200 hover:bg-primary hover:text-primary-foreground"
-              >
-                {tool}
-              </Badge>
-            ))}
+          <div className="space-y-8">
+            <ScrollVelocity
+              texts={[toolsLine1.join(' • ')]}
+              velocity={50}
+              className={`text-2xl md:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}
+            />
+            <ScrollVelocity
+              texts={[toolsLine2.join(' • ')]}
+              velocity={-50}
+              className={`text-2xl md:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}
+            />
           </div>
         </div>
       </section>
