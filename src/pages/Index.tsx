@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -244,96 +243,59 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section - Redesigned */}
-      <section id="skills" className="py-20 px-6 bg-muted/30">
+      {/* Skills Section - Clean and Minimal */}
+      <section id="skills" className="py-20 px-6 bg-muted/20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-foreground">Skills & Expertise</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               A comprehensive toolkit spanning AI, programming, design, and cutting-edge technologies
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skill, index) => (
-              <Card 
+              <div 
                 key={skill.name}
-                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-0 bg-background/50 backdrop-blur-sm"
-                onMouseEnter={() => setHoveredSkill(skill.name)}
-                onMouseLeave={() => setHoveredSkill(null)}
-                style={{ animationDelay: `${index * 150}ms` }}
+                className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-                
-                <CardContent className="p-8 relative z-10">
-                  <div className="flex items-start gap-6">
-                    {/* Icon Section */}
-                    <div className={`flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                      <skill.icon className="w-8 h-8 text-white" />
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="flex-grow space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                            {skill.name}
-                          </h3>
-                          <Badge 
-                            variant="secondary" 
-                            className="mt-2 text-xs font-medium group-hover:bg-primary/20 group-hover:text-primary transition-all duration-300"
-                          >
-                            {skill.category}
-                          </Badge>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-3xl font-bold text-primary">{skill.level}%</div>
-                          <div className="text-sm text-muted-foreground">Proficiency</div>
-                        </div>
-                      </div>
-
-                      {/* Progress Bar */}
-                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                        <div 
-                          className={`h-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out rounded-full`}
-                          style={{ 
-                            width: hoveredSkill === skill.name ? `${skill.level}%` : '0%',
-                            transitionDelay: hoveredSkill === skill.name ? '200ms' : '0ms'
-                          }}
-                        />
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
-                        {skill.description}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Skills Summary */}
-          <div className="mt-16 text-center">
-            <Card className="inline-block bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/20">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">7+</div>
-                    <div className="text-sm text-muted-foreground">Core Skills</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">4</div>
-                    <div className="text-sm text-muted-foreground">Categories</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">87%</div>
-                    <div className="text-sm text-muted-foreground">Avg Proficiency</div>
-                  </div>
+                {/* Icon */}
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <skill.icon className="w-6 h-6 text-white" />
                 </div>
-              </CardContent>
-            </Card>
+
+                {/* Content */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                      {skill.name}
+                    </h3>
+                    <span className="text-sm font-medium text-primary">{skill.level}%</span>
+                  </div>
+
+                  <Badge variant="secondary" className="text-xs">
+                    {skill.category}
+                  </Badge>
+
+                  {/* Progress Bar */}
+                  <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out rounded-full`}
+                      style={{ 
+                        width: `${skill.level}%`,
+                        transform: 'translateX(-100%)',
+                        animation: `slide-in-right 1s ease-out ${index * 200}ms forwards`
+                      }}
+                    />
+                  </div>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
+                    {skill.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
