@@ -12,7 +12,6 @@ import GradientText from '@/components/GradientText';
 import Hyperspeed from '@/components/Hyperspeed';
 import DotGrid from '@/components/DotGrid';
 import FadeContent from '@/components/FadeContent';
-import ScrollVelocity from '@/components/ScrollVelocity';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -80,8 +79,15 @@ const Index = () => {
     }
   ];
 
-  const toolsLine1 = ['ComfyUI', 'Hugging Face', 'DaVinci Resolve'];
-  const toolsLine2 = ['Cursor AI', 'Lovable.dev', 'ChatGPT', 'Claude'];
+  const tools = [
+    { name: 'ComfyUI', color: 'from-purple-500 via-pink-500 to-red-500' },
+    { name: 'Hugging Face', color: 'from-blue-500 via-cyan-500 to-green-500' },
+    { name: 'DaVinci Resolve', color: 'from-orange-500 via-red-500 to-pink-500' },
+    { name: 'Cursor AI', color: 'from-green-500 via-emerald-500 to-teal-500' },
+    { name: 'Lovable.dev', color: 'from-indigo-500 via-purple-500 to-pink-500' },
+    { name: 'ChatGPT', color: 'from-yellow-500 via-orange-500 to-red-500' },
+    { name: 'Claude', color: 'from-cyan-500 via-blue-500 to-indigo-500' }
+  ];
 
   const interests = [
     'Building AI-Powered Tools & Assistants',
@@ -295,20 +301,56 @@ const Index = () => {
       </section>
 
       {/* Tools Section */}
-      <section id="tools" className="py-20 px-6">
+      <section id="tools" className="py-20 px-6 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
-          <div className="space-y-8">
-            <ScrollVelocity
-              texts={[toolsLine1.join(' • ')]}
-              velocity={50}
-              className={`text-2xl md:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}
-            />
-            <ScrollVelocity
-              texts={[toolsLine2.join(' • ')]}
-              velocity={-50}
-              className={`text-2xl md:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}
-            />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {tools.map((tool, index) => (
+              <FadeContent
+                key={tool.name}
+                blur={true}
+                duration={800}
+                delay={index * 150}
+                initialOpacity={0}
+              >
+                <div className="group relative overflow-hidden rounded-2xl bg-background/40 backdrop-blur-sm border border-border/30 hover:border-transparent transition-all duration-500 hover:scale-105 hover:-translate-y-2">
+                  {/* Animated gradient background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-10 group-hover:opacity-30 blur-xl transition-all duration-500`}></div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 p-6 text-center">
+                    {/* Gradient line */}
+                    <div className={`w-16 h-1 bg-gradient-to-r ${tool.color} mx-auto mb-4 rounded-full group-hover:w-full transition-all duration-500`}></div>
+                    
+                    {/* Tool name */}
+                    <h3 className="text-lg font-bold text-foreground group-hover:text-white transition-colors duration-300">
+                      {tool.name}
+                    </h3>
+                    
+                    {/* Animated dots */}
+                    <div className="flex justify-center mt-4 space-x-1">
+                      {[...Array(3)].map((_, i) => (
+                        <div 
+                          key={i}
+                          className={`w-2 h-2 rounded-full bg-gradient-to-r ${tool.color} opacity-50 group-hover:opacity-100 transition-all duration-300`}
+                          style={{ 
+                            animationDelay: `${i * 200}ms`,
+                            animation: 'pulse 2s infinite'
+                          }}
+                        ></div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
+                  </div>
+                </div>
+              </FadeContent>
+            ))}
           </div>
         </div>
       </section>
