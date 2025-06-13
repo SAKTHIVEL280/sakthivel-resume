@@ -1,5 +1,4 @@
-
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, CSSProperties } from 'react';
 
 const LetterGlitch = ({
   glitchColors = ['#2b4539', '#61dca3', '#61b3dc'],
@@ -202,37 +201,37 @@ const LetterGlitch = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [glitchSpeed, smooth]);
 
-  const containerStyle = {
-    position: 'relative',
+  const containerStyle: CSSProperties = {
+    position: 'relative' as const,
     width: '100%',
     height: '100%',
     backgroundColor: '#000000',
-    overflow: 'hidden',
+    overflow: 'hidden' as const,
   };
 
-  const canvasStyle = {
+  const canvasStyle: CSSProperties = {
     display: 'block',
     width: '100%',
     height: '100%',
   };
 
-  const outerVignetteStyle = {
-    position: 'absolute',
+  const outerVignetteStyle: CSSProperties = {
+    position: 'absolute' as const,
     top: 0,
     left: 0,
     width: '100%',
     height: '100%',
-    pointerEvents: 'none',
+    pointerEvents: 'none' as const,
     background: 'radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 100%)',
   };
 
-  const centerVignetteStyle = {
-    position: 'absolute',
+  const centerVignetteStyle: CSSProperties = {
+    position: 'absolute' as const,
     top: 0,
     left: 0,
     width: '100%',
     height: '100%',
-    pointerEvents: 'none',
+    pointerEvents: 'none' as const,
     background: 'radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%)',
   };
 

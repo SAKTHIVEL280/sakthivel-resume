@@ -15,6 +15,7 @@ import FadeContent from '@/components/FadeContent';
 import Silk from '@/components/Silk';
 import FlowingMenu from '@/components/FlowingMenu';
 import LetterGlitch from '@/components/LetterGlitch';
+import ChromaGrid from '@/components/ChromaGrid';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -185,6 +186,45 @@ const Index = () => {
       tech: 'Python',
       year: '2024',
       color: 'from-orange-500 to-red-500'
+    }
+  ];
+
+  const projectItems = [
+    {
+      image: "https://picsum.photos/300/200?random=1",
+      title: "T2I – Text to Image Generator",
+      subtitle: "Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.",
+      handle: "React + AI",
+      borderColor: "#8B5CF6",
+      gradient: "linear-gradient(145deg, #8B5CF6, #000)",
+      url: "#"
+    },
+    {
+      image: "https://picsum.photos/300/200?random=2",
+      title: "Virtual Try-On System",
+      subtitle: "Built a virtual try-on system for fashion e-commerce using diffusion models and image processing. Used in client project (Thooni.com).",
+      handle: "ComfyUI + Python",
+      borderColor: "#06B6D4",
+      gradient: "linear-gradient(210deg, #06B6D4, #000)",
+      url: "#"
+    },
+    {
+      image: "https://picsum.photos/300/200?random=3",
+      title: "MediaWeave – AI Multimedia Platform",
+      subtitle: "Converts text ↔ audio ↔ video using AI. Supports translations and works on low-GPU setups.",
+      handle: "Python + AI",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(165deg, #10B981, #000)",
+      url: "#"
+    },
+    {
+      image: "https://picsum.photos/300/200?random=4",
+      title: "Personal Markdown Note Taker",
+      subtitle: "Created a structured note-taking app with Markdown and AI-based formatting/export features.",
+      handle: "Python",
+      borderColor: "#F59E0B",
+      gradient: "linear-gradient(195deg, #F59E0B, #000)",
+      url: "#"
     }
   ];
 
@@ -514,7 +554,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projects Section - Enhanced with LetterGlitch Background */}
+      {/* Projects Section - Enhanced with LetterGlitch Background and ChromaGrid */}
       <section id="projects" className="py-20 px-6 relative overflow-hidden">
         {/* LetterGlitch Background */}
         <div className="absolute inset-0 z-0">
@@ -532,27 +572,16 @@ const Index = () => {
         
         <div className="max-w-6xl mx-auto relative z-20">
           <h2 className="text-4xl font-bold text-center mb-16 text-white drop-shadow-lg">Featured Projects</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <Card key={project.title} className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] group overflow-hidden bg-background/90 backdrop-blur-sm border-white/20">
-                <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
-                <CardContent className="p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold group-hover:text-primary transition-colors duration-200">
-                      {project.title}
-                    </h3>
-                    <Badge variant="outline">{project.year}</Badge>
-                  </div>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex justify-between items-center">
-                    <Badge className={`bg-gradient-to-r ${project.color} text-white`}>
-                      {project.tech}
-                    </Badge>
-                    <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div style={{ height: '600px', position: 'relative' }}>
+            <ChromaGrid 
+              items={projectItems}
+              radius={300}
+              damping={0.45}
+              fadeOut={0.6}
+              ease="power3.out"
+              columns={2}
+              rows={2}
+            />
           </div>
         </div>
       </section>
