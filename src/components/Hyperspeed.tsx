@@ -494,7 +494,13 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
         let geometry = new THREE.TubeGeometry(curve, 40, 1, 8, false);
 
         let instanced = new THREE.InstancedBufferGeometry();
-        instanced.copy(geometry as THREE.BufferGeometry);
+        // Copy attributes from the source geometry
+        for (const attributeName in geometry.attributes) {
+          instanced.setAttribute(attributeName, geometry.attributes[attributeName]);
+        }
+        if (geometry.index) {
+          instanced.setIndex(geometry.index);
+        }
         instanced.instanceCount = options.lightPairsPerRoadWay * 2;
 
         let laneWidth = options.roadWidth / options.lanesPerRoad;
@@ -612,7 +618,13 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
         const options = this.options;
         const geometry = new THREE.PlaneGeometry(1, 1);
         let instanced = new THREE.InstancedBufferGeometry();
-        instanced.copy(geometry as THREE.BufferGeometry);
+        // Copy attributes from the source geometry
+        for (const attributeName in geometry.attributes) {
+          instanced.setAttribute(attributeName, geometry.attributes[attributeName]);
+        }
+        if (geometry.index) {
+          instanced.setIndex(geometry.index);
+        }
         instanced.instanceCount = options.totalSideLightSticks;
 
         let stickoffset = options.length / (options.totalSideLightSticks - 1);
