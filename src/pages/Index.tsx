@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -121,36 +122,34 @@ const Index = () => {
         />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="animate-fade-in">
-            {/* Interactive TextPressure for main title */}
-            <div className="h-56 md:h-64 mb-6">
+          <div className="animate-fade-in space-y-8">
+            {/* Main Title */}
+            <div className="mb-4">
               <TextPressure 
                 text="SAKTHIVEL E"
                 textColor={isDark ? '#ffffff' : '#1f2937'}
                 strokeColor={isDark ? '#4b5563' : '#6b7280'}
                 stroke={true}
                 minFontSize={72}
-                className="mb-4"
+                className="leading-none"
               />
             </div>
             
-            {/* AI Enthusiast with proper spacing */}
-            <div className="mb-12">
-              <div className="h-8 md:h-10 mb-6">
-                <TextPressure 
-                  text="AI ENTHUSIAST"
-                  textColor={isDark ? '#9ca3af' : '#374151'}
-                  strokeColor={isDark ? '#6b7280' : '#4b5563'}
-                  stroke={false}
-                  minFontSize={16}
-                  className="mb-4"
-                />
-              </div>
+            {/* AI Enthusiast Subtitle */}
+            <div className="mb-8">
+              <TextPressure 
+                text="AI ENTHUSIAST"
+                textColor={isDark ? '#9ca3af' : '#374151'}
+                strokeColor={isDark ? '#6b7280' : '#4b5563'}
+                stroke={false}
+                minFontSize={16}
+                className="leading-none"
+              />
             </div>
 
             {/* Description */}
-            <div className="mb-16">
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+            <div className="mb-12 max-w-4xl mx-auto">
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
                 Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
               </p>
             </div>
@@ -415,3 +414,4 @@ const Index = () => {
 };
 
 export default Index;
+
