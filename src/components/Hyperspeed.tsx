@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import * as THREE from 'three';
 import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
@@ -331,7 +330,7 @@ const Hyperspeed = ({ effectOptions = {
     }
 
     class App {
-      constructor(container, options = {}) {
+      constructor(container: HTMLElement, options: any = {}) {
         this.options = options;
         if (this.options.distortion == null) {
           this.options.distortion = {
