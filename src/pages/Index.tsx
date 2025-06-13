@@ -137,22 +137,22 @@ const Index = () => {
     {
       link: '#',
       text: 'Building AI-Powered Tools & Assistants',
-      image: 'https://picsum.photos/600/400?random=1'
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop'
     },
     {
       link: '#',
       text: 'Exploring Open-Source AI Projects',
-      image: 'https://picsum.photos/600/400?random=2'
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop'
     },
     {
       link: '#',
       text: 'Editing with DaVinci Resolve',
-      image: 'https://picsum.photos/600/400?random=3'
+      image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&h=400&fit=crop'
     },
     {
       link: '#',
       text: 'Designing Minimal UI Experiences',
-      image: 'https://picsum.photos/600/400?random=4'
+      image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&h=400&fit=crop'
     }
   ];
 
@@ -501,8 +501,13 @@ const Index = () => {
       {/* Interests Section - Updated with FlowingMenu */}
       <section id="interests" className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Interests</h2>
-          <div style={{ height: '600px', position: 'relative', background: isDark ? '#1a1a1a' : '#f0f0f0', borderRadius: '12px' }}>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4 text-foreground">My Interests</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Exploring the intersection of AI, creativity, and innovation through hands-on projects and continuous learning
+            </p>
+          </div>
+          <div className="h-[500px] md:h-[600px] relative rounded-xl overflow-hidden shadow-2xl">
             <FlowingMenu items={interests} />
           </div>
         </div>
