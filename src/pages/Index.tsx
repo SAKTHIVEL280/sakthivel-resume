@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,6 +11,7 @@ import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
 import Threads from '@/components/Threads';
 import GradientText from '@/components/GradientText';
+import InfiniteMenu from '@/components/InfiniteMenu';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -33,6 +35,13 @@ const Index = () => {
     { name: 'UI/UX Designing', icon: Palette, category: 'Design' },
     { name: 'ComfyUI', icon: Wrench, category: 'Tools' }
   ];
+
+  const skillsForMenu = skills.map(skill => ({
+    image: `https://picsum.photos/600/600?random=${skill.name}`,
+    title: skill.name,
+    description: skill.category,
+    link: '#'
+  }));
 
   const tools = [
     'ComfyUI', 'Hugging Face', 'DaVinci Resolve', 
@@ -121,33 +130,35 @@ const Index = () => {
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
-            {/* Interactive TextPressure for main title - Made larger */}
-            <div className="h-56 md:h-64 mb-8">
-              <TextPressure 
-                text="SAKTHIVEL E"
-                textColor={isDark ? '#ffffff' : '#1f2937'}
-                strokeColor={isDark ? '#4b5563' : '#6b7280'}
-                stroke={true}
-                minFontSize={72}
-                className="mb-4"
-              />
-            </div>
-            
-            {/* AI Enthusiast with TextPressure effect - Made smaller and added proper spacing */}
-            <div className="mb-16 space-y-4">
-              <div className="h-8 md:h-10 mb-8">
+            {/* AI Enthusiast first - Made smaller and with proper spacing */}
+            <div className="mb-8">
+              <div className="h-6 md:h-8 mb-4">
                 <TextPressure 
                   text="AI ENTHUSIAST"
                   textColor={isDark ? '#9ca3af' : '#374151'}
                   strokeColor={isDark ? '#6b7280' : '#4b5563'}
                   stroke={false}
-                  minFontSize={16}
+                  minFontSize={14}
+                  className="mb-4"
+                />
+              </div>
+            </div>
+            
+            {/* Interactive TextPressure for main title - Made larger */}
+            <div className="mb-8">
+              <div className="h-48 md:h-56">
+                <TextPressure 
+                  text="SAKTHIVEL E"
+                  textColor={isDark ? '#ffffff' : '#1f2937'}
+                  strokeColor={isDark ? '#4b5563' : '#6b7280'}
+                  stroke={true}
+                  minFontSize={64}
                   className="mb-4"
                 />
               </div>
             </div>
 
-            {/* Description */}
+            {/* Description with proper spacing */}
             <div className="mb-16">
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
                 Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
@@ -195,20 +206,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Skills Section with InfiniteMenu */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Skills & Expertise</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill, index) => (
-              <Card key={skill.name} className="hover:shadow-lg transition-all duration-300 hover:scale-105 group">
-                <CardContent className="p-6 text-center">
-                  <skill.icon className="w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-200" />
-                  <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
-                  <Badge variant="secondary">{skill.category}</Badge>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="h-96 md:h-[500px] relative">
+            <InfiniteMenu items={skillsForMenu} />
           </div>
         </div>
       </section>
