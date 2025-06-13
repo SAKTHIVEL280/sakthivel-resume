@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -15,6 +16,8 @@ import Hyperspeed from '@/components/Hyperspeed';
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState('');
+  const [isHyperspeedActive, setIsHyperspeedActive] = useState(false);
+  const hyperspeedRef = useRef<any>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -91,6 +94,11 @@ const Index = () => {
       title: "Resume download",
       description: "Resume download will be available soon!",
     });
+  };
+
+  const handleCardClick = () => {
+    setIsHyperspeedActive(true);
+    setTimeout(() => setIsHyperspeedActive(false), 2000); // Stop effect after 2 seconds
   };
 
   return (
@@ -199,6 +207,7 @@ const Index = () => {
         {/* Hyperspeed Background */}
         <div className="absolute inset-0">
           <Hyperspeed
+            ref={hyperspeedRef}
             effectOptions={{
               onSpeedUp: () => { },
               onSlowDown: () => { },
@@ -209,7 +218,7 @@ const Index = () => {
               lanesPerRoad: 4,
               fov: 90,
               fovSpeedUp: 150,
-              speedUp: 2,
+              speedUp: isHyperspeedActive ? 2 : 0,
               carLightsFade: 0.4,
               totalSideLightSticks: 20,
               lightPairsPerRoadWay: 40,
@@ -245,13 +254,15 @@ const Index = () => {
             {skills.slice(0, 4).map((skill, index) => (
               <Card 
                 key={skill.name} 
-                className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/90 to-muted/90 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md"
+                onClick={handleCardClick}
+                className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/20 to-muted/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md cursor-pointer"
                 style={{
                   animationDelay: `${index * 100}ms`,
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 }}
               >
                 {/* Gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
                 
                 {/* Icon background circle */}
                 <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
@@ -263,12 +274,12 @@ const Index = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-300">
+                      <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors duration-300">
                         {skill.name}
                       </h3>
                       <Badge 
                         variant="secondary" 
-                        className="text-xs font-medium bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300"
+                        className="text-xs font-medium bg-white/20 text-white group-hover:bg-primary/20 group-hover:text-primary transition-all duration-300"
                       >
                         {skill.category}
                       </Badge>
@@ -285,13 +296,15 @@ const Index = () => {
               {skills.slice(4).map((skill, index) => (
                 <Card 
                   key={skill.name} 
-                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/90 to-muted/90 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md"
+                  onClick={handleCardClick}
+                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/20 to-muted/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md cursor-pointer"
                   style={{
                     animationDelay: `${(index + 4) * 100}ms`,
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   }}
                 >
                   {/* Gradient overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
                   
                   {/* Icon background circle */}
                   <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
@@ -303,12 +316,12 @@ const Index = () => {
                       </div>
                       
                       <div className="space-y-2">
-                        <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-300">
+                        <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors duration-300">
                           {skill.name}
                         </h3>
                         <Badge 
                           variant="secondary" 
-                          className="text-xs font-medium bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300"
+                          className="text-xs font-medium bg-white/20 text-white group-hover:bg-primary/20 group-hover:text-primary transition-all duration-300"
                         >
                           {skill.category}
                         </Badge>
