@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -249,9 +248,9 @@ const Index = () => {
                   className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  {/* Icon Container */}
+                  {/* Icon Container - Perfectly Centered */}
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-6 h-6 text-white" />
+                    <IconComponent className="w-6 h-6 text-white flex-shrink-0" />
                   </div>
 
                   {/* Content */}
