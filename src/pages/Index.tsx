@@ -135,49 +135,6 @@ const Index = () => {
     setTimeout(() => setIsHyperspeedActive(false), 2000);
   };
 
-  const tools = [
-    'ComfyUI', 'Hugging Face', 'DaVinci Resolve', 
-    'Cursor AI', 'Lovable.dev', 'ChatGPT', 'Claude'
-  ];
-
-  const interests = [
-    'Building AI-Powered Tools & Assistants',
-    'Exploring Open-Source AI Projects',
-    'Editing with DaVinci Resolve',
-    'Designing Minimal UI Experiences'
-  ];
-
-  const projects = [
-    {
-      title: 'T2I – Text to Image Generator',
-      description: 'Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.',
-      tech: 'React + AI',
-      year: '2024',
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      title: 'Virtual Try-On System',
-      description: 'Built a virtual try-on system for fashion e-commerce using diffusion models and image processing. Used in client project (Thooni.com).',
-      tech: 'ComfyUI + Python',
-      year: '2025',
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      title: 'MediaWeave – AI Multimedia Conversion Platform',
-      description: 'Converts text ↔ audio ↔ video using AI. Supports translations and works on low-GPU setups.',
-      tech: 'Python + AI',
-      year: '2025',
-      color: 'from-green-500 to-emerald-500'
-    },
-    {
-      title: 'Personal Markdown Note Taker (PMLNT)',
-      description: 'Created a structured note-taking app with Markdown and AI-based formatting/export features.',
-      tech: 'Python',
-      year: '2024',
-      color: 'from-orange-500 to-red-500'
-    }
-  ];
-
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Fixed Theme Toggle and Resume Button */}
