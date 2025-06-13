@@ -11,6 +11,7 @@ import Threads from '@/components/Threads';
 import GradientText from '@/components/GradientText';
 import Hyperspeed from '@/components/Hyperspeed';
 import DotGrid from '@/components/DotGrid';
+import FadeContent from '@/components/FadeContent';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -259,24 +260,29 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => {
               return (
-                <div 
+                <FadeContent
                   key={skill.name}
-                  className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  blur={true}
+                  duration={1000}
+                  easing="ease-out"
+                  delay={index * 100}
+                  initialOpacity={0}
                 >
-                  {/* Gradient Bar */}
-                  <div className={`w-full h-2 rounded-full bg-gradient-to-r ${skill.color} mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}></div>
+                  <div className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-center">
+                    {/* Gradient Bar */}
+                    <div className={`w-full h-2 rounded-full bg-gradient-to-r ${skill.color} mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}></div>
 
-                  {/* Content */}
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                      {skill.name}
-                    </h3>
-                    <Badge variant="secondary" className="text-xs">
-                      {skill.category}
-                    </Badge>
+                    {/* Content */}
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                        {skill.name}
+                      </h3>
+                      <Badge variant="secondary" className="text-xs">
+                        {skill.category}
+                      </Badge>
+                    </div>
                   </div>
-                </div>
+                </FadeContent>
               );
             })}
           </div>
