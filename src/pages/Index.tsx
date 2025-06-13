@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -180,18 +179,18 @@ const Index = () => {
       color: 'from-blue-500 to-cyan-500'
     },
     {
-      title: 'T2I – Text to Image Generator',
-      description: 'Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.',
-      tech: 'React + AI',
-      year: '2024',
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
       title: 'Personal Markdown Note Taker (PMLNT)',
       description: 'Created a structured note-taking app with Markdown and AI-based formatting/export features.',
       tech: 'Python',
       year: '2024',
       color: 'from-orange-500 to-red-500'
+    },
+    {
+      title: 'T2I – Text to Image Generator',
+      description: 'Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.',
+      tech: 'React + AI',
+      year: '2024',
+      color: 'from-purple-500 to-pink-500'
     }
   ];
 
@@ -584,7 +583,7 @@ const Index = () => {
             centerVignette={true}
             outerVignette={false}
             smooth={true}
-            glitchColors={isDark ? ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4'] : ['#1d4ed8', '#059669', '#7c3aed', '#d97706', '#dc2626', '#0891b2']}
+            glitchColors={isDark ? ['#00ff41', '#008f11', '#00ff41', '#41ff00', '#0080ff', '#00ff80'] : ['#008f11', '#006400', '#228b22', '#32cd32', '#1e90ff', '#00fa9a']}
           />
         </div>
         
