@@ -258,7 +258,7 @@ const Index = () => {
                   <CardContent className="p-6 relative z-10 h-full flex flex-col items-center justify-center text-center">
                     <div className="space-y-4">
                       <div className={`w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg mx-auto`}>
-                        <skill.icon className="w-8 h-8 text-white" />
+                        <skill.icon className="w-8 h-8 text-white flex-shrink-0" />
                       </div>
                       
                       <div className="space-y-2">
