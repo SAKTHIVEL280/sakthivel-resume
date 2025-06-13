@@ -13,6 +13,7 @@ import Hyperspeed from '@/components/Hyperspeed';
 import DotGrid from '@/components/DotGrid';
 import FadeContent from '@/components/FadeContent';
 import Silk from '@/components/Silk';
+import FlowingMenu from '@/components/FlowingMenu';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -133,10 +134,26 @@ const Index = () => {
   ];
 
   const interests = [
-    'Building AI-Powered Tools & Assistants',
-    'Exploring Open-Source AI Projects',
-    'Editing with DaVinci Resolve',
-    'Designing Minimal UI Experiences'
+    {
+      link: '#',
+      text: 'Building AI-Powered Tools & Assistants',
+      image: 'https://picsum.photos/600/400?random=1'
+    },
+    {
+      link: '#',
+      text: 'Exploring Open-Source AI Projects',
+      image: 'https://picsum.photos/600/400?random=2'
+    },
+    {
+      link: '#',
+      text: 'Editing with DaVinci Resolve',
+      image: 'https://picsum.photos/600/400?random=3'
+    },
+    {
+      link: '#',
+      text: 'Designing Minimal UI Experiences',
+      image: 'https://picsum.photos/600/400?random=4'
+    }
   ];
 
   const projects = [
@@ -481,21 +498,12 @@ const Index = () => {
         `}</style>
       </section>
 
-      {/* Interests Section */}
+      {/* Interests Section - Updated with FlowingMenu */}
       <section id="interests" className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Interests</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {interests.map((interest, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <CardContent className="p-6">
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary to-blue-600 mr-4"></div>
-                    <p className="text-lg font-medium">{interest}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div style={{ height: '600px', position: 'relative', background: isDark ? '#1a1a1a' : '#f0f0f0', borderRadius: '12px' }}>
+            <FlowingMenu items={interests} />
           </div>
         </div>
       </section>
