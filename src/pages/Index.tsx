@@ -9,6 +9,8 @@ import SplitText from '@/components/SplitText';
 import BlurText from '@/components/BlurText';
 import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
+import Threads from '@/components/Threads';
+import ScrambledText from '@/components/ScrambledText';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -173,23 +175,37 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
+      {/* About Section with Threads Background */}
+      <section className="py-20 px-6 relative overflow-hidden">
+        {/* Threads Background */}
+        <div className="absolute inset-0">
+          <Threads 
+            color={isDark ? [0.4, 0.5, 0.7] : [0.3, 0.4, 0.6]}
+            amplitude={0.8}
+            distance={0.3}
+            enableMouseInteraction={true}
+            className="absolute inset-0"
+          />
+        </div>
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <SplitText 
             text="About Me" 
             className="text-4xl font-bold text-center mb-16 text-foreground"
             splitType="words"
             delay={100}
           />
-          <Card className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+          <Card className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] bg-background/80 backdrop-blur-md border-border/50">
             <CardContent className="p-8">
-              <BlurText
-                text="Strong interest in open-source, multimedia processing, and creating solutions using free, accessible resources. I build smart tools that help people, focusing on innovation through artificial intelligence and automation. My approach combines technical expertise with user-centered design to create meaningful digital experiences."
-                className="text-lg leading-relaxed text-muted-foreground"
-                animateBy="words"
-                delay={80}
-              />
+              <ScrambledText
+                radius={120}
+                duration={1.5}
+                scrambleChars="01.:"
+                className="!text-foreground !max-w-none !margin-0"
+                style={{ margin: 0, color: 'inherit', fontFamily: 'inherit', fontSize: '1.125rem' }}
+              >
+                Strong interest in open-source, multimedia processing, and creating solutions using free, accessible resources. I build smart tools that help people, focusing on innovation through artificial intelligence and automation. My approach combines technical expertise with user-centered design to create meaningful digital experiences.
+              </ScrambledText>
             </CardContent>
           </Card>
         </div>
