@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -134,6 +135,49 @@ const Index = () => {
     setTimeout(() => setIsHyperspeedActive(false), 2000);
   };
 
+  const tools = [
+    'ComfyUI', 'Hugging Face', 'DaVinci Resolve', 
+    'Cursor AI', 'Lovable.dev', 'ChatGPT', 'Claude'
+  ];
+
+  const interests = [
+    'Building AI-Powered Tools & Assistants',
+    'Exploring Open-Source AI Projects',
+    'Editing with DaVinci Resolve',
+    'Designing Minimal UI Experiences'
+  ];
+
+  const projects = [
+    {
+      title: 'T2I – Text to Image Generator',
+      description: 'Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.',
+      tech: 'React + AI',
+      year: '2024',
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
+      title: 'Virtual Try-On System',
+      description: 'Built a virtual try-on system for fashion e-commerce using diffusion models and image processing. Used in client project (Thooni.com).',
+      tech: 'ComfyUI + Python',
+      year: '2025',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      title: 'MediaWeave – AI Multimedia Conversion Platform',
+      description: 'Converts text ↔ audio ↔ video using AI. Supports translations and works on low-GPU setups.',
+      tech: 'Python + AI',
+      year: '2025',
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      title: 'Personal Markdown Note Taker (PMLNT)',
+      description: 'Created a structured note-taking app with Markdown and AI-based formatting/export features.',
+      tech: 'Python',
+      year: '2024',
+      color: 'from-orange-500 to-red-500'
+    }
+  ];
+
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Fixed Theme Toggle and Resume Button */}
@@ -229,7 +273,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section - Clean and Minimal */}
+      {/* Skills Section - Completely Rewritten */}
       <section id="skills" className="py-20 px-6 bg-muted/20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -240,28 +284,31 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {skills.map((skill, index) => (
-              <div 
-                key={skill.name}
-                className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Icon */}
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <skill.icon className="w-6 h-6 text-white flex-shrink-0" />
-                </div>
+            {skills.map((skill, index) => {
+              const IconComponent = skill.icon;
+              return (
+                <div 
+                  key={skill.name}
+                  className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {/* Icon Container */}
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
 
-                {/* Content */}
-                <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                    {skill.name}
-                  </h3>
-                  <Badge variant="secondary" className="text-xs">
-                    {skill.category}
-                  </Badge>
+                  {/* Content */}
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                      {skill.name}
+                    </h3>
+                    <Badge variant="secondary" className="text-xs">
+                      {skill.category}
+                    </Badge>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
