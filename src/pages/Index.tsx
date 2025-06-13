@@ -212,7 +212,7 @@ const Index = () => {
       {/* Hero Section */}
       <section id="hero" className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
         <Waves 
-          lineColor={isDark ? 'rgba(156, 163, 175, 0.3)' : 'rgba(107, 114, 128, 0.2)'} 
+          lineColor={isDark ? 'rgba(156, 163, 175, 0.4)' : 'rgba(107, 114, 128, 0.3)'} 
           backgroundColor="transparent"
           className="absolute inset-0 z-0"
         />
@@ -265,9 +265,9 @@ const Index = () => {
       <section id="about" className="py-20 px-6 relative overflow-hidden">
         <div className="absolute inset-0">
           <Threads 
-            color={isDark ? [0.4, 0.5, 0.7] : [0.3, 0.4, 0.6]}
-            amplitude={0.8}
-            distance={0.3}
+            color={isDark ? [0.5, 0.6, 0.8] : [0.3, 0.4, 0.6]}
+            amplitude={1.2}
+            distance={0.4}
             enableMouseInteraction={true}
             className="absolute inset-0"
           />
@@ -291,15 +291,15 @@ const Index = () => {
         {/* DotGrid Background */}
         <div className="absolute inset-0 z-0">
           <DotGrid
-            dotSize={8}
-            gap={20}
+            dotSize={10}
+            gap={18}
             baseColor={isDark ? "#374151" : "#d1d5db"}
             activeColor={isDark ? "#60a5fa" : "#3b82f6"}
-            proximity={120}
-            shockRadius={200}
-            shockStrength={3}
-            resistance={500}
-            returnDuration={1.2}
+            proximity={140}
+            shockRadius={250}
+            shockStrength={4}
+            resistance={400}
+            returnDuration={1.0}
           />
         </div>
 
@@ -348,16 +348,16 @@ const Index = () => {
         {/* Silk Background */}
         <div className="absolute inset-0 z-0">
           <Silk
-            speed={2}
-            scale={0.8}
+            speed={10}
+            scale={1.5}
             color={isDark ? "#1e293b" : "#f1f5f9"}
-            noiseIntensity={0.8}
-            rotation={0.1}
+            noiseIntensity={1.5}
+            rotation={0.2}
           />
         </div>
         
         {/* Dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-black/20 z-10"></div>
+        <div className="absolute inset-0 bg-black/15 z-10"></div>
         
         <div className="max-w-6xl mx-auto relative z-20">
           <div className="text-center mb-12">
@@ -371,22 +371,22 @@ const Index = () => {
           <div className="relative h-32 overflow-hidden mask-gradient">
             <div className="absolute inset-0 flex items-center">
               {/* First Set - Continuous Movement */}
-              <div className="flex animate-scroll-continuous space-x-8 min-w-max">
+              <div className="flex animate-scroll-smooth space-x-8 min-w-max">
                 {tools.map((tool, index) => (
                   <div
                     key={`first-${index}`}
-                    className={`group flex-shrink-0 relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-6 min-w-[320px] shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden transition-all duration-300`}
+                    className={`group flex-shrink-0 relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-6 min-w-[320px] shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-3xl`}
                   >
                     {/* Background Pattern */}
                     <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10"></div>
-                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10 transition-transform duration-500 group-hover:scale-110"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-8 -translate-x-8 transition-transform duration-500 group-hover:scale-110"></div>
                     
                     {/* Content */}
                     <div className="relative z-10">
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h3 className="text-xl font-bold text-white mb-1 tracking-tight">
+                          <h3 className="text-xl font-bold text-white mb-1 tracking-tight transition-all duration-300 group-hover:text-yellow-200">
                             {tool.name}
                           </h3>
                           <p className="text-white/80 text-sm font-medium">
@@ -395,7 +395,7 @@ const Index = () => {
                         </div>
                         <Badge 
                           variant="secondary" 
-                          className="bg-white/20 text-white border-white/30 text-xs font-semibold backdrop-blur-sm"
+                          className="bg-white/20 text-white border-white/30 text-xs font-semibold backdrop-blur-sm transition-all duration-300 group-hover:bg-white/30"
                         >
                           {tool.tech}
                         </Badge>
@@ -406,28 +406,28 @@ const Index = () => {
                     </div>
                     
                     {/* Subtle Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl transition-opacity duration-300 group-hover:from-black/10"></div>
                   </div>
                 ))}
               </div>
               
               {/* Second Set for Seamless Loop */}
-              <div className="flex animate-scroll-continuous space-x-8 min-w-max ml-8">
+              <div className="flex animate-scroll-smooth space-x-8 min-w-max ml-8">
                 {tools.map((tool, index) => (
                   <div
                     key={`second-${index}`}
-                    className={`group flex-shrink-0 relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-6 min-w-[320px] shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden transition-all duration-300`}
+                    className={`group flex-shrink-0 relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-6 min-w-[320px] shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-3xl`}
                   >
                     {/* Background Pattern */}
                     <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10"></div>
-                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10 transition-transform duration-500 group-hover:scale-110"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-8 -translate-x-8 transition-transform duration-500 group-hover:scale-110"></div>
                     
                     {/* Content */}
                     <div className="relative z-10">
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h3 className="text-xl font-bold text-white mb-1 tracking-tight">
+                          <h3 className="text-xl font-bold text-white mb-1 tracking-tight transition-all duration-300 group-hover:text-yellow-200">
                             {tool.name}
                           </h3>
                           <p className="text-white/80 text-sm font-medium">
@@ -436,7 +436,7 @@ const Index = () => {
                         </div>
                         <Badge 
                           variant="secondary" 
-                          className="bg-white/20 text-white border-white/30 text-xs font-semibold backdrop-blur-sm"
+                          className="bg-white/20 text-white border-white/30 text-xs font-semibold backdrop-blur-sm transition-all duration-300 group-hover:bg-white/30"
                         >
                           {tool.tech}
                         </Badge>
@@ -447,7 +447,7 @@ const Index = () => {
                     </div>
                     
                     {/* Subtle Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl transition-opacity duration-300 group-hover:from-black/10"></div>
                   </div>
                 ))}
               </div>
@@ -458,11 +458,11 @@ const Index = () => {
         {/* Enhanced Rolling Animation CSS */}
         <style>{`
           .mask-gradient {
-            mask: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-            -webkit-mask: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+            -webkit-mask: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
           }
           
-          @keyframes scroll-continuous {
+          @keyframes scroll-smooth {
             0% {
               transform: translateX(0);
             }
@@ -471,8 +471,12 @@ const Index = () => {
             }
           }
           
-          .animate-scroll-continuous {
-            animation: scroll-continuous 25s linear infinite;
+          .animate-scroll-smooth {
+            animation: scroll-smooth 20s linear infinite;
+          }
+          
+          .hover\\:shadow-3xl:hover {
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25), 0 0 40px rgba(255, 255, 255, 0.1);
           }
         `}</style>
       </section>

@@ -56,15 +56,15 @@ void main() {
   vec2  tex        = uv * uScale;
   float tOffset    = uSpeed * uTime;
 
-  tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
+  tex.y += 0.05 * sin(12.0 * tex.x - tOffset * 2.0);
 
   float pattern = 0.6 +
-                  0.4 * sin(5.0 * (tex.x + tex.y +
-                                   cos(3.0 * tex.x + 5.0 * tex.y) +
-                                   0.02 * tOffset) +
-                           sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
+                  0.5 * sin(7.0 * (tex.x + tex.y +
+                                   cos(4.0 * tex.x + 6.0 * tex.y) +
+                                   0.05 * tOffset) +
+                           sin(25.0 * (tex.x + tex.y - 0.15 * tOffset)));
 
-  vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
+  vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 12.0 * uNoiseIntensity;
   col.a = 1.0;
   gl_FragColor = col;
 }
@@ -85,7 +85,7 @@ const SilkPlane = forwardRef<any, SilkPlaneProps>(function SilkPlane({ uniforms 
 
   useFrame((_, delta) => {
     if (ref && typeof ref === 'object' && ref.current) {
-      ref.current.material.uniforms.uTime.value += 0.1 * delta;
+      ref.current.material.uniforms.uTime.value += 0.3 * delta;
     }
   });
 
@@ -110,10 +110,10 @@ interface SilkProps {
 }
 
 const Silk = ({
-  speed = 5,
-  scale = 1,
+  speed = 8,
+  scale = 1.2,
   color = "#7B7481",
-  noiseIntensity = 1.5,
+  noiseIntensity = 2,
   rotation = 0,
 }: SilkProps) => {
   const meshRef = useRef();
