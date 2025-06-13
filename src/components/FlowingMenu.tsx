@@ -30,7 +30,7 @@ function MenuItem({ link, text, image }: MenuItem) {
   const marqueeRef = React.useRef<HTMLDivElement>(null);
   const marqueeInnerRef = React.useRef<HTMLDivElement>(null);
 
-  const animationDefaults = { duration: 0.6, ease: 'expo' };
+  const animationDefaults = { duration: 0.6, ease: 'expo.out' };
 
   const findClosestEdge = (mouseX: number, mouseY: number, width: number, height: number) => {
     const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
@@ -46,6 +46,7 @@ function MenuItem({ link, text, image }: MenuItem) {
 
   const handleMouseEnter = (ev: React.MouseEvent) => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
+    
     const rect = itemRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
     const y = ev.clientY - rect.top;
@@ -59,6 +60,7 @@ function MenuItem({ link, text, image }: MenuItem) {
 
   const handleMouseLeave = (ev: React.MouseEvent) => {
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
+    
     const rect = itemRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
     const y = ev.clientY - rect.top;
@@ -69,7 +71,7 @@ function MenuItem({ link, text, image }: MenuItem) {
       .to(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0);
   };
 
-  const repeatedMarqueeContent = Array.from({ length: 4 }).map((_, idx) => (
+  const repeatedMarqueeContent = Array.from({ length: 6 }).map((_, idx) => (
     <React.Fragment key={idx}>
       <span>{text}</span>
       <div
@@ -80,7 +82,10 @@ function MenuItem({ link, text, image }: MenuItem) {
   ));
 
   return (
-    <div className="menu__item" ref={itemRef}>
+    <div 
+      className="menu__item" 
+      ref={itemRef}
+    >
       <a
         className="menu__item-link"
         href={link}
