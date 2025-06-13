@@ -11,16 +11,18 @@
   height: 100%;
   margin: 0;
   padding: 0;
+  gap: 0; /* Remove any gaps between items */
 }
 
 .menu__item {
-  flex: 1;
+  flex: none; /* Changed from flex: 1 to prevent equal distribution */
   position: relative;
   overflow: hidden;
   text-align: center;
   box-shadow: 0 -1px #fff;
-  min-height: 60px; /* Reduced from default */
-  max-height: 80px; /* Added max height constraint */
+  min-height: 50px; /* Reduced further */
+  max-height: 60px; /* Reduced further */
+  height: 60px; /* Fixed height instead of flexible */
 }
 
 .menu__item-link {
@@ -35,8 +37,8 @@
   white-space: nowrap;
   font-weight: 600;
   color: #fff;
-  font-size: 2.5vh; /* Reduced from 4vh */
-  padding: 0.5rem; /* Added padding for better spacing */
+  font-size: 2vh; /* Reduced further */
+  padding: 0.25rem; /* Reduced padding */
 }
 
 .menu__item-link:hover {
@@ -82,17 +84,17 @@
   white-space: nowrap;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 2.5vh; /* Reduced from 4vh */
+  font-size: 2vh; /* Reduced further */
   line-height: 1.2;
-  padding: 0.5vh 1vw 0; /* Reduced padding */
+  padding: 0.25vh 1vw 0; /* Reduced padding further */
 }
 
 .marquee__img {
-  width: 120px; /* Reduced from 200px */
-  height: 4vh; /* Reduced from 7vh */
-  margin: 1em 2vw; /* Reduced margin */
-  padding: 0.5em 0; /* Reduced padding */
-  border-radius: 30px; /* Reduced from 50px */
+  width: 100px; /* Reduced further */
+  height: 3vh; /* Reduced further */
+  margin: 0.5em 1.5vw; /* Reduced margin further */
+  padding: 0.25em 0; /* Reduced padding further */
+  border-radius: 20px; /* Reduced further */
   background-size: cover;
   background-position: 50% 50%;
 }
