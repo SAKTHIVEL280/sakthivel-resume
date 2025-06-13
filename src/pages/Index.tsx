@@ -7,7 +7,6 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import SplitText from '@/components/SplitText';
-import BlurText from '@/components/BlurText';
 import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
 import Threads from '@/components/Threads';
@@ -123,27 +122,27 @@ const Index = () => {
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
-            {/* Interactive TextPressure for main title */}
-            <div className="h-40 md:h-48 mb-8">
+            {/* Interactive TextPressure for main title - Made larger */}
+            <div className="h-48 md:h-56 mb-8">
               <TextPressure 
                 text="SAKTHIVEL E"
                 textColor={isDark ? '#ffffff' : '#1f2937'}
                 strokeColor={isDark ? '#4b5563' : '#6b7280'}
                 stroke={true}
-                minFontSize={56}
+                minFontSize={64}
                 className="mb-4"
               />
             </div>
             
-            {/* AI Enthusiast with TextPressure effect */}
-            <div className="mb-16 space-y-4">
-              <div className="h-16 md:h-20 mb-8">
+            {/* AI Enthusiast with TextPressure effect - Made smaller */}
+            <div className="mb-12 space-y-4">
+              <div className="h-12 md:h-16 mb-8">
                 <TextPressure 
                   text="AI ENTHUSIAST"
                   textColor={isDark ? '#9ca3af' : '#374151'}
                   strokeColor={isDark ? '#6b7280' : '#4b5563'}
                   stroke={false}
-                  minFontSize={24}
+                  minFontSize={20}
                   className="mb-4"
                 />
               </div>
@@ -185,12 +184,7 @@ const Index = () => {
         </div>
         
         <div className="max-w-6xl mx-auto relative z-10">
-          <SplitText 
-            text="About Me" 
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-            splitType="words"
-            delay={100}
-          />
+          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">About Me</h2>
           <div className="text-center">
             <GradientText
               className="text-lg leading-relaxed max-w-4xl mx-auto"
@@ -205,12 +199,7 @@ const Index = () => {
       {/* Skills Section */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <SplitText 
-            text="Skills & Expertise" 
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-            splitType="words"
-            delay={100}
-          />
+          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Skills & Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skill, index) => (
               <Card key={skill.name} className="hover:shadow-lg transition-all duration-300 hover:scale-105 group">
@@ -228,12 +217,7 @@ const Index = () => {
       {/* Tools Section */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <SplitText 
-            text="Tools & Technologies" 
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-            splitType="words"
-            delay={100}
-          />
+          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
           <div className="flex flex-wrap justify-center gap-4">
             {tools.map((tool, index) => (
               <Badge 
@@ -251,12 +235,7 @@ const Index = () => {
       {/* Interests Section */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <SplitText 
-            text="Interests" 
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-            splitType="words"
-            delay={100}
-          />
+          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Interests</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {interests.map((interest, index) => (
               <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
@@ -275,24 +254,16 @@ const Index = () => {
       {/* Projects Section */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <SplitText 
-            text="Featured Projects" 
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-            splitType="words"
-            delay={100}
-          />
+          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Featured Projects</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <Card key={project.title} className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] group overflow-hidden">
                 <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start mb-4">
-                    <SplitText
-                      text={project.title}
-                      className="text-2xl font-bold group-hover:text-primary transition-colors duration-200"
-                      splitType="words"
-                      delay={50}
-                    />
+                    <h3 className="text-2xl font-bold group-hover:text-primary transition-colors duration-200">
+                      {project.title}
+                    </h3>
                     <Badge variant="outline">{project.year}</Badge>
                   </div>
                   <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
@@ -312,12 +283,7 @@ const Index = () => {
       {/* Education Section */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <SplitText 
-            text="Education" 
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-            splitType="words"
-            delay={100}
-          />
+          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Education</h2>
           <div className="space-y-8">
             <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
               <CardContent className="p-8">
@@ -367,12 +333,7 @@ const Index = () => {
       {/* Contact Section */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <SplitText 
-            text="Let's Connect" 
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-            splitType="words"
-            delay={100}
-          />
+          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Let's Connect</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
