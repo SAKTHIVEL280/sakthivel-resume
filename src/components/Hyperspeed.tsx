@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import * as THREE from 'three';
 import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
@@ -614,10 +613,9 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
         const geometry = new THREE.PlaneGeometry(1, 1);
         let instanced = new THREE.InstancedBufferGeometry();
         instanced.copy(geometry);
-        let totalSticks = options.totalSideLightSticks;
-        instanced.instanceCount = totalSticks;
+        instanced.instanceCount = options.totalSideLightSticks;
 
-        let stickoffset = options.length / (totalSticks - 1);
+        let stickoffset = options.length / (options.totalSideLightSticks - 1);
         const aOffset = [];
         const aColor = [];
         const aMetrics = [];
@@ -629,7 +627,7 @@ const Hyperspeed = forwardRef<any, HyperspeedProps>(({ effectOptions = {}, class
           colors = new THREE.Color(colors);
         }
 
-        for (let i = 0; i < totalSticks; i++) {
+        for (let i = 0; i < options.totalSideLightSticks; i++) {
           let width = random(options.lightStickWidth);
           let height = random(options.lightStickHeight);
           aOffset.push((i - 1) * stickoffset * 2 + stickoffset * Math.random());
