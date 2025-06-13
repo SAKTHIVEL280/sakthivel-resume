@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import * as THREE from 'three';
 import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
@@ -330,6 +331,32 @@ const Hyperspeed = ({ effectOptions = {
     }
 
     class App {
+      options: any;
+      container: HTMLElement;
+      renderer: THREE.WebGLRenderer;
+      composer: EffectComposer;
+      camera: THREE.PerspectiveCamera;
+      scene: THREE.Scene;
+      fogUniforms: any;
+      clock: THREE.Clock;
+      assets: any;
+      disposed: boolean;
+      road: Road;
+      leftCarLights: CarLights;
+      rightCarLights: CarLights;
+      leftSticks: LightsSticks;
+      fovTarget: number;
+      speedUpTarget: number;
+      speedUp: number;
+      timeOffset: number;
+      renderPass: RenderPass;
+      bloomPass: EffectPass;
+      tick: () => void;
+      init: () => void;
+      setSize: (width: number, height: number, updateStyles?: boolean) => void;
+      onMouseDown: (ev: MouseEvent) => void;
+      onMouseUp: (ev: MouseEvent) => void;
+
       constructor(container: HTMLElement, options: any = {}) {
         this.options = options;
         if (this.options.distortion == null) {
@@ -430,9 +457,7 @@ const Hyperspeed = ({ effectOptions = {
         const smaaPass = new EffectPass(
           this.camera,
           new SMAAEffect({
-            preset: SMAAPreset.MEDIUM,
-            searchImage: SMAAEffect.searchImageDataURL,
-            areaImage: SMAAEffect.areaImageDataURL
+            preset: SMAAPreset.MEDIUM
           })
         );
         this.renderPass.renderToScreen = false;
@@ -446,7 +471,7 @@ const Hyperspeed = ({ effectOptions = {
       loadAssets() {
         const assets = this.assets;
         return new Promise((resolve) => {
-          const manager = new THREE.LoadingManager(resolve);
+          const manager = new THREE.LoadingManager(() => resolve(undefined));
 
           const searchImage = new Image();
           const areaImage = new Image();
@@ -493,19 +518,19 @@ const Hyperspeed = ({ effectOptions = {
         this.tick();
       }
 
-      onMouseDown(ev) {
+      onMouseDown(ev: MouseEvent) {
         if (this.options.onSpeedUp) this.options.onSpeedUp(ev);
         this.fovTarget = this.options.fovSpeedUp;
         this.speedUpTarget = this.options.speedUp;
       }
 
-      onMouseUp(ev) {
+      onMouseUp(ev: MouseEvent) {
         if (this.options.onSlowDown) this.options.onSlowDown(ev);
         this.fovTarget = this.options.fov;
         this.speedUpTarget = 0;
       }
 
-      update(delta) {
+      update(delta: number) {
         let lerpPercentage = Math.exp(-(-60 * Math.log2(1 - 0.1)) * delta);
         this.speedUp += lerp(
           this.speedUp,
@@ -550,7 +575,7 @@ const Hyperspeed = ({ effectOptions = {
         }
       }
 
-      render(delta) {
+      render(delta: number) {
         this.composer.render(delta);
       }
 
@@ -558,7 +583,7 @@ const Hyperspeed = ({ effectOptions = {
         this.disposed = true;
       }
 
-      setSize(width, height, updateStyles) {
+      setSize(width: number, height: number, updateStyles?: boolean) {
         this.composer.setSize(width, height, updateStyles);
       }
 
