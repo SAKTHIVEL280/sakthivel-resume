@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -80,13 +81,55 @@ const Index = () => {
   ];
 
   const tools = [
-    { name: '🚀 ComfyUI', gradient: 'from-purple-500 to-pink-500' },
-    { name: '🤖 Hugging Face', gradient: 'from-yellow-500 to-orange-500' }, 
-    { name: '🎬 DaVinci Resolve', gradient: 'from-blue-500 to-cyan-500' },
-    { name: '⚡ Cursor AI', gradient: 'from-green-500 to-emerald-500' },
-    { name: '💖 Lovable.dev', gradient: 'from-red-500 to-pink-500' },
-    { name: '🧠 ChatGPT', gradient: 'from-indigo-500 to-purple-500' },
-    { name: '🔮 Claude', gradient: 'from-cyan-500 to-blue-500' }
+    { 
+      name: 'ComfyUI', 
+      category: 'AI Workflow',
+      description: 'Advanced stable diffusion interface',
+      gradient: 'from-violet-600 via-purple-600 to-fuchsia-600',
+      tech: 'AI'
+    },
+    { 
+      name: 'Hugging Face', 
+      category: 'ML Platform',
+      description: 'Open-source AI model hub',
+      gradient: 'from-amber-500 via-orange-500 to-red-500',
+      tech: 'ML'
+    }, 
+    { 
+      name: 'DaVinci Resolve', 
+      category: 'Video Production',
+      description: 'Professional video editing suite',
+      gradient: 'from-blue-600 via-cyan-500 to-teal-500',
+      tech: 'Media'
+    },
+    { 
+      name: 'Cursor AI', 
+      category: 'Development',
+      description: 'AI-powered code editor',
+      gradient: 'from-emerald-500 via-green-500 to-lime-500',
+      tech: 'Dev'
+    },
+    { 
+      name: 'Lovable', 
+      category: 'Web Development',
+      description: 'AI web application builder',
+      gradient: 'from-rose-500 via-pink-500 to-red-500',
+      tech: 'Web'
+    },
+    { 
+      name: 'ChatGPT', 
+      category: 'AI Assistant',
+      description: 'Advanced language model',
+      gradient: 'from-indigo-600 via-purple-500 to-violet-600',
+      tech: 'AI'
+    },
+    { 
+      name: 'Claude', 
+      category: 'AI Assistant',
+      description: 'Constitutional AI assistant',
+      gradient: 'from-cyan-600 via-blue-500 to-indigo-600',
+      tech: 'AI'
+    }
   ];
 
   const interests = [
@@ -300,55 +343,112 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Tools Section - Rolling Gallery */}
-      <section id="tools" className="py-12 px-6 relative overflow-hidden bg-muted/10">
+      {/* Tools Section - Enhanced Professional Rolling Gallery */}
+      <section id="tools" className="py-20 px-6 relative overflow-hidden bg-muted/5">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-8 text-foreground">Tools & Technologies</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Technology Stack</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Cutting-edge tools and platforms I leverage to create innovative AI-powered solutions
+            </p>
+          </div>
           
-          {/* Rolling Gallery Container */}
-          <div className="relative h-20 overflow-hidden">
+          {/* Professional Rolling Gallery Container */}
+          <div className="relative h-32 overflow-hidden mask-gradient">
             <div className="absolute inset-0 flex items-center">
-              {/* First Set */}
-              <div className="flex animate-scroll-left space-x-6 min-w-max">
+              {/* First Set - Continuous Movement */}
+              <div className="flex animate-scroll-continuous space-x-8 min-w-max">
                 {tools.map((tool, index) => (
                   <div
                     key={`first-${index}`}
-                    className={`flex-shrink-0 bg-gradient-to-r ${tool.gradient} rounded-lg px-6 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300`}
+                    className={`group flex-shrink-0 relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-6 min-w-[320px] shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden transition-all duration-300`}
                   >
-                    <span className="text-white font-semibold text-sm whitespace-nowrap">
-                      {tool.name}
-                    </span>
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
+                    
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="text-xl font-bold text-white mb-1 tracking-tight">
+                            {tool.name}
+                          </h3>
+                          <p className="text-white/80 text-sm font-medium">
+                            {tool.category}
+                          </p>
+                        </div>
+                        <Badge 
+                          variant="secondary" 
+                          className="bg-white/20 text-white border-white/30 text-xs font-semibold backdrop-blur-sm"
+                        >
+                          {tool.tech}
+                        </Badge>
+                      </div>
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        {tool.description}
+                      </p>
+                    </div>
+                    
+                    {/* Subtle Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
                   </div>
                 ))}
               </div>
               
               {/* Second Set for Seamless Loop */}
-              <div className="flex animate-scroll-left space-x-6 min-w-max ml-6">
+              <div className="flex animate-scroll-continuous space-x-8 min-w-max ml-8">
                 {tools.map((tool, index) => (
                   <div
                     key={`second-${index}`}
-                    className={`flex-shrink-0 bg-gradient-to-r ${tool.gradient} rounded-lg px-6 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300`}
+                    className={`group flex-shrink-0 relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-6 min-w-[320px] shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden transition-all duration-300`}
                   >
-                    <span className="text-white font-semibold text-sm whitespace-nowrap">
-                      {tool.name}
-                    </span>
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
+                    
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="text-xl font-bold text-white mb-1 tracking-tight">
+                            {tool.name}
+                          </h3>
+                          <p className="text-white/80 text-sm font-medium">
+                            {tool.category}
+                          </p>
+                        </div>
+                        <Badge 
+                          variant="secondary" 
+                          className="bg-white/20 text-white border-white/30 text-xs font-semibold backdrop-blur-sm"
+                        >
+                          {tool.tech}
+                        </Badge>
+                      </div>
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        {tool.description}
+                      </p>
+                    </div>
+                    
+                    {/* Subtle Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
-          {/* Description */}
-          <div className="text-center mt-6">
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              Cutting-edge tools and technologies I work with to create amazing AI-powered experiences
-            </p>
-          </div>
         </div>
 
-        {/* Rolling Animation CSS */}
+        {/* Enhanced Rolling Animation CSS */}
         <style>{`
-          @keyframes scroll-left {
+          .mask-gradient {
+            mask: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+          }
+          
+          @keyframes scroll-continuous {
             0% {
               transform: translateX(0);
             }
@@ -357,12 +457,8 @@ const Index = () => {
             }
           }
           
-          .animate-scroll-left {
-            animation: scroll-left 20s linear infinite;
-          }
-          
-          .animate-scroll-left:hover {
-            animation-play-state: paused;
+          .animate-scroll-continuous {
+            animation: scroll-continuous 25s linear infinite;
           }
         `}</style>
       </section>
