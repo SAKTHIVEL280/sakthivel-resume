@@ -19,6 +19,8 @@
   overflow: hidden;
   text-align: center;
   box-shadow: 0 -1px #fff;
+  min-height: 60px; /* Reduced from default */
+  max-height: 80px; /* Added max height constraint */
 }
 
 .menu__item-link {
@@ -33,7 +35,8 @@
   white-space: nowrap;
   font-weight: 600;
   color: #fff;
-  font-size: 4vh;
+  font-size: 2.5vh; /* Reduced from 4vh */
+  padding: 0.5rem; /* Added padding for better spacing */
 }
 
 .menu__item-link:hover {
@@ -79,17 +82,17 @@
   white-space: nowrap;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 4vh;
+  font-size: 2.5vh; /* Reduced from 4vh */
   line-height: 1.2;
-  padding: 1vh 1vw 0;
+  padding: 0.5vh 1vw 0; /* Reduced padding */
 }
 
 .marquee__img {
-  width: 200px;
-  height: 7vh;
-  margin: 2em 2vw;
-  padding: 1em 0;
-  border-radius: 50px;
+  width: 120px; /* Reduced from 200px */
+  height: 4vh; /* Reduced from 7vh */
+  margin: 1em 2vw; /* Reduced margin */
+  padding: 0.5em 0; /* Reduced padding */
+  border-radius: 30px; /* Reduced from 50px */
   background-size: cover;
   background-position: 50% 50%;
 }
