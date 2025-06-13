@@ -6,11 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import SplitText from '@/components/SplitText';
+import BlurText from '@/components/BlurText';
 import TextPressure from '@/components/TextPressure';
-import Waves from '@/components/Waves';
-import Threads from '@/components/Threads';
-import GradientText from '@/components/GradientText';
-import InfiniteMenu from '@/components/InfiniteMenu';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -33,51 +30,6 @@ const Index = () => {
     { name: 'Prompt Engineering', icon: Brain, category: 'AI' },
     { name: 'UI/UX Designing', icon: Palette, category: 'Design' },
     { name: 'ComfyUI', icon: Wrench, category: 'Tools' }
-  ];
-
-  const skillsForMenu = [
-    {
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-      title: 'Python',
-      description: 'Programming',
-      link: '#'
-    },
-    {
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
-      title: 'C',
-      description: 'Programming',
-      link: '#'
-    },
-    {
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
-      title: 'HTML & CSS',
-      description: 'Web',
-      link: '#'
-    },
-    {
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
-      title: 'Applied AI Skills',
-      description: 'AI',
-      link: '#'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=400&fit=crop&crop=center',
-      title: 'Prompt Engineering',
-      description: 'AI',
-      link: '#'
-    },
-    {
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
-      title: 'UI/UX Designing',
-      description: 'Design',
-      link: '#'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=400&fit=crop&crop=center',
-      title: 'ComfyUI',
-      description: 'Tools',
-      link: '#'
-    }
   ];
 
   const tools = [
@@ -156,59 +108,57 @@ const Index = () => {
         </Button>
       </div>
 
-      {/* Hero Section with Waves Background */}
-      <section className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
-        {/* Background Waves Effect - Only for Hero */}
-        <Waves 
-          lineColor={isDark ? 'rgba(156, 163, 175, 0.3)' : 'rgba(107, 114, 128, 0.2)'} 
-          backgroundColor="transparent"
-          className="absolute inset-0 z-0"
-        />
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="animate-fade-in space-y-12">
-            {/* Main title - SAKTHIVEL E */}
-            <div className="mb-12">
-              <div className="h-32 md:h-40 mb-8">
-                <TextPressure 
-                  text="SAKTHIVEL E"
-                  textColor={isDark ? '#ffffff' : '#1f2937'}
-                  strokeColor={isDark ? '#4b5563' : '#6b7280'}
-                  stroke={true}
-                  minFontSize={48}
-                  className="mb-4"
-                />
-              </div>
+      {/* Hero Section */}
+      <section className="pt-20 pb-20 px-6 text-center min-h-screen flex items-center justify-center">
+        <div className="max-w-4xl mx-auto">
+          <div className="animate-fade-in">
+            {/* Interactive TextPressure for main title */}
+            <div className="h-32 md:h-40 mb-12">
+              <TextPressure 
+                text="SAKTHIVEL E"
+                textColor={isDark ? '#ffffff' : '#000000'}
+                strokeColor={isDark ? '#3b82f6' : '#6366f1'}
+                stroke={true}
+                minFontSize={48}
+                className="mb-4"
+              />
             </div>
             
-            {/* AI Enthusiast subtitle - Smaller and well spaced */}
-            <div className="mb-12">
-              <div className="h-8 md:h-10">
-                <TextPressure 
-                  text="AI ENTHUSIAST"
-                  textColor={isDark ? '#9ca3af' : '#374151'}
-                  strokeColor={isDark ? '#6b7280' : '#4b5563'}
-                  stroke={false}
-                  minFontSize={16}
-                  className="mb-4"
-                />
-              </div>
+            {/* Structured subtitle section */}
+            <div className="mb-16 space-y-4">
+              <SplitText 
+                text="AI Enthusiast"
+                className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent"
+                delay={50}
+                duration={0.8}
+              />
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-600 mx-auto my-6"></div>
+              <SplitText 
+                text="& Python Developer"
+                className="text-2xl md:text-4xl font-medium text-muted-foreground"
+                delay={75}
+                duration={0.8}
+              />
             </div>
 
-            {/* Description with proper spacing */}
+            {/* Description */}
             <div className="mb-16">
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
-                Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
-              </p>
+              <BlurText 
+                text="Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences."
+                className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto"
+                animateBy="words"
+                delay={100}
+                direction="bottom"
+              />
             </div>
 
             {/* Action buttons */}
             <div className="flex flex-wrap justify-center gap-6">
-              <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6 bg-gray-800 hover:bg-gray-700 text-white">
+              <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
                 <Mail className="w-5 h-5 mr-2" />
                 Get In Touch
               </Button>
-              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6 border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
                 <ExternalLink className="w-5 h-5 mr-2" />
                 View Projects
               </Button>
@@ -217,43 +167,52 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section with Threads Background */}
-      <section className="py-20 px-6 relative overflow-hidden">
-        {/* Threads Background */}
-        <div className="absolute inset-0">
-          <Threads 
-            color={isDark ? [0.4, 0.5, 0.7] : [0.3, 0.4, 0.6]}
-            amplitude={0.8}
-            distance={0.3}
-            enableMouseInteraction={true}
-            className="absolute inset-0"
+      {/* About Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <SplitText 
+            text="About Me" 
+            className="text-4xl font-bold text-center mb-16 text-foreground"
+            splitType="words"
+            delay={100}
           />
-        </div>
-        
-        <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">About Me</h2>
-          <div className="text-center">
-            <GradientText
-              className="text-lg leading-relaxed max-w-4xl mx-auto"
-              colors={isDark ? ["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"] : ["#2d7a4a", "#2d5a7a", "#2d7a4a", "#2d5a7a", "#2d7a4a"]}
-            >
-              Strong interest in open-source, multimedia processing, and creating solutions using free, accessible resources. I build smart tools that help people, focusing on innovation through artificial intelligence and automation. My approach combines technical expertise with user-centered design to create meaningful digital experiences.
-            </GradientText>
-          </div>
+          <Card className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+            <CardContent className="p-8">
+              <BlurText
+                text="Strong interest in open-source, multimedia processing, and creating solutions using free, accessible resources. I build smart tools that help people, focusing on innovation through artificial intelligence and automation. My approach combines technical expertise with user-centered design to create meaningful digital experiences."
+                className="text-lg leading-relaxed text-muted-foreground"
+                animateBy="words"
+                delay={80}
+              />
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      {/* Skills Section with InfiniteMenu - Enhanced */}
-      <section className="py-20 px-6 bg-muted/30 relative overflow-hidden">
+      {/* Skills Section */}
+      <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">Skills & Expertise</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore my technical skills through this interactive 3D interface. Click and drag to navigate through my expertise areas.
-            </p>
-          </div>
-          <div className="h-96 md:h-[600px] relative rounded-2xl overflow-hidden bg-transparent backdrop-blur-sm">
-            <InfiniteMenu items={skillsForMenu} />
+          <SplitText 
+            text="Skills & Expertise" 
+            className="text-4xl font-bold text-center mb-16 text-foreground"
+            splitType="words"
+            delay={100}
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skills.map((skill, index) => (
+              <Card key={skill.name} className="hover:shadow-lg transition-all duration-300 hover:scale-105 group">
+                <CardContent className="p-6 text-center">
+                  <skill.icon className="w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-200" />
+                  <BlurText
+                    text={skill.name}
+                    className="text-xl font-semibold mb-2"
+                    delay={50}
+                    animateBy="chars"
+                  />
+                  <Badge variant="secondary">{skill.category}</Badge>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -261,7 +220,12 @@ const Index = () => {
       {/* Tools Section */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
+          <SplitText 
+            text="Tools & Technologies" 
+            className="text-4xl font-bold text-center mb-16 text-foreground"
+            splitType="words"
+            delay={100}
+          />
           <div className="flex flex-wrap justify-center gap-4">
             {tools.map((tool, index) => (
               <Badge 
@@ -279,14 +243,24 @@ const Index = () => {
       {/* Interests Section */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Interests</h2>
+          <SplitText 
+            text="Interests" 
+            className="text-4xl font-bold text-center mb-16 text-foreground"
+            splitType="words"
+            delay={100}
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {interests.map((interest, index) => (
               <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6">
                   <div className="flex items-center">
                     <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary to-blue-600 mr-4"></div>
-                    <p className="text-lg font-medium">{interest}</p>
+                    <BlurText
+                      text={interest}
+                      className="text-lg font-medium"
+                      delay={50}
+                      animateBy="words"
+                    />
                   </div>
                 </CardContent>
               </Card>
@@ -298,19 +272,32 @@ const Index = () => {
       {/* Projects Section */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Featured Projects</h2>
+          <SplitText 
+            text="Featured Projects" 
+            className="text-4xl font-bold text-center mb-16 text-foreground"
+            splitType="words"
+            delay={100}
+          />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <Card key={project.title} className="hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] group overflow-hidden">
                 <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold group-hover:text-primary transition-colors duration-200">
-                      {project.title}
-                    </h3>
+                    <SplitText
+                      text={project.title}
+                      className="text-2xl font-bold group-hover:text-primary transition-colors duration-200"
+                      splitType="words"
+                      delay={50}
+                    />
                     <Badge variant="outline">{project.year}</Badge>
                   </div>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
+                  <BlurText
+                    text={project.description}
+                    className="text-muted-foreground mb-4 leading-relaxed"
+                    delay={30}
+                    animateBy="words"
+                  />
                   <div className="flex justify-between items-center">
                     <Badge className={`bg-gradient-to-r ${project.color} text-white`}>
                       {project.tech}
@@ -327,14 +314,29 @@ const Index = () => {
       {/* Education Section */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Education</h2>
+          <SplitText 
+            text="Education" 
+            className="text-4xl font-bold text-center mb-16 text-foreground"
+            splitType="words"
+            delay={100}
+          />
           <div className="space-y-8">
             <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">K.S. Rangasamy College of Technology</h3>
-                    <p className="text-lg text-muted-foreground mb-2">AIML Department</p>
+                    <BlurText
+                      text="K.S. Rangasamy College of Technology"
+                      className="text-2xl font-bold mb-2"
+                      delay={50}
+                      animateBy="words"
+                    />
+                    <BlurText
+                      text="AIML Department"
+                      className="text-lg text-muted-foreground mb-2"
+                      delay={70}
+                      animateBy="words"
+                    />
                   </div>
                   <div className="text-right">
                     <Badge className="bg-green-500 text-white mb-2">1st Year CGPA: 8.78</Badge>
@@ -351,8 +353,18 @@ const Index = () => {
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
-                    <p className="text-lg text-muted-foreground">12th Grade - 2023</p>
+                    <BlurText
+                      text="Maharishi Vidya Mandir (CBSE)"
+                      className="text-2xl font-bold mb-2"
+                      delay={50}
+                      animateBy="words"
+                    />
+                    <BlurText
+                      text="12th Grade - 2023"
+                      className="text-lg text-muted-foreground"
+                      delay={70}
+                      animateBy="words"
+                    />
                   </div>
                   <Badge className="bg-orange-500 text-white">77%</Badge>
                 </div>
@@ -363,8 +375,18 @@ const Index = () => {
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row justify-between items-start">
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
-                    <p className="text-lg text-muted-foreground">10th Grade - 2021</p>
+                    <BlurText
+                      text="Maharishi Vidya Mandir (CBSE)"
+                      className="text-2xl font-bold mb-2"
+                      delay={50}
+                      animateBy="words"
+                    />
+                    <BlurText
+                      text="10th Grade - 2021"
+                      className="text-lg text-muted-foreground"
+                      delay={70}
+                      animateBy="words"
+                    />
                   </div>
                   <Badge className="bg-cyan-500 text-white">75%</Badge>
                 </div>
@@ -377,10 +399,20 @@ const Index = () => {
       {/* Contact Section */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Let's Connect</h2>
+          <SplitText 
+            text="Let's Connect" 
+            className="text-4xl font-bold text-center mb-16 text-foreground"
+            splitType="words"
+            delay={100}
+          />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
+              <BlurText
+                text="Get In Touch"
+                className="text-2xl font-semibold mb-6"
+                delay={50}
+                animateBy="words"
+              />
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Mail className="w-6 h-6 text-primary mr-4" />
@@ -440,7 +472,12 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-12 px-6 bg-muted/50 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-muted-foreground mb-4">© 2025 Sakthivel E. Built with passion and AI.</p>
+          <BlurText
+            text="© 2025 Sakthivel E. Built with passion and AI."
+            className="text-muted-foreground mb-4"
+            delay={50}
+            animateBy="words"
+          />
           <div className="flex justify-center space-x-6">
             <Button variant="ghost" size="icon" className="hover:scale-110 transition-transform duration-200">
               <Github className="w-5 h-5" />
