@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -199,7 +200,7 @@ const Index = () => {
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Skills & Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {skills.map((skill, index) => (
-              <div key={skill.name} className="skill-card">
+              <div key={skill.name} className={`skill-card ${isDark ? 'skill-card-dark' : 'skill-card-light'}`}>
                 <div className="skill-icon-wrapper">
                   <skill.icon className="skill-icon" />
                 </div>
@@ -407,92 +408,111 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Styles */}
+      <style jsx>{`
+        .skill-card {
+          position: relative;
+          width: 190px;
+          height: 254px;
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+          padding: 12px;
+          gap: 12px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .skill-card-dark {
+          background-color: #1f2937;
+        }
+
+        .skill-card-light {
+          background-color: #ffffff;
+        }
+
+        .skill-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          left: -5px;
+          margin: auto;
+          width: 200px;
+          height: 264px;
+          border-radius: 10px;
+          background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+          z-index: -10;
+          pointer-events: none;
+          transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .skill-card::after {
+          content: "";
+          z-index: -1;
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+          transform: translate3d(0, 0, 0) scale(0.95);
+          filter: blur(20px);
+        }
+
+        .skill-icon-wrapper {
+          display: flex;
+          justify-content: center;
+          margin-bottom: auto;
+          padding-top: 20px;
+        }
+
+        .skill-icon {
+          width: 48px;
+          height: 48px;
+          color: #e81cff;
+          transition: all 0.3s ease;
+        }
+
+        .skill-card-light .skill-icon {
+          color: #40c9ff;
+        }
+
+        .skill-heading {
+          font-size: 20px;
+          text-transform: capitalize;
+          font-weight: 700;
+          margin: 0;
+        }
+
+        .skill-card-dark .skill-heading {
+          color: #ffffff;
+        }
+
+        .skill-card-light .skill-heading {
+          color: #1f2937;
+        }
+
+        .skill-category {
+          font-size: 14px;
+          color: #e81cff;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        .skill-card:hover::after {
+          filter: blur(30px);
+        }
+
+        .skill-card:hover::before {
+          transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+        }
+
+        .skill-card:hover .skill-icon {
+          transform: scale(1.1);
+          color: #e81cff;
+        }
+      `}</style>
     </div>
   );
 };
 
 export default Index;
-
-<style jsx>{`
-  .skill-card {
-    position: relative;
-    width: 190px;
-    height: 254px;
-    background-color: ${isDark ? '#1f2937' : '#ffffff'};
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    padding: 12px;
-    gap: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .skill-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    left: -5px;
-    margin: auto;
-    width: 200px;
-    height: 264px;
-    border-radius: 10px;
-    background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
-    z-index: -10;
-    pointer-events: none;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  .skill-card::after {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
-    transform: translate3d(0, 0, 0) scale(0.95);
-    filter: blur(20px);
-  }
-
-  .skill-icon-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: auto;
-    padding-top: 20px;
-  }
-
-  .skill-icon {
-    width: 48px;
-    height: 48px;
-    color: ${isDark ? '#e81cff' : '#40c9ff'};
-    transition: all 0.3s ease;
-  }
-
-  .skill-heading {
-    font-size: 20px;
-    text-transform: capitalize;
-    font-weight: 700;
-    color: ${isDark ? '#ffffff' : '#1f2937'};
-    margin: 0;
-  }
-
-  .skill-category {
-    font-size: 14px;
-    color: #e81cff;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .skill-card:hover::after {
-    filter: blur(30px);
-  }
-
-  .skill-card:hover::before {
-    transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
-  }
-
-  .skill-card:hover .skill-icon {
-    transform: scale(1.1);
-    color: #e81cff;
-  }
-`}</style>
