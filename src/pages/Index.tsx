@@ -410,7 +410,7 @@ const Index = () => {
       </footer>
 
       {/* Styles */}
-      <style jsx>{`
+      <style>{`
         .skill-card {
           position: relative;
           width: 190px;
