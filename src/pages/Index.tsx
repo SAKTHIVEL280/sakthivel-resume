@@ -26,13 +26,13 @@ const Index = () => {
   }, [isDark]);
 
   const skills = [
-    { name: 'Python', icon: Code, category: 'Programming' },
-    { name: 'C', icon: Code, category: 'Programming' },
-    { name: 'HTML & CSS', icon: Code, category: 'Web' },
-    { name: 'Applied AI Skills', icon: Brain, category: 'AI' },
-    { name: 'Prompt Engineering', icon: Brain, category: 'AI' },
-    { name: 'UI/UX Designing', icon: Palette, category: 'Design' },
-    { name: 'ComfyUI', icon: Wrench, category: 'Tools' }
+    { name: 'Python', icon: Code, category: 'Programming', color: 'from-yellow-400 to-yellow-600' },
+    { name: 'C', icon: Code, category: 'Programming', color: 'from-blue-400 to-blue-600' },
+    { name: 'HTML & CSS', icon: Code, category: 'Web', color: 'from-orange-400 to-red-500' },
+    { name: 'Applied AI Skills', icon: Brain, category: 'AI', color: 'from-purple-400 to-purple-600' },
+    { name: 'Prompt Engineering', icon: Brain, category: 'AI', color: 'from-pink-400 to-pink-600' },
+    { name: 'UI/UX Designing', icon: Palette, category: 'Design', color: 'from-green-400 to-green-600' },
+    { name: 'ComfyUI', icon: Wrench, category: 'Tools', color: 'from-indigo-400 to-indigo-600' }
   ];
 
   const tools = [
@@ -194,19 +194,45 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section with Custom Cards */}
+      {/* Skills Section - Completely Redesigned */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Skills & Expertise</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
-              <div key={skill.name} className={`skill-card ${isDark ? 'skill-card-dark' : 'skill-card-light'}`}>
-                <div className="skill-icon-wrapper">
-                  <skill.icon className="skill-icon" />
-                </div>
-                <p className="skill-heading">{skill.name}</p>
-                <p className="skill-category">{skill.category}</p>
-              </div>
+              <Card 
+                key={skill.name} 
+                className="group relative overflow-hidden border-0 bg-gradient-to-br from-background to-muted hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                {/* Gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                
+                {/* Icon background circle */}
+                <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
+                
+                <CardContent className="p-6 relative z-10">
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className={`p-4 rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <skill.icon className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-300">
+                        {skill.name}
+                      </h3>
+                      <Badge 
+                        variant="secondary" 
+                        className="text-xs font-medium bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300"
+                      >
+                        {skill.category}
+                      </Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -408,109 +434,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-
-      {/* Styles */}
-      <style>{`
-        .skill-card {
-          position: relative;
-          width: 190px;
-          height: 254px;
-          display: flex;
-          flex-direction: column;
-          justify-content: end;
-          padding: 12px;
-          gap: 12px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .skill-card-dark {
-          background-color: #1f2937;
-        }
-
-        .skill-card-light {
-          background-color: #ffffff;
-        }
-
-        .skill-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          left: -5px;
-          margin: auto;
-          width: 200px;
-          height: 264px;
-          border-radius: 10px;
-          background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
-          z-index: -10;
-          pointer-events: none;
-          transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .skill-card::after {
-          content: "";
-          z-index: -1;
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
-          transform: translate3d(0, 0, 0) scale(0.95);
-          filter: blur(20px);
-        }
-
-        .skill-icon-wrapper {
-          display: flex;
-          justify-content: center;
-          margin-bottom: auto;
-          padding-top: 20px;
-        }
-
-        .skill-icon {
-          width: 48px;
-          height: 48px;
-          color: #e81cff;
-          transition: all 0.3s ease;
-        }
-
-        .skill-card-light .skill-icon {
-          color: #40c9ff;
-        }
-
-        .skill-heading {
-          font-size: 20px;
-          text-transform: capitalize;
-          font-weight: 700;
-          margin: 0;
-        }
-
-        .skill-card-dark .skill-heading {
-          color: #ffffff;
-        }
-
-        .skill-card-light .skill-heading {
-          color: #1f2937;
-        }
-
-        .skill-category {
-          font-size: 14px;
-          color: #e81cff;
-          font-weight: 600;
-          margin: 0;
-        }
-
-        .skill-card:hover::after {
-          filter: blur(30px);
-        }
-
-        .skill-card:hover::before {
-          transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
-        }
-
-        .skill-card:hover .skill-icon {
-          transform: scale(1.1);
-          color: #e81cff;
-        }
-      `}</style>
     </div>
   );
 };
