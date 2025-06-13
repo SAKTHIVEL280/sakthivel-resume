@@ -138,6 +138,7 @@ const Index = () => {
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Fixed Theme Toggle and Resume Button */}
+      
       <div className="fixed top-6 right-6 z-50 flex items-center gap-4">
         <Button
           variant="ghost"
@@ -230,7 +231,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section - Fixed Icon Alignment with DotGrid Background */}
+      {/* Skills Section - No Icons, Better Alignment */}
       <section id="skills" className="py-20 px-6 bg-muted/20 relative overflow-hidden">
         {/* DotGrid Background */}
         <div className="absolute inset-0 z-0">
@@ -257,17 +258,14 @@ const Index = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => {
-              const IconComponent = skill.icon;
               return (
                 <div 
                   key={skill.name}
                   className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  {/* Icon Container - Fixed Alignment */}
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
-                    <IconComponent className="w-6 h-6 text-white flex-shrink-0" />
-                  </div>
+                  {/* Gradient Bar */}
+                  <div className={`w-full h-2 rounded-full bg-gradient-to-r ${skill.color} mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}></div>
 
                   {/* Content */}
                   <div className="space-y-2">
