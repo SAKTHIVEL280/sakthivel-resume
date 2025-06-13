@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,6 +15,7 @@ import Hyperspeed from '@/components/Hyperspeed';
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
   const [isHyperspeedActive, setIsHyperspeedActive] = useState(false);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const hyperspeedRef = useRef<any>(null);
   const { toast } = useToast();
 
@@ -26,13 +28,62 @@ const Index = () => {
   }, [isDark]);
 
   const skills = [
-    { name: 'Python', icon: Code, category: 'Programming', color: 'from-yellow-400 to-yellow-600' },
-    { name: 'C', icon: Code, category: 'Programming', color: 'from-blue-400 to-blue-600' },
-    { name: 'HTML & CSS', icon: Code, category: 'Web', color: 'from-orange-400 to-red-500' },
-    { name: 'Applied AI Skills', icon: Brain, category: 'AI', color: 'from-purple-400 to-purple-600' },
-    { name: 'Prompt Engineering', icon: Brain, category: 'AI', color: 'from-pink-400 to-pink-600' },
-    { name: 'UI/UX Designing', icon: Palette, category: 'Design', color: 'from-green-400 to-green-600' },
-    { name: 'ComfyUI', icon: Wrench, category: 'Tools', color: 'from-indigo-400 to-indigo-600' }
+    { 
+      name: 'Python', 
+      icon: Code, 
+      category: 'Programming', 
+      color: 'from-yellow-400 to-yellow-600',
+      description: 'Building AI tools, automation scripts, and backend systems',
+      level: 90
+    },
+    { 
+      name: 'C', 
+      icon: Code, 
+      category: 'Programming', 
+      color: 'from-blue-400 to-blue-600',
+      description: 'System programming and algorithm implementation',
+      level: 75
+    },
+    { 
+      name: 'HTML & CSS', 
+      icon: Code, 
+      category: 'Web', 
+      color: 'from-orange-400 to-red-500',
+      description: 'Modern web layouts and responsive design',
+      level: 85
+    },
+    { 
+      name: 'Applied AI Skills', 
+      icon: Brain, 
+      category: 'AI', 
+      color: 'from-purple-400 to-purple-600',
+      description: 'Machine learning, computer vision, and AI integration',
+      level: 95
+    },
+    { 
+      name: 'Prompt Engineering', 
+      icon: Brain, 
+      category: 'AI', 
+      color: 'from-pink-400 to-pink-600',
+      description: 'Optimizing AI model interactions and outputs',
+      level: 88
+    },
+    { 
+      name: 'UI/UX Designing', 
+      icon: Palette, 
+      category: 'Design', 
+      color: 'from-green-400 to-green-600',
+      description: 'User-centered design and interface optimization',
+      level: 80
+    },
+    { 
+      name: 'ComfyUI', 
+      icon: Wrench, 
+      category: 'Tools', 
+      color: 'from-indigo-400 to-indigo-600',
+      description: 'Advanced AI image generation and workflow creation',
+      level: 92
+    }
   ];
 
   const tools = [
@@ -193,90 +244,96 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Hyperspeed
-            ref={hyperspeedRef}
-            effectOptions={{
-              onSpeedUp: () => { },
-              onSlowDown: () => { },
-              distortion: 'turbulentDistortion',
-              length: 400,
-              roadWidth: 10,
-              islandWidth: 2,
-              lanesPerRoad: 4,
-              fov: 90,
-              fovSpeedUp: 150,
-              speedUp: isHyperspeedActive ? 2 : 0,
-              carLightsFade: 0.4,
-              totalSideLightSticks: 20,
-              lightPairsPerRoadWay: 40,
-              shoulderLinesWidthPercentage: 0.05,
-              brokenLinesWidthPercentage: 0.1,
-              brokenLinesLengthPercentage: 0.5,
-              lightStickWidth: [0.12, 0.5],
-              lightStickHeight: [1.3, 1.7],
-              movingAwaySpeed: [60, 80],
-              movingCloserSpeed: [-120, -160],
-              carLightsLength: [400 * 0.03, 400 * 0.2],
-              carLightsRadius: [0.05, 0.14],
-              carWidthPercentage: [0.3, 0.5],
-              carShiftX: [-0.8, 0.8],
-              carFloorSeparation: [0, 5],
-              colors: {
-                roadColor: 0x080808,
-                islandColor: 0x0a0a0a,
-                background: 0x000000,
-                shoulderLines: 0xFFFFFF,
-                brokenLines: 0xFFFFFF,
-                leftCars: [0xD856BF, 0x6750A2, 0xC247AC],
-                rightCars: [0x03B3C3, 0x0E5EA5, 0x324555],
-                sticks: 0x03B3C3,
-              }
-            }}
-          />
-        </div>
-        
-        <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">Skills & Expertise</h2>
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl">
-              {skills.map((skill, index) => (
-                <Card 
-                  key={skill.name} 
-                  onClick={handleCardClick}
-                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/20 to-muted/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md cursor-pointer w-full h-48"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  }}
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-                  <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
-                  
-                  <CardContent className="p-6 relative z-10 h-full flex flex-col items-center justify-center text-center">
-                    <div className="space-y-4">
-                      <div className={`w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg mx-auto`}>
-                        <skill.icon className="w-8 h-8 text-white flex-shrink-0" />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors duration-300">
-                          {skill.name}
-                        </h3>
-                        <Badge 
-                          variant="secondary" 
-                          className="text-xs font-medium bg-white/20 text-white group-hover:bg-primary/20 group-hover:text-primary transition-all duration-300"
-                        >
-                          {skill.category}
-                        </Badge>
-                      </div>
+      {/* Skills Section - Redesigned */}
+      <section id="skills" className="py-20 px-6 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Skills & Expertise</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              A comprehensive toolkit spanning AI, programming, design, and cutting-edge technologies
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {skills.map((skill, index) => (
+              <Card 
+                key={skill.name}
+                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-0 bg-background/50 backdrop-blur-sm"
+                onMouseEnter={() => setHoveredSkill(skill.name)}
+                onMouseLeave={() => setHoveredSkill(null)}
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                
+                <CardContent className="p-8 relative z-10">
+                  <div className="flex items-start gap-6">
+                    {/* Icon Section */}
+                    <div className={`flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <skill.icon className="w-8 h-8 text-white" />
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+
+                    {/* Content Section */}
+                    <div className="flex-grow space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                            {skill.name}
+                          </h3>
+                          <Badge 
+                            variant="secondary" 
+                            className="mt-2 text-xs font-medium group-hover:bg-primary/20 group-hover:text-primary transition-all duration-300"
+                          >
+                            {skill.category}
+                          </Badge>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-3xl font-bold text-primary">{skill.level}%</div>
+                          <div className="text-sm text-muted-foreground">Proficiency</div>
+                        </div>
+                      </div>
+
+                      {/* Progress Bar */}
+                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                        <div 
+                          className={`h-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out rounded-full`}
+                          style={{ 
+                            width: hoveredSkill === skill.name ? `${skill.level}%` : '0%',
+                            transitionDelay: hoveredSkill === skill.name ? '200ms' : '0ms'
+                          }}
+                        />
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
+                        {skill.description}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Skills Summary */}
+          <div className="mt-16 text-center">
+            <Card className="inline-block bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-8">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-primary">7+</div>
+                    <div className="text-sm text-muted-foreground">Core Skills</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-primary">4</div>
+                    <div className="text-sm text-muted-foreground">Categories</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-primary">87%</div>
+                    <div className="text-sm text-muted-foreground">Avg Proficiency</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
