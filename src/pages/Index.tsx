@@ -12,7 +12,6 @@ import GradientText from '@/components/GradientText';
 import Hyperspeed from '@/components/Hyperspeed';
 import DotGrid from '@/components/DotGrid';
 import FadeContent from '@/components/FadeContent';
-import ScrollVelocity from '@/components/ScrollVelocity';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -294,13 +293,17 @@ const Index = () => {
       <section id="tools" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Tools & Technologies</h2>
-          <ScrollVelocity
-            texts={tools}
-            velocity={50}
-            className="text-foreground opacity-80"
-            parallaxClassName="parallax h-24 md:h-32"
-            scrollerClassName="scroller flex items-center"
-          />
+          <div className="flex flex-wrap justify-center gap-4">
+            {tools.map((tool, index) => (
+              <Badge 
+                key={tool} 
+                variant="outline" 
+                className="text-lg py-3 px-6 hover:scale-110 transition-transform duration-200 hover:bg-primary hover:text-primary-foreground"
+              >
+                {tool}
+              </Badge>
+            ))}
+          </div>
         </div>
       </section>
 
