@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,6 @@ import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
 import Threads from '@/components/Threads';
 import GradientText from '@/components/GradientText';
-import InfiniteMenu from '@/components/InfiniteMenu';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -27,13 +25,13 @@ const Index = () => {
   }, [isDark]);
 
   const skills = [
-    { name: 'Python', icon: 'https://picsum.photos/300/300?grayscale&random=1', category: 'Programming', description: 'Building AI applications and automation scripts' },
-    { name: 'C', icon: 'https://picsum.photos/300/300?grayscale&random=2', category: 'Programming', description: 'System programming and performance optimization' },
-    { name: 'HTML & CSS', icon: 'https://picsum.photos/300/300?grayscale&random=3', category: 'Web', description: 'Creating responsive and accessible web interfaces' },
-    { name: 'Applied AI Skills', icon: 'https://picsum.photos/300/300?grayscale&random=4', category: 'AI', description: 'Implementing machine learning solutions' },
-    { name: 'Prompt Engineering', icon: 'https://picsum.photos/300/300?grayscale&random=5', category: 'AI', description: 'Optimizing AI model interactions' },
-    { name: 'UI/UX Designing', icon: 'https://picsum.photos/300/300?grayscale&random=6', category: 'Design', description: 'Creating user-centered design experiences' },
-    { name: 'ComfyUI', icon: 'https://picsum.photos/300/300?grayscale&random=7', category: 'Tools', description: 'Advanced AI workflow automation' }
+    { name: 'Python', icon: Code, category: 'Programming' },
+    { name: 'C', icon: Code, category: 'Programming' },
+    { name: 'HTML & CSS', icon: Code, category: 'Web' },
+    { name: 'Applied AI Skills', icon: Brain, category: 'AI' },
+    { name: 'Prompt Engineering', icon: Brain, category: 'AI' },
+    { name: 'UI/UX Designing', icon: Palette, category: 'Design' },
+    { name: 'ComfyUI', icon: Wrench, category: 'Tools' }
   ];
 
   const tools = [
@@ -124,7 +122,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
             {/* Interactive TextPressure for main title - Made larger */}
-            <div className="h-56 md:h-64 mb-4">
+            <div className="h-56 md:h-64 mb-8">
               <TextPressure 
                 text="SAKTHIVEL E"
                 textColor={isDark ? '#ffffff' : '#1f2937'}
@@ -135,9 +133,9 @@ const Index = () => {
               />
             </div>
             
-            {/* AI Enthusiast with TextPressure effect - Made smaller and moved above */}
-            <div className="mb-16">
-              <div className="h-8 md:h-10 mb-12">
+            {/* AI Enthusiast with TextPressure effect - Made smaller and added proper spacing */}
+            <div className="mb-16 space-y-4">
+              <div className="h-8 md:h-10 mb-8">
                 <TextPressure 
                   text="AI ENTHUSIAST"
                   textColor={isDark ? '#9ca3af' : '#374151'}
@@ -197,17 +195,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section with InfiniteMenu */}
+      {/* Skills Section */}
       <section className="py-20 px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Skills & Expertise</h2>
-          <div style={{ height: '600px', position: 'relative', borderRadius: '16px', overflow: 'hidden' }}>
-            <InfiniteMenu items={skills.map(skill => ({
-              image: skill.icon,
-              link: '#',
-              title: skill.name,
-              description: skill.description
-            }))} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skills.map((skill, index) => (
+              <Card key={skill.name} className="hover:shadow-lg transition-all duration-300 hover:scale-105 group">
+                <CardContent className="p-6 text-center">
+                  <skill.icon className="w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-200" />
+                  <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
+                  <Badge variant="secondary">{skill.category}</Badge>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
