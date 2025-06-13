@@ -292,7 +292,7 @@ const Index = () => {
         <div className="absolute inset-0 z-0">
           <DotGrid
             dotSize={10}
-            gap={18}
+            gap={12}
             baseColor={isDark ? "#374151" : "#d1d5db"}
             activeColor={isDark ? "#60a5fa" : "#3b82f6"}
             proximity={80}
@@ -348,7 +348,7 @@ const Index = () => {
         {/* Silk Background */}
         <div className="absolute inset-0 z-0">
           <Silk
-            speed={6}
+            speed={4}
             scale={1.5}
             color={isDark ? "#1e293b" : "#f1f5f9"}
             noiseIntensity={1.5}
