@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,7 @@ import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
 import Threads from '@/components/Threads';
 import GradientText from '@/components/GradientText';
+import Hyperspeed from '@/components/Hyperspeed';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -194,15 +194,58 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section - Completely Redesigned */}
-      <section className="py-20 px-6 bg-muted/30">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Skills & Expertise</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {skills.map((skill, index) => (
+      {/* Skills Section with Hyperspeed Background */}
+      <section className="py-20 px-6 relative overflow-hidden">
+        {/* Hyperspeed Background */}
+        <div className="absolute inset-0">
+          <Hyperspeed
+            effectOptions={{
+              onSpeedUp: () => { },
+              onSlowDown: () => { },
+              distortion: 'turbulentDistortion',
+              length: 400,
+              roadWidth: 10,
+              islandWidth: 2,
+              lanesPerRoad: 4,
+              fov: 90,
+              fovSpeedUp: 150,
+              speedUp: 2,
+              carLightsFade: 0.4,
+              totalSideLightSticks: 20,
+              lightPairsPerRoadWay: 40,
+              shoulderLinesWidthPercentage: 0.05,
+              brokenLinesWidthPercentage: 0.1,
+              brokenLinesLengthPercentage: 0.5,
+              lightStickWidth: [0.12, 0.5],
+              lightStickHeight: [1.3, 1.7],
+              movingAwaySpeed: [60, 80],
+              movingCloserSpeed: [-120, -160],
+              carLightsLength: [400 * 0.03, 400 * 0.2],
+              carLightsRadius: [0.05, 0.14],
+              carWidthPercentage: [0.3, 0.5],
+              carShiftX: [-0.8, 0.8],
+              carFloorSeparation: [0, 5],
+              colors: {
+                roadColor: 0x080808,
+                islandColor: 0x0a0a0a,
+                background: 0x000000,
+                shoulderLines: 0xFFFFFF,
+                brokenLines: 0xFFFFFF,
+                leftCars: [0xD856BF, 0x6750A2, 0xC247AC],
+                rightCars: [0x03B3C3, 0x0E5EA5, 0x324555],
+                sticks: 0x03B3C3,
+              }
+            }}
+          />
+        </div>
+        
+        <div className="max-w-6xl mx-auto relative z-10">
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">Skills & Expertise</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {skills.slice(0, 4).map((skill, index) => (
               <Card 
                 key={skill.name} 
-                className="group relative overflow-hidden border-0 bg-gradient-to-br from-background to-muted hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/90 to-muted/90 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md"
                 style={{
                   animationDelay: `${index * 100}ms`,
                 }}
@@ -234,6 +277,47 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          
+          {/* Second row - centered with remaining cards */}
+          <div className="flex justify-center mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
+              {skills.slice(4).map((skill, index) => (
+                <Card 
+                  key={skill.name} 
+                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/90 to-muted/90 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md"
+                  style={{
+                    animationDelay: `${(index + 4) * 100}ms`,
+                  }}
+                >
+                  {/* Gradient overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                  
+                  {/* Icon background circle */}
+                  <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
+                  
+                  <CardContent className="p-6 relative z-10">
+                    <div className="flex flex-col items-center text-center space-y-4">
+                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                        <skill.icon className="w-8 h-8 text-white" />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-300">
+                          {skill.name}
+                        </h3>
+                        <Badge 
+                          variant="secondary" 
+                          className="text-xs font-medium bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300"
+                        >
+                          {skill.category}
+                        </Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
