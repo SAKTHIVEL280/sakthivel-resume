@@ -1,4 +1,3 @@
-
 import { useRef, useEffect, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import "./DotGrid.css";
@@ -164,18 +163,25 @@ const DotGrid = ({
   useEffect(() => {
     buildGrid();
     let ro: ResizeObserver | null = null;
-    if ("ResizeObserver" in window) {
+    let useResizeObserver = false;
+    
+    if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
+      useResizeObserver = true;
       ro = new ResizeObserver(buildGrid);
       if (wrapperRef.current) {
         ro.observe(wrapperRef.current);
       }
-    } else {
+    }
+    
+    if (!useResizeObserver && typeof window !== 'undefined') {
       window.addEventListener("resize", buildGrid);
     }
+    
     return () => {
       if (ro) {
         ro.disconnect();
-      } else {
+      }
+      if (!useResizeObserver && typeof window !== 'undefined') {
         window.removeEventListener("resize", buildGrid);
       }
     };
