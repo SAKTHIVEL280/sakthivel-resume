@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -241,61 +240,24 @@ const Index = () => {
         
         <div className="max-w-6xl mx-auto relative z-10">
           <h2 className="text-4xl font-bold text-center mb-16 text-white">Skills & Expertise</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.slice(0, 4).map((skill, index) => (
-              <Card 
-                key={skill.name} 
-                onClick={handleCardClick}
-                className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/20 to-muted/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md cursor-pointer"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-                <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
-                
-                <CardContent className="p-6 relative z-10">
-                  <div className="flex flex-col items-center text-center space-y-4">
-                    <div className={`p-4 rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                      <skill.icon className="w-8 h-8 text-white" />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors duration-300">
-                        {skill.name}
-                      </h3>
-                      <Badge 
-                        variant="secondary" 
-                        className="text-xs font-medium bg-white/20 text-white group-hover:bg-primary/20 group-hover:text-primary transition-all duration-300"
-                      >
-                        {skill.category}
-                      </Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="flex justify-center mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
-              {skills.slice(4).map((skill, index) => (
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl">
+              {skills.map((skill, index) => (
                 <Card 
                   key={skill.name} 
                   onClick={handleCardClick}
-                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/20 to-muted/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md cursor-pointer"
+                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-background/20 to-muted/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-md cursor-pointer w-full h-48"
                   style={{
-                    animationDelay: `${(index + 4) * 100}ms`,
+                    animationDelay: `${index * 100}ms`,
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   }}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
                   <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:scale-150 transition-transform duration-700" />
                   
-                  <CardContent className="p-6 relative z-10">
-                    <div className="flex flex-col items-center text-center space-y-4">
-                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <CardContent className="p-6 relative z-10 h-full flex flex-col items-center justify-center text-center">
+                    <div className="space-y-4">
+                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-lg mx-auto`}>
                         <skill.icon className="w-8 h-8 text-white" />
                       </div>
                       
