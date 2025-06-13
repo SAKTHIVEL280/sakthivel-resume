@@ -248,9 +248,9 @@ const Index = () => {
                   className="group bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in text-center"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  {/* Icon Container - Perfectly Centered */}
+                  {/* Icon Container - Perfectly Centered with Flexbox */}
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-6 h-6 text-white" style={{ display: 'block' }} />
+                    <IconComponent className="w-6 h-6 text-white" />
                   </div>
 
                   {/* Content */}
