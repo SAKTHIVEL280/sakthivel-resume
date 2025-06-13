@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -123,26 +122,26 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
             {/* Interactive TextPressure for main title - Made larger */}
-            <div className="h-48 md:h-56 mb-8">
+            <div className="h-56 md:h-64 mb-8">
               <TextPressure 
                 text="SAKTHIVEL E"
                 textColor={isDark ? '#ffffff' : '#1f2937'}
                 strokeColor={isDark ? '#4b5563' : '#6b7280'}
                 stroke={true}
-                minFontSize={64}
+                minFontSize={72}
                 className="mb-4"
               />
             </div>
             
-            {/* AI Enthusiast with TextPressure effect - Made smaller */}
-            <div className="mb-12 space-y-4">
-              <div className="h-12 md:h-16 mb-8">
+            {/* AI Enthusiast with TextPressure effect - Made smaller and added proper spacing */}
+            <div className="mb-16 space-y-4">
+              <div className="h-8 md:h-10 mb-8">
                 <TextPressure 
                   text="AI ENTHUSIAST"
                   textColor={isDark ? '#9ca3af' : '#374151'}
                   strokeColor={isDark ? '#6b7280' : '#4b5563'}
                   stroke={false}
-                  minFontSize={20}
+                  minFontSize={16}
                   className="mb-4"
                 />
               </div>
