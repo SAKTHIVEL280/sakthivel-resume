@@ -1,195 +1,160 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Home, User, Wrench, Heart, FolderOpen, GraduationCap, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { gsap } from 'gsap';
+import { cn } from '@/lib/utils';
 
 const NavigationDock = () => {
   const [activeSection, setActiveSection] = useState('hero');
-  const dockRef = useRef<HTMLDivElement>(null);
-  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const tooltipRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
 
   const navItems = [
-    { href: '#hero', label: 'Home', icon: Home },
-    { href: '#about', label: 'About', icon: User },
-    { href: '#skills', label: 'Skills', icon: Wrench },
-    { href: '#interests', label: 'Interests', icon: Heart },
-    { href: '#projects', label: 'Projects', icon: FolderOpen },
-    { href: '#education', label: 'Education', icon: GraduationCap },
-    { href: '#contact', label: 'Contact', icon: Mail },
+    { id: 'hero', label: 'Home', icon: Home },
+    { id: 'about', label: 'About', icon: User },
+    { id: 'skills', label: 'Skills', icon: Wrench },
+    { id: 'interests', label: 'Interests', icon: Heart },
+    { id: 'projects', label: 'Projects', icon: FolderOpen },
+    { id: 'education', label: 'Education', icon: GraduationCap },
+    { id: 'contact', label: 'Contact', icon: Mail },
   ];
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => item.href.substring(1));
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const sections = navItems.map(item => item.id);
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
 
-      let currentSection = 'hero';
-      
-      for (const section of sections) {
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
         const element = document.getElementById(section);
+        
         if (element) {
-          const rect = element.getBoundingClientRect();
-          const elementTop = rect.top + window.scrollY;
-          const elementBottom = elementTop + element.offsetHeight;
-
-          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-            currentSection = section;
+          const offsetTop = element.offsetTop;
+          if (scrollPosition >= offsetTop) {
+            setActiveSection(section);
             break;
           }
         }
       }
-
-      if (currentSection !== activeSection) {
-        setActiveSection(currentSection);
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
-
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeSection]);
-
-  // Initial dock animation
-  useEffect(() => {
-    if (dockRef.current) {
-      gsap.fromTo(dockRef.current,
-        { x: 100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.8, ease: "back.out(1.7)", delay: 1 }
-      );
-    }
   }, []);
 
-  // Active state animation
-  useEffect(() => {
-    buttonRefs.current.forEach((button, index) => {
-      if (button) {
-        const isActive = activeSection === navItems[index].href.substring(1);
-        
-        if (isActive) {
-          gsap.to(button, {
-            scale: 1.1,
-            duration: 0.3,
-            ease: "back.out(1.7)"
-          });
-          gsap.to(button.querySelector('.icon'), {
-            rotate: 360,
-            duration: 0.6,
-            ease: "back.out(1.7)"
-          });
-        } else {
-          gsap.to(button, {
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-          gsap.to(button.querySelector('.icon'), {
-            rotate: 0,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-        }
-      }
-    });
-  }, [activeSection]);
-
-  const handleMouseEnter = (index: number) => {
-    const button = buttonRefs.current[index];
-    const tooltip = tooltipRefs.current[index];
-    
-    if (button && tooltip) {
-      gsap.to(button, {
-        scale: 1.15,
-        duration: 0.2,
-        ease: "power2.out"
-      });
-      
-      gsap.to(tooltip, {
-        opacity: 1,
-        x: -8,
-        duration: 0.3,
-        ease: "back.out(1.7)"
-      });
-    }
-  };
-
-  const handleMouseLeave = (index: number) => {
-    const button = buttonRefs.current[index];
-    const tooltip = tooltipRefs.current[index];
-    const isActive = activeSection === navItems[index].href.substring(1);
-    
-    if (button && tooltip) {
-      gsap.to(button, {
-        scale: isActive ? 1.1 : 1,
-        duration: 0.2,
-        ease: "power2.out"
-      });
-      
-      gsap.to(tooltip, {
-        opacity: 0,
-        x: 0,
-        duration: 0.2,
-        ease: "power2.out"
-      });
-    }
-  };
-
-  const handleClick = (index: number) => {
-    const button = buttonRefs.current[index];
-    
-    if (button) {
-      gsap.to(button, {
-        scale: 0.95,
-        duration: 0.1,
-        ease: "power2.out",
-        yoyo: true,
-        repeat: 1
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
       });
     }
   };
 
   return (
-    <div 
-      ref={dockRef}
-      className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block"
-    >
-      <div className="flex flex-col gap-3 bg-background/20 backdrop-blur-md border border-border/20 rounded-2xl p-4 shadow-lg">
-        {navItems.map((item, index) => {
-          const Icon = item.icon;
-          const isActive = activeSection === item.href.substring(1);
-          
-          return (
-            <Button
-              key={item.href}
-              ref={(el) => { buttonRefs.current[index] = el; }}
-              variant="ghost"
-              size="icon"
-              asChild
-              className={`w-12 h-12 rounded-xl transition-all duration-300 group relative ${
-                isActive 
-                  ? 'bg-primary/20 text-primary shadow-lg' 
-                  : 'hover:bg-muted/50 text-muted-foreground hover:text-foreground'
-              }`}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
-              onClick={() => handleClick(index)}
-            >
-              <a href={item.href}>
-                <Icon className="w-5 h-5 icon" />
-                <span 
-                  ref={(el) => { tooltipRefs.current[index] = el; }}
-                  className="absolute right-full mr-3 px-2 py-1 bg-popover text-popover-foreground text-sm rounded-md opacity-0 whitespace-nowrap border border-border/50 shadow-md pointer-events-none"
+    <>
+      {/* Desktop Dock */}
+      <nav 
+        className={cn(
+          "fixed right-6 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ease-out hidden lg:block",
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+        )}
+      >
+        <div className="bg-background/80 backdrop-blur-lg border border-border/50 rounded-2xl p-3 shadow-xl">
+          <div className="flex flex-col gap-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              
+              return (
+                <div key={item.id} className="relative group">
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={cn(
+                      "relative w-12 h-12 rounded-xl transition-all duration-300 flex items-center justify-center",
+                      "hover:scale-110 active:scale-95",
+                      isActive 
+                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    )}
+                  >
+                    <Icon size={20} className="transition-transform duration-300 group-hover:rotate-12" />
+                    
+                    {/* Active indicator */}
+                    <div className={cn(
+                      "absolute -right-1 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-full transition-all duration-300",
+                      isActive ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                    )} />
+                  </button>
+                  
+                  {/* Tooltip */}
+                  <div className={cn(
+                    "absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-2",
+                    "bg-popover text-popover-foreground text-sm font-medium rounded-lg shadow-lg border",
+                    "opacity-0 scale-95 translate-x-2 pointer-events-none",
+                    "transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-x-0",
+                    "whitespace-nowrap"
+                  )}>
+                    {item.label}
+                    <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-popover" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Bottom Navigation */}
+      <nav 
+        className={cn(
+          "fixed bottom-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-700 ease-out lg:hidden",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        )}
+      >
+        <div className="bg-background/90 backdrop-blur-lg border border-border/50 rounded-2xl p-2 shadow-xl">
+          <div className="flex gap-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={cn(
+                    "relative flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-300",
+                    "hover:scale-105 active:scale-95 min-w-0",
+                    isActive 
+                      ? "bg-primary text-primary-foreground" 
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  )}
                 >
-                  {item.label}
-                </span>
-              </a>
-            </Button>
-          );
-        })}
-      </div>
-    </div>
+                  <Icon size={18} className="shrink-0" />
+                  <span className={cn(
+                    "text-xs font-medium transition-all duration-300 overflow-hidden",
+                    isActive ? "opacity-100 max-h-4" : "opacity-70 max-h-4"
+                  )}>
+                    {item.label}
+                  </span>
+                  
+                  {/* Active indicator */}
+                  <div className={cn(
+                    "absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full transition-all duration-300",
+                    isActive ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                  )} />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
 
