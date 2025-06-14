@@ -220,7 +220,7 @@ const Index = () => {
       position: 'right'
     },
     {
-      year: '2023-2025',
+      year: '2023-2027',
       title: 'Current Journey',
       institution: 'K.S. Rangasamy College of Technology',
       grade: 'AIML Department',
@@ -850,7 +850,7 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-foreground">Educational Journey</h2>
-            <p className="text-lg text-muted-foreground">My pathway from 2021 to 2025</p>
+            <p className="text-lg text-muted-foreground">My pathway from 2021 to 2027</p>
           </div>
           
           <div ref={timelineRef} className="relative">
@@ -858,7 +858,7 @@ const Index = () => {
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <svg 
                 className="w-full h-full max-w-4xl" 
-                viewBox="0 0 800 600" 
+                viewBox="0 0 800 700" 
                 preserveAspectRatio="xMidYMid meet"
               >
                 <defs>
@@ -878,7 +878,7 @@ const Index = () => {
                 </defs>
                 <path
                   ref={pathRef}
-                  d="M 100 150 Q 250 100 400 200 Q 550 300 700 250"
+                  d="M 100 150 Q 250 100 400 200 Q 550 300 700 350 Q 750 380 800 400"
                   fill="none"
                   stroke="url(#pathGradient)"
                   strokeWidth="4"
@@ -892,14 +892,18 @@ const Index = () => {
                 <circle cx="400" cy="200" r="8" fill="#8b5cf6" className="drop-shadow-md">
                   <animate attributeName="r" values="8;12;8" dur="2s" begin="0.7s" repeatCount="indefinite" />
                 </circle>
-                <circle cx="700" cy="250" r="8" fill="#10b981" className="drop-shadow-md">
+                <circle cx="700" cy="350" r="8" fill="#10b981" className="drop-shadow-md">
                   <animate attributeName="r" values="8;12;8" dur="2s" begin="1.4s" repeatCount="indefinite" />
+                </circle>
+                {/* End point marker */}
+                <circle cx="800" cy="400" r="10" fill="#10b981" className="drop-shadow-md">
+                  <animate attributeName="r" values="10;14;10" dur="2s" begin="2.1s" repeatCount="indefinite" />
                 </circle>
               </svg>
             </div>
 
             {/* Timeline Cards */}
-            <div className="relative z-10 space-y-24 pt-8">
+            <div className="relative z-10 space-y-24 pt-8 pb-16">
               {educationData.map((item, index) => (
                 <div
                   key={index}
