@@ -834,228 +834,167 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Enhanced Education Timeline Section with Advanced Curved Path Animation */}
-      <section id="education" className="py-20 px-6 bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden">
-        {/* Enhanced Background Pattern */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.15),transparent_50%)]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.15),transparent_50%)]"></div>
+      {/* Compact Education Timeline Section with Wider, Shorter Cards */}
+      <section id="education" className="py-16 px-6 bg-gradient-to-br from-muted/20 via-background to-muted/10 relative overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.1),transparent_50%)]"></div>
         </div>
         
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
               Educational Pathway
             </h2>
-            <p className="text-lg text-muted-foreground">My Journey • 2021 - 2027</p>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+            <p className="text-base text-muted-foreground">My Journey • 2021 - 2027</p>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-3"></div>
           </div>
           
           <div ref={timelineRef} className="relative">
-            {/* Enhanced Central Timeline Path with Advanced Smooth Curves */}
+            {/* Cleaner Central Timeline Path */}
             <div className="absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2 pointer-events-none">
               <svg 
-                className="w-16 h-full" 
-                viewBox="0 0 64 1000" 
+                className="w-12 h-full" 
+                viewBox="0 0 48 800" 
                 preserveAspectRatio="xMidYMid meet"
               >
                 <defs>
                   <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.9" />
-                    <stop offset="25%" stopColor="#8b5cf6" stopOpacity="1" />
-                    <stop offset="50%" stopColor="#f97316" stopOpacity="1" />
-                    <stop offset="75%" stopColor="#10b981" stopOpacity="1" />
-                    <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.9" />
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
+                    <stop offset="50%" stopColor="#8b5cf6" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.8" />
                   </linearGradient>
-                  <filter id="advancedGlow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                     <feMerge> 
                       <feMergeNode in="coloredBlur"/>
                       <feMergeNode in="SourceGraphic"/> 
                     </feMerge>
                   </filter>
-                  <linearGradient id="shadowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="rgba(59, 130, 246, 0.3)" />
-                    <stop offset="50%" stopColor="rgba(139, 92, 246, 0.4)" />
-                    <stop offset="100%" stopColor="rgba(16, 185, 129, 0.3)" />
-                  </linearGradient>
                 </defs>
                 
-                {/* Shadow path for depth */}
-                <path
-                  d="M 34 30 
-                     C 38 50, 40 100, 32 180
-                     S 28 260, 32 340
-                     C 36 420, 38 500, 32 580
-                     S 28 660, 32 740
-                     C 36 820, 34 900, 32 950"
-                  stroke="url(#shadowGradient)"
-                  strokeWidth="8"
-                  fill="none"
-                  strokeLinecap="round"
-                  opacity="0.4"
-                  filter="blur(4px)"
-                />
-                
-                {/* Main advanced curved path with flowing curves */}
+                {/* Main curved path - cleaner design */}
                 <path
                   ref={pathRef}
-                  d="M 32 30 
-                     C 36 50, 38 100, 30 180
-                     S 26 260, 30 340
-                     C 34 420, 36 500, 30 580
-                     S 26 660, 30 740
-                     C 34 820, 32 900, 30 950"
+                  d="M 24 20 
+                     C 26 40, 28 80, 22 140
+                     S 20 200, 24 260
+                     C 26 320, 28 380, 22 440
+                     S 20 500, 24 560"
                   stroke="url(#pathGradient)"
-                  strokeWidth="6"
+                  strokeWidth="4"
                   fill="none"
                   strokeLinecap="round"
-                  filter="url(#advancedGlow)"
-                  className="drop-shadow-xl"
-                />
-                
-                {/* Decorative flowing particles along the path */}
-                <circle r="2" fill="#3b82f6" opacity="0.6">
-                  <animateMotion dur="8s" repeatCount="indefinite">
-                    <mpath href="#mainPath"/>
-                  </animateMotion>
-                </circle>
-                <circle r="1.5" fill="#8b5cf6" opacity="0.5">
-                  <animateMotion dur="12s" repeatCount="indefinite" begin="2s">
-                    <mpath href="#mainPath"/>
-                  </animateMotion>
-                </circle>
-                
-                {/* Reference path for animation */}
-                <path
-                  id="mainPath"
-                  d="M 32 30 
-                     C 36 50, 38 100, 30 180
-                     S 26 260, 30 340
-                     C 34 420, 36 500, 30 580
-                     S 26 660, 30 740
-                     C 34 820, 32 900, 30 950"
-                  stroke="none"
-                  fill="none"
+                  filter="url(#glow)"
                 />
               </svg>
             </div>
 
-            {/* Enhanced Timeline Cards with Better Responsive Layout */}
-            <div className="space-y-24 md:space-y-32">
+            {/* Compact Timeline Cards */}
+            <div className="space-y-16">
               {educationData.map((item, index) => (
                 <div
                   key={index}
                   className="timeline-card relative"
                 >
-                  {/* Enhanced Timeline Dot with Advanced Pulsing Animation */}
+                  {/* Smaller Timeline Dot */}
                   <div className="timeline-dot absolute left-1/2 transform -translate-x-1/2 z-20">
                     <div className={`
-                      relative w-12 h-12 rounded-full bg-gradient-to-br ${item.color} 
-                      shadow-2xl border-4 border-background
+                      relative w-8 h-8 rounded-full bg-gradient-to-br ${item.color} 
+                      shadow-lg border-2 border-background
                       ${item.current ? 'animate-pulse' : ''}
                     `}>
-                      {/* Multiple glow rings */}
-                      <div className={`absolute -inset-3 rounded-full bg-gradient-to-br ${item.color} opacity-20 blur-md animate-pulse`}></div>
-                      <div className={`absolute -inset-2 rounded-full bg-gradient-to-br ${item.color} opacity-30 blur-sm`}></div>
+                      {/* Single glow ring */}
+                      <div className={`absolute -inset-2 rounded-full bg-gradient-to-br ${item.color} opacity-20 blur-sm`}></div>
                       
-                      {/* Current indicator with enhanced animation */}
+                      {/* Current indicator - smaller */}
                       {item.current && (
-                        <div className="absolute -top-3 -right-3">
-                          <div className="w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
-                          <div className="absolute top-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-                            <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                        <div className="absolute -top-2 -right-2">
+                          <div className="w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+                          <div className="absolute top-0 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                            <div className="w-2 h-2 bg-white rounded-full"></div>
                           </div>
                         </div>
                       )}
                       
-                      {/* Icon overlay with subtle animation */}
-                      <div className="absolute inset-0 flex items-center justify-center text-white text-lg transform transition-transform duration-300 group-hover:scale-110">
+                      {/* Icon overlay - smaller */}
+                      <div className="absolute inset-0 flex items-center justify-center text-white text-sm">
                         {item.icon}
                       </div>
                     </div>
                   </div>
 
-                  {/* Responsive Card Container with Enhanced Layout */}
+                  {/* Wider, Shorter Card Layout */}
                   <div className={`
-                    flex flex-col md:flex-row items-center gap-8 md:gap-12
+                    flex flex-col md:flex-row items-center gap-6
                     ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}
                   `}>
                     {/* Spacer for desktop center alignment */}
                     <div className="hidden md:block md:flex-1"></div>
                     
-                    {/* Enhanced Year Badge with Advanced Design */}
+                    {/* Compact Year Badge */}
                     <div className="flex-shrink-0 z-10 order-1 md:order-none">
                       <div className={`
-                        relative p-8 rounded-3xl bg-gradient-to-br ${item.color} 
-                        shadow-2xl border border-white/20 backdrop-blur-sm
-                        transform-gpu hover:scale-110 transition-all duration-700
-                        min-w-[140px] text-center group
-                        hover:shadow-[0_0_40px_rgba(59,130,246,0.4)]
-                        hover:rotate-1
+                        relative p-4 rounded-2xl bg-gradient-to-br ${item.color} 
+                        shadow-lg border border-white/20 backdrop-blur-sm
+                        transform-gpu hover:scale-105 transition-all duration-500
+                        min-w-[100px] text-center group
                       `}>
-                        {/* Enhanced background pattern */}
-                        <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
-                        <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8 group-hover:scale-125 transition-transform duration-700"></div>
-                        <div className="absolute bottom-0 left-0 w-12 h-12 bg-white/5 rounded-full translate-y-6 -translate-x-6 group-hover:scale-125 transition-transform duration-500"></div>
-                        
+                        <div className="absolute inset-0 bg-black/5 rounded-2xl"></div>
                         <div className="relative z-10">
-                          <div className="text-2xl font-bold text-white mb-2 group-hover:scale-105 transition-transform duration-300">
+                          <div className="text-lg font-bold text-white mb-1">
                             {item.year}
                           </div>
-                          <div className="text-lg text-white/90 group-hover:scale-110 transition-transform duration-300">
+                          <div className="text-sm text-white/90">
                             {item.icon}
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Enhanced Card Content with Advanced Animations */}
-                    <div className="flex-1 max-w-lg order-2 md:order-none">
+                    {/* Wider, Shorter Card Content */}
+                    <div className="flex-1 max-w-2xl order-2 md:order-none">
                       <Card className={`
-                        transform-gpu hover:shadow-2xl transition-all duration-700 
-                        group hover:scale-105 border-2 hover:border-primary/40 
+                        transform-gpu hover:shadow-lg transition-all duration-500 
+                        group hover:scale-102 border hover:border-primary/30 
                         bg-background/95 backdrop-blur-sm relative overflow-hidden
-                        hover:-translate-y-2
-                        ${item.current ? 'ring-2 ring-green-500/30 shadow-green-500/20' : ''}
+                        ${item.current ? 'ring-1 ring-green-500/20' : ''}
                       `}>
-                        {/* Enhanced card background pattern */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/10 to-transparent rounded-full -translate-y-10 translate-x-10 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        {/* Subtle card background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         
-                        <CardContent className="p-10 relative z-10">
-                          <div className="space-y-6">
-                            <div>
-                              <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3">
+                        <CardContent className="p-6 relative z-10">
+                          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div className="flex-1">
+                              <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-2">
                                 {item.title}
                               </h3>
-                              <p className="text-muted-foreground font-semibold text-lg mb-2">
+                              <p className="text-muted-foreground font-medium text-base mb-1">
                                 {item.institution}
                               </p>
-                              <p className="text-base text-muted-foreground/80">
+                              <p className="text-sm text-muted-foreground/80">
                                 {item.grade}
                               </p>
                             </div>
                             
-                            <Badge 
-                              className={`
-                                bg-gradient-to-r ${item.color} text-white border-none 
-                                px-6 py-3 text-base font-semibold hover:scale-105 transition-transform duration-300
-                                shadow-lg hover:shadow-xl
-                              `}
-                            >
-                              {item.score}
-                            </Badge>
+                            <div className="flex flex-col items-start md:items-end gap-2">
+                              <Badge 
+                                className={`
+                                  bg-gradient-to-r ${item.color} text-white border-none 
+                                  px-4 py-2 text-sm font-medium hover:scale-105 transition-transform duration-300
+                                `}
+                              >
+                                {item.score}
+                              </Badge>
 
-                            {item.current && (
-                              <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-2xl border border-green-500/20 backdrop-blur-sm">
-                                <div className="relative">
-                                  <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
-                                  <div className="absolute inset-0 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+                              {item.current && (
+                                <div className="flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-full border border-green-500/20">
+                                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                  <span className="text-green-600 font-medium text-xs">Currently Studying</span>
                                 </div>
-                                <span className="text-green-600 font-bold text-base">Currently Studying</span>
-                              </div>
-                            )}
+                              )}
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
@@ -1065,16 +1004,13 @@ const Index = () => {
               ))}
             </div>
 
-            {/* Enhanced Journey Progress Indicator */}
-            <div className="text-center mt-20">
-              <div className="inline-flex items-center gap-6 px-10 py-6 bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 rounded-3xl border border-green-500/20 backdrop-blur-sm shadow-2xl">
-                <div className="relative">
-                  <div className="w-5 h-5 bg-green-500 rounded-full animate-pulse"></div>
-                  <div className="absolute inset-0 w-5 h-5 bg-green-400 rounded-full animate-ping"></div>
-                </div>
-                <span className="text-green-600 font-bold text-lg">Journey in Progress</span>
-                <div className="h-6 w-px bg-green-500/30"></div>
-                <span className="text-base text-muted-foreground font-medium">Expected completion: 2027</span>
+            {/* Compact Journey Progress Indicator */}
+            <div className="text-center mt-12">
+              <div className="inline-flex items-center gap-4 px-6 py-3 bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 rounded-2xl border border-green-500/20 backdrop-blur-sm">
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-green-600 font-medium text-base">Journey in Progress</span>
+                <div className="h-4 w-px bg-green-500/30"></div>
+                <span className="text-sm text-muted-foreground">Expected: 2027</span>
               </div>
             </div>
           </div>
