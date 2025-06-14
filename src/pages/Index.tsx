@@ -14,9 +14,11 @@ import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
 import ScrollRevealAnimation from '@/components/ScrollRevealAnimation';
 import LeftNavDock from '@/components/LeftNavDock';
+import PageLoader from '@/components/PageLoader';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -27,12 +29,25 @@ const Index = () => {
     }
   }, [isDark]);
 
+  useEffect(() => {
+    // Simulate loading time and ensure all components are ready
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleDownloadResume = () => {
     toast({
       title: "Resume download",
       description: "Resume download will be available soon!",
     });
   };
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   return (
     <div className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
