@@ -39,9 +39,13 @@
   text-decoration: none;
   white-space: nowrap;
   font-weight: 600;
-  color: #fff;
+  color: #333;
   font-size: 2vh;
   padding: 0.25rem;
+}
+
+.dark .menu__item-link {
+  color: #fff;
 }
 
 .menu__item-link:hover {
@@ -49,6 +53,10 @@
 }
 
 .menu__item-link:focus:not(:focus-visible) {
+  color: #333;
+}
+
+.dark .menu__item-link:focus:not(:focus-visible) {
   color: #fff;
 }
 

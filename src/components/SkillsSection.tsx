@@ -66,7 +66,7 @@ const SkillsSection = ({ isDark }: SkillsSectionProps) => {
         <DotGrid
           dotSize={10}
           gap={12}
-          baseColor={isDark ? "#374151" : "#d1d5db"}
+          baseColor={isDark ? "#374151" : "#9ca3af"}
           activeColor={isDark ? "#60a5fa" : "#3b82f6"}
           proximity={80}
           shockRadius={250}
@@ -78,7 +78,7 @@ const SkillsSection = ({ isDark }: SkillsSectionProps) => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-foreground">Skills & Expertise</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground drop-shadow-sm">Technology Stack</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Technologies and skills I work with
           </p>

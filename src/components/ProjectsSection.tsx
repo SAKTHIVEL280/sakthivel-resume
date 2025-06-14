@@ -134,27 +134,28 @@ const ProjectsSection = ({ isDark }: ProjectsSectionProps) => {
             {projects.map((project, index) => (
               <Card 
                 key={index} 
-                className="group bg-background/90 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden"
+                className="group bg-background/95 backdrop-blur-md border-2 border-border/60 hover:border-primary/60 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-primary/20 relative overflow-hidden"
                 style={{
                   "--mouse-x": "50%",
                   "--mouse-y": "50%",
-                  "--spotlight-color": "rgba(255, 255, 255, 0.1)",
+                  "--spotlight-color": "rgba(59, 130, 246, 0.15)",
+                  filter: "saturate(1.1) brightness(1.05)",
                 } as any}
                 onMouseMove={handleCardMove}
               >
                 <div 
-                  className="absolute inset-0 bg-gradient-radial opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                  className="absolute inset-0 bg-gradient-radial opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10"
                   style={{
-                    background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%)`,
+                    background: `radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.25), transparent 60%)`,
                   }}
                 ></div>
                 
                 <CardContent className="p-8 relative z-20">
                   <div className="flex justify-between items-start mb-4">
-                    <Badge className={`bg-gradient-to-r ${project.color} text-white border-none`}>
+                    <Badge className={`bg-gradient-to-r ${project.color} text-white border-none shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       {project.year}
                     </Badge>
-                    <Badge variant="outline" className="border-primary/30 text-primary">
+                    <Badge variant="outline" className="border-primary/40 text-primary bg-primary/5 group-hover:bg-primary/15 transition-colors duration-300">
                       {project.tech}
                     </Badge>
                   </div>
@@ -170,12 +171,12 @@ const ProjectsSection = ({ isDark }: ProjectsSectionProps) => {
                   <div className="flex justify-between items-center">
                     <Button 
                       variant="ghost" 
-                      className="hover:bg-primary/10 hover:text-primary transition-all duration-300 group-hover:scale-105"
+                      className="hover:bg-primary/15 hover:text-primary transition-all duration-300 group-hover:scale-105"
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View Project
                     </Button>
-                    <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${project.color} group-hover:scale-110 transition-transform duration-300`}></div>
+                    <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${project.color} group-hover:scale-125 transition-transform duration-300 shadow-lg`}></div>
                   </div>
                 </CardContent>
               </Card>
