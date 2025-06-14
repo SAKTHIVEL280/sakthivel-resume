@@ -41,11 +41,11 @@ function DockItem({
   const ref = useRef<HTMLDivElement>(null);
   const isHovered = useMotionValue(0);
 
-  const mouseDistance = useTransform(mouseX, (val) => {
-    const rect = ref.current?.getBoundingClientRect() ?? {
-      x: 0,
-      width: baseItemSize,
-    };
+  const mouseDistance = useTransform(mouseX, (val: number) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) {
+      return 0;
+    }
     return val - rect.x - baseItemSize / 2;
   });
 
