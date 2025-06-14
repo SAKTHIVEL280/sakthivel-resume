@@ -34,7 +34,7 @@ const Index = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       <SmoothScroll />
       <ThemeToggle 
         isDark={isDark} 
