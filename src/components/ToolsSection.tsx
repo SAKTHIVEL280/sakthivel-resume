@@ -75,7 +75,7 @@ const ToolsSection = ({ isDark }: ToolsSectionProps) => {
       
       <div className="max-w-6xl mx-auto relative z-20">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground drop-shadow-lg">Technology Stack</h2>
+          <h2 className="text-4xl font-bold mb-4 text-foreground drop-shadow-lg">Technology Tools</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto drop-shadow-md">
             Cutting-edge tools and platforms I leverage to create innovative AI-powered solutions
           </p>

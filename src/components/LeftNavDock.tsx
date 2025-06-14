@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Home, User, Code, Briefcase, GraduationCap, Mail } from 'lucide-react';
 
 const LeftNavDock = () => {
@@ -21,6 +21,31 @@ const LeftNavDock = () => {
       setActiveSection(sectionId);
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map(item => item.id);
+      const currentSection = sections.find(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+
+      if (currentSection && currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [activeSection]);
 
   return (
     <div className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
