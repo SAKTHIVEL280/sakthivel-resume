@@ -13,6 +13,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
 import ScrollRevealAnimation from '@/components/ScrollRevealAnimation';
+import RightNavDock from '@/components/RightNavDock';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -41,6 +42,7 @@ const Index = () => {
         setIsDark={setIsDark} 
         onDownloadResume={handleDownloadResume} 
       />
+      <RightNavDock isDark={isDark} />
       
       <HeroSection isDark={isDark} />
       
