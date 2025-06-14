@@ -12,6 +12,7 @@ import ContactSection from '@/components/ContactSection';
 import ThemeToggle from '@/components/ThemeToggle';
 import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
+import NavigationDock from '@/components/NavigationDock';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -40,6 +41,7 @@ const Index = () => {
         setIsDark={setIsDark} 
         onDownloadResume={handleDownloadResume} 
       />
+      <NavigationDock />
       
       <HeroSection isDark={isDark} />
       <AboutSection isDark={isDark} />
