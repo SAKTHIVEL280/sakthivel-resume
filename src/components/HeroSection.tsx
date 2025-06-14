@@ -48,13 +48,17 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">
-            <Button size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
-              <Mail className="w-5 h-5 mr-2" />
-              Get In Touch
+            <Button asChild size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
+              <a href="#contact">
+                <Mail className="w-5 h-5 mr-2" />
+                Get In Touch
+              </a>
             </Button>
-            <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
-              <ExternalLink className="w-5 h-5 mr-2" />
-              View Projects
+            <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
+              <a href="#projects">
+                <ExternalLink className="w-5 h-5 mr-2" />
+                View Projects
+              </a>
             </Button>
           </div>
         </div>

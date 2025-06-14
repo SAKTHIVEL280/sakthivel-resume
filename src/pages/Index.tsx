@@ -11,6 +11,8 @@ import EducationSection from '@/components/EducationSection';
 import ContactSection from '@/components/ContactSection';
 import ThemeToggle from '@/components/ThemeToggle';
 import Footer from '@/components/Footer';
+import Navigation from '@/components/Navigation';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -33,6 +35,8 @@ const Index = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+      <SmoothScroll offset={80} duration={800} />
+      <Navigation isDark={isDark} />
       <ThemeToggle 
         isDark={isDark} 
         setIsDark={setIsDark} 
