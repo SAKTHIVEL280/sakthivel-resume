@@ -305,7 +305,7 @@ const Index = () => {
     setTimeout(() => setIsHyperspeedActive(false), 2000);
   };
 
-  // Timeline animation setup
+  // Enhanced Timeline animation setup with curved path
   useEffect(() => {
     if (!timelineRef.current) return;
 
@@ -326,7 +326,7 @@ const Index = () => {
       opacity: 0
     });
 
-    // Path animation
+    // Enhanced Path animation with smooth curves
     if (pathElement) {
       const pathLength = pathElement.getTotalLength();
       gsap.set(pathElement, {
@@ -338,19 +338,19 @@ const Index = () => {
         trigger: timeline,
         start: 'top 80%',
         end: 'bottom 20%',
-        scrub: 1,
+        scrub: 1.5,
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.to(pathElement, {
             strokeDashoffset: pathLength * (1 - progress),
             duration: 0.3,
-            ease: 'none'
+            ease: 'power2.out'
           });
         }
       });
     }
 
-    // Cards and dots animation
+    // Enhanced Cards and dots animation with stagger
     cards.forEach((card, index) => {
       const dot = dots[index];
       
@@ -358,15 +358,15 @@ const Index = () => {
         trigger: card,
         start: 'top 90%',
         onEnter: () => {
-          // Animate dot first
+          // Animate dot with elastic effect
           gsap.to(dot, {
             scale: 1,
             opacity: 1,
-            duration: 0.5,
-            ease: 'back.out(2)'
+            duration: 0.6,
+            ease: 'elastic.out(1, 0.5)'
           });
           
-          // Then animate card
+          // Then animate card with bounce
           gsap.to(card, {
             y: 0,
             opacity: 1,
@@ -834,8 +834,14 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Redesigned Education Timeline Section */}
+      {/* Enhanced Education Timeline Section with Curved Path Animation */}
       <section id="education" className="py-20 px-6 bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden">
+        {/* Enhanced Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.15),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.15),transparent_50%)]"></div>
+        </div>
+        
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
@@ -846,99 +852,148 @@ const Index = () => {
           </div>
           
           <div ref={timelineRef} className="relative">
-            {/* Central Timeline Path */}
+            {/* Enhanced Central Timeline Path with Smooth Curves */}
             <div className="absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2 pointer-events-none">
               <svg 
-                className="w-6 h-full" 
-                viewBox="0 0 24 600" 
+                className="w-8 h-full" 
+                viewBox="0 0 32 800" 
                 preserveAspectRatio="xMidYMid meet"
               >
                 <defs>
                   <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="50%" stopColor="#f97316" />
-                    <stop offset="100%" stopColor="#10b981" />
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
+                    <stop offset="30%" stopColor="#8b5cf6" stopOpacity="0.9" />
+                    <stop offset="70%" stopColor="#f97316" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="1" />
                   </linearGradient>
+                  <filter id="pathGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge> 
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/> 
+                    </feMerge>
+                  </filter>
                 </defs>
                 
+                {/* Main curved path */}
                 <path
                   ref={pathRef}
-                  d="M 12 20 L 12 580"
+                  d="M 16 20 
+                     Q 20 120 16 220
+                     Q 12 320 16 420
+                     Q 20 520 16 620
+                     Q 14 720 16 780"
                   stroke="url(#pathGradient)"
-                  strokeWidth="3"
+                  strokeWidth="4"
                   fill="none"
                   strokeLinecap="round"
-                  className="drop-shadow-sm"
+                  filter="url(#pathGlow)"
+                  className="drop-shadow-lg"
+                />
+                
+                {/* Background path for context */}
+                <path
+                  d="M 16 20 
+                     Q 20 120 16 220
+                     Q 12 320 16 420
+                     Q 20 520 16 620
+                     Q 14 720 16 780"
+                  stroke="rgba(156, 163, 175, 0.2)"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeDasharray="5,5"
                 />
               </svg>
             </div>
 
-            {/* Timeline Cards */}
-            <div className="space-y-16">
+            {/* Enhanced Timeline Cards with Better Responsive Layout */}
+            <div className="space-y-20 md:space-y-24">
               {educationData.map((item, index) => (
                 <div
                   key={index}
                   className="timeline-card relative"
                 >
-                  {/* Timeline Dot */}
+                  {/* Enhanced Timeline Dot with Pulsing Animation */}
                   <div className="timeline-dot absolute left-1/2 transform -translate-x-1/2 z-20">
                     <div className={`
-                      w-6 h-6 rounded-full bg-gradient-to-br ${item.color} 
-                      shadow-lg border-4 border-background
+                      relative w-8 h-8 rounded-full bg-gradient-to-br ${item.color} 
+                      shadow-2xl border-4 border-background
                       ${item.current ? 'animate-pulse' : ''}
                     `}>
+                      {/* Outer glow ring */}
+                      <div className={`absolute -inset-2 rounded-full bg-gradient-to-br ${item.color} opacity-30 blur-sm`}></div>
+                      
+                      {/* Current indicator */}
                       {item.current && (
-                        <div className="absolute -top-1 -right-1">
-                          <div className="w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
-                          <div className="absolute top-0 w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div className="absolute -top-2 -right-2">
+                          <div className="w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+                          <div className="absolute top-0 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                          </div>
                         </div>
                       )}
+                      
+                      {/* Icon overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center text-white text-sm">
+                        {item.icon}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Card Container */}
+                  {/* Responsive Card Container */}
                   <div className={`
-                    flex items-center gap-8
-                    ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}
+                    flex flex-col md:flex-row items-center gap-6 md:gap-8
+                    ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}
                   `}>
-                    {/* Spacer for center alignment */}
-                    <div className="flex-1"></div>
+                    {/* Spacer for desktop center alignment */}
+                    <div className="hidden md:block md:flex-1"></div>
                     
-                    {/* Year Badge */}
-                    <div className="flex-shrink-0 z-10">
+                    {/* Enhanced Year Badge */}
+                    <div className="flex-shrink-0 z-10 order-1 md:order-none">
                       <div className={`
-                        relative p-4 rounded-xl bg-gradient-to-br ${item.color} 
-                        shadow-lg border border-white/20 backdrop-blur-sm
-                        transform-gpu hover:scale-110 transition-all duration-300
-                        min-w-[100px] text-center
+                        relative p-6 rounded-2xl bg-gradient-to-br ${item.color} 
+                        shadow-2xl border border-white/20 backdrop-blur-sm
+                        transform-gpu hover:scale-110 transition-all duration-500
+                        min-w-[120px] text-center group
+                        hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]
                       `}>
-                        <div className="text-lg font-bold text-white">
-                          {item.year}
-                        </div>
-                        <div className="text-xs text-white/80 mt-1">
-                          {item.icon}
+                        {/* Background pattern */}
+                        <div className="absolute inset-0 bg-black/10 rounded-2xl"></div>
+                        <div className="absolute top-0 right-0 w-12 h-12 bg-white/10 rounded-full -translate-y-6 translate-x-6 group-hover:scale-110 transition-transform duration-500"></div>
+                        
+                        <div className="relative z-10">
+                          <div className="text-xl font-bold text-white mb-1">
+                            {item.year}
+                          </div>
+                          <div className="text-sm text-white/80">
+                            {item.icon}
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Card Content */}
-                    <div className="flex-1 max-w-sm">
+                    {/* Enhanced Card Content */}
+                    <div className="flex-1 max-w-md order-2 md:order-none">
                       <Card className={`
-                        transform-gpu hover:shadow-xl transition-all duration-500 
+                        transform-gpu hover:shadow-2xl transition-all duration-700 
                         group hover:scale-105 border-2 hover:border-primary/40 
-                        bg-background/95 backdrop-blur-sm
-                        ${item.current ? 'ring-2 ring-green-500/30' : ''}
+                        bg-background/95 backdrop-blur-sm relative overflow-hidden
+                        ${item.current ? 'ring-2 ring-green-500/30 shadow-green-500/20' : ''}
                       `}>
-                        <CardContent className="p-6">
-                          <div className="space-y-3">
+                        {/* Card background pattern */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <CardContent className="p-8 relative z-10">
+                          <div className="space-y-4">
                             <div>
-                              <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                              <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-2">
                                 {item.title}
                               </h3>
-                              <p className="text-muted-foreground font-medium text-sm mt-1">
+                              <p className="text-muted-foreground font-semibold text-base mb-1">
                                 {item.institution}
                               </p>
-                              <p className="text-xs text-muted-foreground/80">
+                              <p className="text-sm text-muted-foreground/80">
                                 {item.grade}
                               </p>
                             </div>
@@ -946,16 +1001,20 @@ const Index = () => {
                             <Badge 
                               className={`
                                 bg-gradient-to-r ${item.color} text-white border-none 
-                                px-3 py-1 text-xs font-semibold hover:scale-105 transition-transform duration-300
+                                px-4 py-2 text-sm font-semibold hover:scale-105 transition-transform duration-300
+                                shadow-lg
                               `}
                             >
                               {item.score}
                             </Badge>
 
                             {item.current && (
-                              <div className="flex items-center gap-2 p-2 bg-green-500/10 rounded-lg border border-green-500/20">
-                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                <span className="text-green-600 font-medium text-xs">Currently Studying</span>
+                              <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20 backdrop-blur-sm">
+                                <div className="relative">
+                                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                  <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                                </div>
+                                <span className="text-green-600 font-semibold text-sm">Currently Studying</span>
                               </div>
                             )}
                           </div>
@@ -967,12 +1026,16 @@ const Index = () => {
               ))}
             </div>
 
-            {/* Journey Progress Indicator */}
-            <div className="text-center mt-12">
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20 backdrop-blur-sm">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-green-600 font-semibold text-sm">Journey in Progress</span>
-                <span className="text-xs text-muted-foreground">Expected completion: 2027</span>
+            {/* Enhanced Journey Progress Indicator */}
+            <div className="text-center mt-16">
+              <div className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 rounded-2xl border border-green-500/20 backdrop-blur-sm shadow-xl">
+                <div className="relative">
+                  <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                  <div className="absolute inset-0 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+                </div>
+                <span className="text-green-600 font-bold text-base">Journey in Progress</span>
+                <div className="h-4 w-px bg-green-500/30"></div>
+                <span className="text-sm text-muted-foreground font-medium">Expected completion: 2027</span>
               </div>
             </div>
           </div>
