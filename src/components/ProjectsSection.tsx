@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -103,10 +104,6 @@ const ProjectsSection = ({ isDark }: ProjectsSectionProps) => {
 
   return (
     <section id="projects" className="py-20 px-6 relative overflow-hidden">
-      {/* Soft edges */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background via-background/60 to-transparent z-50 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background via-background/60 to-transparent z-50 pointer-events-none"></div>
-      
       <div className="absolute inset-0 z-0">
         <LetterGlitch
           glitchSpeed={50}

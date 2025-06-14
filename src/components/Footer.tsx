@@ -1,12 +1,10 @@
+
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Footer = () => {
   return (
-    <footer className="py-8 px-6 bg-background border-t border-border/30 relative overflow-hidden">
-      {/* Soft edge at top */}
-      <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-background via-background/60 to-transparent z-10 pointer-events-none"></div>
-      
+    <footer className="py-8 px-6 bg-background border-t border-border/30">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center space-y-6">
           {/* Social Links */}

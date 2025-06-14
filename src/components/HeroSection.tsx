@@ -1,3 +1,4 @@
+
 import { Mail, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TextPressure from '@/components/TextPressure';
@@ -11,10 +12,6 @@ interface HeroSectionProps {
 const HeroSection = ({ isDark }: HeroSectionProps) => {
   return (
     <section id="hero" className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Soft edges */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-background via-background/80 to-transparent z-30 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background via-background/80 to-transparent z-30 pointer-events-none"></div>
-      
       <Waves 
         lineColor={isDark ? 'rgba(156, 163, 175, 0.4)' : 'rgba(107, 114, 128, 0.3)'} 
         backgroundColor="transparent"

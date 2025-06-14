@@ -1,3 +1,4 @@
+
 import FlowingMenu from '@/components/FlowingMenu';
 
 const InterestsSection = () => {
@@ -25,11 +26,7 @@ const InterestsSection = () => {
   ];
 
   return (
-    <section id="interests" className="py-20 px-6 bg-muted/30 relative overflow-hidden">
-      {/* Soft edges */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
-      
+    <section id="interests" className="py-20 px-6 bg-muted/30">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 text-foreground">My Interests</h2>
