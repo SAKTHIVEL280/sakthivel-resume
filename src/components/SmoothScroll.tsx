@@ -1,12 +1,11 @@
 
 import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-interface SmoothScrollProps {
-  offset?: number;
-  duration?: number;
-}
+gsap.registerPlugin(ScrollToPlugin);
 
-const SmoothScroll = ({ offset = 80, duration = 800 }: SmoothScrollProps) => {
+const SmoothScroll = () => {
   useEffect(() => {
     const handleClick = (e: Event) => {
       const target = e.target as HTMLAnchorElement;
@@ -19,29 +18,18 @@ const SmoothScroll = ({ offset = 80, duration = 800 }: SmoothScrollProps) => {
         const targetElement = document.getElementById(targetId || '');
         
         if (targetElement) {
-          const targetPosition = targetElement.offsetTop - offset;
+          // Use GSAP for ultra-smooth scrolling with responsive offset
+          const isMobile = window.innerWidth < 768;
+          const offset = isMobile ? 60 : 80;
           
-          // Smooth scroll animation
-          const startPosition = window.pageYOffset;
-          const distance = targetPosition - startPosition;
-          let startTime: number | null = null;
-          
-          const animation = (currentTime: number) => {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            
-            // Easing function (ease-out cubic)
-            const ease = 1 - Math.pow(1 - progress, 3);
-            
-            window.scrollTo(0, startPosition + distance * ease);
-            
-            if (timeElapsed < duration) {
-              requestAnimationFrame(animation);
-            }
-          };
-          
-          requestAnimationFrame(animation);
+          gsap.to(window, {
+            duration: 1.2,
+            scrollTo: {
+              y: targetElement,
+              offsetY: offset
+            },
+            ease: "power2.inOut"
+          });
         }
       }
     };
@@ -49,10 +37,15 @@ const SmoothScroll = ({ offset = 80, duration = 800 }: SmoothScrollProps) => {
     // Add click listener to the document
     document.addEventListener('click', handleClick);
     
+    // Enhanced smooth scrolling for all scroll behavior
+    gsap.set(document.documentElement, {
+      scrollBehavior: "auto"
+    });
+    
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [offset, duration]);
+  }, []);
 
   return null;
 };
