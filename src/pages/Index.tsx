@@ -185,18 +185,18 @@ const Index = () => {
       color: 'from-blue-500 to-cyan-500'
     },
     {
-      title: 'Personal Markdown Note Taker (PMLNT)',
-      description: 'Created a structured note-taking app with Markdown and AI-based formatting/export features.',
-      tech: 'Python',
-      year: '2024',
-      color: 'from-orange-500 to-red-500'
-    },
-    {
       title: 'T2I – Text to Image Generator',
       description: 'Created a fully free image generator using local ComfyUI and open-source models. Helps users turn text into AI-generated images without expensive APIs.',
       tech: 'React + AI',
       year: '2024',
       color: 'from-purple-500 to-pink-500'
+    },
+    {
+      title: 'Personal Markdown Note Taker (PMLNT)',
+      description: 'Created a structured note-taking app with Markdown and AI-based formatting/export features.',
+      tech: 'Python',
+      year: '2024',
+      color: 'from-orange-500 to-red-500'
     }
   ];
 
@@ -208,7 +208,8 @@ const Index = () => {
       grade: '10th Grade',
       score: '75%',
       color: 'from-cyan-500 to-blue-500',
-      position: 'left'
+      position: 'left',
+      coords: { x: 200, y: 100 }
     },
     {
       year: '2023',
@@ -217,7 +218,8 @@ const Index = () => {
       grade: '12th Grade',
       score: '77%',
       color: 'from-orange-500 to-red-500',
-      position: 'right'
+      position: 'right',
+      coords: { x: 600, y: 200 }
     },
     {
       year: '2023-2027',
@@ -227,7 +229,8 @@ const Index = () => {
       score: 'CGPA: 9.0',
       color: 'from-green-500 to-emerald-500',
       position: 'left',
-      current: true
+      current: true,
+      coords: { x: 300, y: 350 }
     }
   ];
 
@@ -305,22 +308,24 @@ const Index = () => {
     setTimeout(() => setIsHyperspeedActive(false), 2000);
   };
 
-  // Timeline animation setup
+  // Enhanced Timeline animation setup
   useEffect(() => {
     if (!timelineRef.current) return;
 
     const timeline = timelineRef.current;
     const cards = timeline.querySelectorAll('.timeline-card');
     const pathElement = pathRef.current;
+    const progressBar = timeline.querySelector('.progress-bar');
 
-    // Initial setup - hide cards
+    // Initial setup - hide cards and position them
     gsap.set(cards, {
-      y: 100,
+      y: 150,
       opacity: 0,
-      scale: 0.8
+      scale: 0.7,
+      rotationX: 45
     });
 
-    // Path animation
+    // Path animation with progress tracking
     if (pathElement) {
       const pathLength = pathElement.getTotalLength();
       gsap.set(pathElement, {
@@ -328,44 +333,82 @@ const Index = () => {
         strokeDashoffset: pathLength
       });
 
+      // Progress bar animation
+      if (progressBar) {
+        gsap.set(progressBar, { scaleX: 0, transformOrigin: 'left center' });
+      }
+
       ScrollTrigger.create({
         trigger: timeline,
-        start: 'top 80%',
-        end: 'bottom 20%',
+        start: 'top 70%',
+        end: 'bottom 30%',
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
+          
+          // Animate path drawing
           gsap.to(pathElement, {
             strokeDashoffset: pathLength * (1 - progress),
             duration: 0.3,
             ease: 'none'
           });
+
+          // Animate progress bar
+          if (progressBar) {
+            gsap.to(progressBar, {
+              scaleX: progress,
+              duration: 0.3,
+              ease: 'none'
+            });
+          }
         }
       });
     }
 
-    // Cards animation
+    // Enhanced cards animation with stagger effect
     cards.forEach((card, index) => {
+      // Individual card scroll trigger
       ScrollTrigger.create({
         trigger: card,
-        start: 'top 85%',
-        end: 'bottom 15%',
+        start: 'top 80%',
+        end: 'bottom 20%',
         onEnter: () => {
           gsap.to(card, {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 0.8,
-            delay: index * 0.2,
-            ease: 'back.out(1.7)'
+            rotationX: 0,
+            duration: 1.2,
+            delay: index * 0.15,
+            ease: 'back.out(1.4)',
+            onComplete: () => {
+              // Add floating animation after entrance
+              gsap.to(card, {
+                y: -10,
+                duration: 2,
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1
+              });
+            }
           });
+
+          // Animate year badge separately
+          const yearBadge = card.querySelector('.year-badge');
+          if (yearBadge) {
+            gsap.fromTo(yearBadge, 
+              { scale: 0, rotation: -180 },
+              { scale: 1, rotation: 0, duration: 0.8, delay: index * 0.15 + 0.3, ease: 'back.out(2)' }
+            );
+          }
         },
         onLeave: () => {
           gsap.to(card, {
-            y: -50,
-            opacity: 0.3,
-            scale: 0.95,
-            duration: 0.5,
+            y: -100,
+            opacity: 0.2,
+            scale: 0.9,
+            rotationX: -15,
+            duration: 0.6,
             ease: 'power2.out'
           });
         },
@@ -374,16 +417,18 @@ const Index = () => {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 0.6,
-            ease: 'back.out(1.7)'
+            rotationX: 0,
+            duration: 0.8,
+            ease: 'back.out(1.4)'
           });
         },
         onLeaveBack: () => {
           gsap.to(card, {
-            y: 100,
+            y: 150,
             opacity: 0,
-            scale: 0.8,
-            duration: 0.5,
+            scale: 0.7,
+            rotationX: 45,
+            duration: 0.6,
             ease: 'power2.in'
           });
         }
@@ -845,121 +890,233 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Education Section - Timeline */}
-      <section id="education" className="py-20 px-6 bg-muted/30 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Educational Journey</h2>
-            <p className="text-lg text-muted-foreground">My pathway from 2021 to 2027</p>
+      {/* Enhanced Education Section - Innovative Timeline */}
+      <section id="education" className="py-20 px-6 bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-1/4 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-green-500/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
+              Educational Journey
+            </h2>
+            <p className="text-xl text-muted-foreground mb-4">My pathway from 2021 to 2027</p>
+            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
           </div>
           
           <div ref={timelineRef} className="relative">
-            {/* Timeline Path SVG */}
+            {/* Progress Indicator */}
+            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-full max-w-4xl">
+              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div className="progress-bar h-full bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 rounded-full"></div>
+              </div>
+            </div>
+
+            {/* Enhanced Timeline Path SVG */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <svg 
-                className="w-full h-full max-w-4xl" 
-                viewBox="0 0 800 700" 
+                className="w-full h-full max-w-6xl" 
+                viewBox="0 0 1000 800" 
                 preserveAspectRatio="xMidYMid meet"
               >
                 <defs>
                   <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#06b6d4" />
-                    <stop offset="33%" stopColor="#3b82f6" />
-                    <stop offset="66%" stopColor="#8b5cf6" />
-                    <stop offset="100%" stopColor="#10b981" />
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
+                    <stop offset="25%" stopColor="#06b6d4" stopOpacity="0.9" />
+                    <stop offset="50%" stopColor="#8b5cf6" stopOpacity="1" />
+                    <stop offset="75%" stopColor="#10b981" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#059669" stopOpacity="0.8" />
                   </linearGradient>
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                    <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.3" />
+                  </linearGradient>
+                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
                     <feMerge>
                       <feMergeNode in="coloredBlur"/>
                       <feMergeNode in="SourceGraphic"/>
                     </feMerge>
                   </filter>
+                  <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="8" floodColor="#000000" floodOpacity="0.3"/>
+                  </filter>
                 </defs>
+
+                {/* Glow path background */}
+                <path
+                  d="M 200 150 Q 350 120 500 180 Q 650 240 750 200 Q 850 160 900 220"
+                  fill="none"
+                  stroke="url(#glowGradient)"
+                  strokeWidth="12"
+                  filter="url(#glow)"
+                  opacity="0.6"
+                />
+
+                {/* Main path */}
                 <path
                   ref={pathRef}
-                  d="M 100 150 Q 250 100 400 200 Q 550 300 700 350 Q 750 380 800 400"
+                  d="M 200 150 Q 350 120 500 180 Q 650 240 750 200 Q 850 160 900 220"
                   fill="none"
                   stroke="url(#pathGradient)"
-                  strokeWidth="4"
-                  filter="url(#glow)"
-                  className="drop-shadow-lg"
+                  strokeWidth="6"
+                  filter="url(#shadow)"
+                  className="drop-shadow-2xl"
                 />
-                {/* Year markers */}
-                <circle cx="100" cy="150" r="8" fill="#06b6d4" className="drop-shadow-md">
-                  <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
-                </circle>
-                <circle cx="400" cy="200" r="8" fill="#8b5cf6" className="drop-shadow-md">
-                  <animate attributeName="r" values="8;12;8" dur="2s" begin="0.7s" repeatCount="indefinite" />
-                </circle>
-                <circle cx="700" cy="350" r="8" fill="#10b981" className="drop-shadow-md">
-                  <animate attributeName="r" values="8;12;8" dur="2s" begin="1.4s" repeatCount="indefinite" />
-                </circle>
-                {/* End point marker */}
-                <circle cx="800" cy="400" r="10" fill="#10b981" className="drop-shadow-md">
-                  <animate attributeName="r" values="10;14;10" dur="2s" begin="2.1s" repeatCount="indefinite" />
-                </circle>
+
+                {/* Enhanced Year markers with pulsing effects */}
+                <g className="year-markers">
+                  <circle cx="200" cy="150" r="12" fill="#3b82f6" filter="url(#shadow)">
+                    <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="200" cy="150" r="6" fill="#ffffff" opacity="0.9">
+                    <animate attributeName="r" values="6;9;6" dur="3s" repeatCount="indefinite" />
+                  </circle>
+                  
+                  <circle cx="500" cy="180" r="12" fill="#8b5cf6" filter="url(#shadow)">
+                    <animate attributeName="r" values="12;18;12" dur="3s" begin="1s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" begin="1s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="500" cy="180" r="6" fill="#ffffff" opacity="0.9">
+                    <animate attributeName="r" values="6;9;6" dur="3s" begin="1s" repeatCount="indefinite" />
+                  </circle>
+                  
+                  <circle cx="750" cy="200" r="14" fill="#10b981" filter="url(#shadow)">
+                    <animate attributeName="r" values="14;20;14" dur="2.5s" begin="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.9;1;0.9" dur="2.5s" begin="2s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="750" cy="200" r="7" fill="#ffffff" opacity="0.95">
+                    <animate attributeName="r" values="7;10;7" dur="2.5s" begin="2s" repeatCount="indefinite" />
+                  </circle>
+
+                  {/* Future milestone indicator */}
+                  <circle cx="900" cy="220" r="16" fill="#059669" filter="url(#shadow)" opacity="0.7">
+                    <animate attributeName="r" values="16;22;16" dur="4s" begin="3s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="3s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="900" cy="220" r="8" fill="#ffffff" opacity="0.8">
+                    <animate attributeName="r" values="8;12;8" dur="4s" begin="3s" repeatCount="indefinite" />
+                  </circle>
+                </g>
               </svg>
             </div>
 
-            {/* Timeline Cards */}
-            <div className="relative z-10 space-y-24 pt-8 pb-16">
+            {/* Enhanced Timeline Cards with 3D perspective */}
+            <div className="relative z-10 space-y-32 pt-16 pb-20">
               {educationData.map((item, index) => (
                 <div
                   key={index}
-                  className={`timeline-card flex items-center ${
+                  className={`timeline-card perspective-1000 ${
                     item.position === 'right' 
                       ? 'md:flex-row-reverse md:text-right' 
                       : 'md:flex-row md:text-left'
-                  } flex-col text-center gap-8`}
+                  } flex flex-col md:items-center text-center md:text-left gap-12`}
                 >
-                  {/* Year Badge */}
-                  <div className="flex-shrink-0">
+                  {/* Enhanced Year Badge */}
+                  <div className="flex-shrink-0 order-2 md:order-1">
                     <div className={`
-                      relative p-6 rounded-2xl bg-gradient-to-br ${item.color} 
-                      shadow-xl border border-white/20 backdrop-blur-sm
-                      ${item.current ? 'animate-pulse' : ''}
+                      year-badge relative p-8 rounded-3xl bg-gradient-to-br ${item.color} 
+                      shadow-2xl border border-white/30 backdrop-blur-sm transform-gpu
+                      hover:scale-110 transition-all duration-500 cursor-pointer
+                      ${item.current ? 'animate-pulse shadow-green-500/50' : ''}
+                      group overflow-hidden
                     `}>
-                      <div className="text-2xl font-bold text-white mb-1">
-                        {item.year}
-                      </div>
-                      {item.current && (
-                        <div className="absolute -top-2 -right-2">
-                          <div className="w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
-                          <div className="absolute top-0 w-4 h-4 bg-green-500 rounded-full"></div>
+                      {/* Background pattern */}
+                      <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-white/20 rounded-full -translate-y-8 translate-x-8 group-hover:scale-125 transition-transform duration-500"></div>
+                      <div className="absolute bottom-0 left-0 w-12 h-12 bg-white/10 rounded-full translate-y-6 -translate-x-6 group-hover:scale-125 transition-transform duration-500"></div>
+                      
+                      <div className="relative z-10 text-center">
+                        <div className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
+                          {item.year}
                         </div>
-                      )}
+                        {item.current && (
+                          <div className="absolute -top-3 -right-3">
+                            <div className="relative">
+                              <div className="w-6 h-6 bg-green-400 rounded-full animate-ping opacity-75"></div>
+                              <div className="absolute top-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <div className="w-2 h-2 bg-white rounded-full"></div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Card Content */}
-                  <Card className="flex-1 max-w-md hover:shadow-2xl transition-all duration-500 group hover:scale-105 border-2 hover:border-primary/30">
-                    <CardContent className="p-8">
-                      <div className="space-y-4">
-                        <div>
-                          <h3 className="text-2xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                  {/* Enhanced Card Content */}
+                  <Card className={`
+                    flex-1 max-w-lg order-1 md:order-2 transform-gpu
+                    hover:shadow-2xl transition-all duration-700 group
+                    hover:scale-105 border-2 hover:border-primary/40
+                    bg-background/95 backdrop-blur-sm
+                    ${item.current ? 'ring-2 ring-green-500/50 shadow-green-500/20' : ''}
+                    relative overflow-hidden
+                  `}>
+                    {/* Card glow effect */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                    
+                    <CardContent className="p-10 relative z-10">
+                      <div className="space-y-6">
+                        {/* Header */}
+                        <div className="space-y-3">
+                          <h3 className="text-3xl md:text-4xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
                             {item.title}
                           </h3>
-                          <p className="text-lg font-semibold text-muted-foreground mb-1">
-                            {item.institution}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {item.grade}
-                          </p>
+                          <div className="space-y-2">
+                            <p className="text-lg font-semibold text-muted-foreground">
+                              {item.institution}
+                            </p>
+                            <p className="text-base text-muted-foreground/80">
+                              {item.grade}
+                            </p>
+                          </div>
                         </div>
                         
+                        {/* Score Badge */}
                         <div className="flex justify-center md:justify-start">
                           <Badge 
-                            className={`bg-gradient-to-r ${item.color} text-white border-none text-lg px-4 py-2 font-bold shadow-lg`}
+                            className={`
+                              bg-gradient-to-r ${item.color} text-white border-none 
+                              text-xl px-6 py-3 font-bold shadow-lg
+                              hover:scale-110 transition-transform duration-300
+                              cursor-pointer
+                            `}
                           >
                             {item.score}
                           </Badge>
                         </div>
 
+                        {/* Current status */}
                         {item.current && (
-                          <div className="flex items-center justify-center md:justify-start gap-2 mt-4">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span className="text-sm text-green-600 font-medium">Currently Studying</span>
+                          <div className="flex items-center justify-center md:justify-start gap-3 mt-6 p-4 bg-green-500/10 rounded-2xl border border-green-500/20">
+                            <div className="relative">
+                              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                              <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-40"></div>
+                            </div>
+                            <span className="text-green-600 font-semibold text-lg">Currently Studying</span>
+                            <div className="ml-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full">
+                              <span className="text-green-700 dark:text-green-300 text-sm font-medium">Active</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Progress indicator for current studies */}
+                        {item.current && (
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm text-muted-foreground">
+                              <span>Progress (2023-2027)</span>
+                              <span>50%</span>
+                            </div>
+                            <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                              <div className="bg-gradient-to-r from-green-500 to-emerald-500 h-full rounded-full w-1/2 transition-all duration-1000 animate-pulse"></div>
+                            </div>
                           </div>
                         )}
                       </div>
@@ -967,6 +1124,15 @@ const Index = () => {
                   </Card>
                 </div>
               ))}
+            </div>
+
+            {/* Journey completion indicator */}
+            <div className="text-center mt-16 relative z-10">
+              <div className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-2xl border border-green-500/20 backdrop-blur-sm">
+                <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-lg font-semibold text-green-600">Journey in Progress</span>
+                <div className="text-sm text-muted-foreground">Expected completion: 2027</div>
+              </div>
             </div>
           </div>
         </div>
