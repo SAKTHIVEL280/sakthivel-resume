@@ -1,4 +1,3 @@
-
 import Threads from '@/components/Threads';
 import GradientText from '@/components/GradientText';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -10,6 +9,10 @@ interface AboutSectionProps {
 const AboutSection = ({ isDark }: AboutSectionProps) => {
   return (
     <section id="about" className="py-20 px-6 relative overflow-hidden">
+      {/* Soft edges */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
+      
       <div className="absolute inset-0">
         <Threads 
           color={isDark ? [0.5, 0.6, 0.8] : [0.3, 0.4, 0.6]}

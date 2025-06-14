@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,6 +17,10 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-8 px-6 relative overflow-hidden">
+      {/* Soft edges */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
+      
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Orbs */}

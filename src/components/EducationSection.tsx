@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -117,6 +116,10 @@ const EducationSection = () => {
 
   return (
     <section id="education" className="py-16 px-6 bg-gradient-to-br from-muted/20 via-background to-muted/10 relative overflow-hidden">
+      {/* Soft edges */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background via-background/60 to-transparent z-30 pointer-events-none"></div>
+      
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.1),transparent_50%)]"></div>
