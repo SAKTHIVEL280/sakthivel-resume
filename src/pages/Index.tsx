@@ -16,6 +16,10 @@ import Silk from '@/components/Silk';
 import FlowingMenu from '@/components/FlowingMenu';
 import LetterGlitch from '@/components/LetterGlitch';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -24,6 +28,8 @@ const Index = () => {
   const hyperspeedRef = useRef<any>(null);
   const projectsGridRef = useRef<HTMLDivElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
   const setX = useRef<any>(null);
   const setY = useRef<any>(null);
   const pos = useRef({ x: 0, y: 0 });
@@ -194,6 +200,37 @@ const Index = () => {
     }
   ];
 
+  const educationData = [
+    {
+      year: '2021',
+      title: 'Secondary Education',
+      institution: 'Maharishi Vidya Mandir (CBSE)',
+      grade: '10th Grade',
+      score: '75%',
+      color: 'from-cyan-500 to-blue-500',
+      position: 'left'
+    },
+    {
+      year: '2023',
+      title: 'Higher Secondary',
+      institution: 'Maharishi Vidya Mandir (CBSE)',
+      grade: '12th Grade',
+      score: '77%',
+      color: 'from-orange-500 to-red-500',
+      position: 'right'
+    },
+    {
+      year: '2023-2025',
+      title: 'Current Journey',
+      institution: 'K.S. Rangasamy College of Technology',
+      grade: 'AIML Department',
+      score: 'CGPA: 9.0',
+      color: 'from-green-500 to-emerald-500',
+      position: 'left',
+      current: true
+    }
+  ];
+
   // ChromaGrid effect initialization
   useEffect(() => {
     const el = projectsGridRef.current;
@@ -267,6 +304,96 @@ const Index = () => {
     setIsHyperspeedActive(true);
     setTimeout(() => setIsHyperspeedActive(false), 2000);
   };
+
+  // Timeline animation setup
+  useEffect(() => {
+    if (!timelineRef.current) return;
+
+    const timeline = timelineRef.current;
+    const cards = timeline.querySelectorAll('.timeline-card');
+    const pathElement = pathRef.current;
+
+    // Initial setup - hide cards
+    gsap.set(cards, {
+      y: 100,
+      opacity: 0,
+      scale: 0.8
+    });
+
+    // Path animation
+    if (pathElement) {
+      const pathLength = pathElement.getTotalLength();
+      gsap.set(pathElement, {
+        strokeDasharray: pathLength,
+        strokeDashoffset: pathLength
+      });
+
+      ScrollTrigger.create({
+        trigger: timeline,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.to(pathElement, {
+            strokeDashoffset: pathLength * (1 - progress),
+            duration: 0.3,
+            ease: 'none'
+          });
+        }
+      });
+    }
+
+    // Cards animation
+    cards.forEach((card, index) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 85%',
+        end: 'bottom 15%',
+        onEnter: () => {
+          gsap.to(card, {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            delay: index * 0.2,
+            ease: 'back.out(1.7)'
+          });
+        },
+        onLeave: () => {
+          gsap.to(card, {
+            y: -50,
+            opacity: 0.3,
+            scale: 0.95,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        },
+        onEnterBack: () => {
+          gsap.to(card, {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: 'back.out(1.7)'
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(card, {
+            y: 100,
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.5,
+            ease: 'power2.in'
+          });
+        }
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
@@ -718,52 +845,125 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Education Section */}
-      <section id="education" className="py-20 px-6 bg-muted/30">
+      {/* Education Section - Timeline */}
+      <section id="education" className="py-20 px-6 bg-muted/30 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Education</h2>
-          <div className="space-y-8">
-            <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-              <CardContent className="p-8">
-                <div className="flex flex-col md:flex-row justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">K.S. Rangasamy College of Technology</h3>
-                    <p className="text-lg text-muted-foreground mb-2">AIML Department</p>
-                  </div>
-                  <div className="text-right">
-                    <Badge className="bg-green-500 text-white mb-2">1st Year CGPA: 8.78</Badge>
-                    <br />
-                    <Badge className="bg-blue-500 text-white mb-2">3rd Sem CGPA: 9.0</Badge>
-                    <br />
-                    <Badge className="bg-purple-500 text-white">4th Sem: Completed</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-              <CardContent className="p-8">
-                <div className="flex flex-col md:flex-row justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
-                    <p className="text-lg text-muted-foreground">12th Grade - 2023</p>
-                  </div>
-                  <Badge className="bg-orange-500 text-white">77%</Badge>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Educational Journey</h2>
+            <p className="text-lg text-muted-foreground">My pathway from 2021 to 2025</p>
+          </div>
+          
+          <div ref={timelineRef} className="relative">
+            {/* Timeline Path SVG */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <svg 
+                className="w-full h-full max-w-4xl" 
+                viewBox="0 0 800 600" 
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <defs>
+                  <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#06b6d4" />
+                    <stop offset="33%" stopColor="#3b82f6" />
+                    <stop offset="66%" stopColor="#8b5cf6" />
+                    <stop offset="100%" stopColor="#10b981" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <path
+                  ref={pathRef}
+                  d="M 100 150 Q 250 100 400 200 Q 550 300 700 250"
+                  fill="none"
+                  stroke="url(#pathGradient)"
+                  strokeWidth="4"
+                  filter="url(#glow)"
+                  className="drop-shadow-lg"
+                />
+                {/* Year markers */}
+                <circle cx="100" cy="150" r="8" fill="#06b6d4" className="drop-shadow-md">
+                  <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="400" cy="200" r="8" fill="#8b5cf6" className="drop-shadow-md">
+                  <animate attributeName="r" values="8;12;8" dur="2s" begin="0.7s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="700" cy="250" r="8" fill="#10b981" className="drop-shadow-md">
+                  <animate attributeName="r" values="8;12;8" dur="2s" begin="1.4s" repeatCount="indefinite" />
+                </circle>
+              </svg>
+            </div>
 
-            <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-              <CardContent className="p-8">
-                <div className="flex flex-col md:flex-row justify-between items-start">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">Maharishi Vidya Mandir (CBSE)</h3>
-                    <p className="text-lg text-muted-foreground">10th Grade - 2021</p>
+            {/* Timeline Cards */}
+            <div className="relative z-10 space-y-24 pt-8">
+              {educationData.map((item, index) => (
+                <div
+                  key={index}
+                  className={`timeline-card flex items-center ${
+                    item.position === 'right' 
+                      ? 'md:flex-row-reverse md:text-right' 
+                      : 'md:flex-row md:text-left'
+                  } flex-col text-center gap-8`}
+                >
+                  {/* Year Badge */}
+                  <div className="flex-shrink-0">
+                    <div className={`
+                      relative p-6 rounded-2xl bg-gradient-to-br ${item.color} 
+                      shadow-xl border border-white/20 backdrop-blur-sm
+                      ${item.current ? 'animate-pulse' : ''}
+                    `}>
+                      <div className="text-2xl font-bold text-white mb-1">
+                        {item.year}
+                      </div>
+                      {item.current && (
+                        <div className="absolute -top-2 -right-2">
+                          <div className="w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+                          <div className="absolute top-0 w-4 h-4 bg-green-500 rounded-full"></div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <Badge className="bg-cyan-500 text-white">75%</Badge>
+
+                  {/* Card Content */}
+                  <Card className="flex-1 max-w-md hover:shadow-2xl transition-all duration-500 group hover:scale-105 border-2 hover:border-primary/30">
+                    <CardContent className="p-8">
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="text-2xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                            {item.title}
+                          </h3>
+                          <p className="text-lg font-semibold text-muted-foreground mb-1">
+                            {item.institution}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {item.grade}
+                          </p>
+                        </div>
+                        
+                        <div className="flex justify-center md:justify-start">
+                          <Badge 
+                            className={`bg-gradient-to-r ${item.color} text-white border-none text-lg px-4 py-2 font-bold shadow-lg`}
+                          >
+                            {item.score}
+                          </Badge>
+                        </div>
+
+                        {item.current && (
+                          <div className="flex items-center justify-center md:justify-start gap-2 mt-4">
+                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            <span className="text-sm text-green-600 font-medium">Currently Studying</span>
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
