@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Download, Mail, Phone, Github, Linkedin, ExternalLink, Code, Brain, Palette, Wrench, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -208,8 +207,8 @@ const Index = () => {
       institution: 'Maharishi Vidya Mandir (CBSE)',
       grade: '10th Grade',
       score: '75%',
-      color: 'from-cyan-500 to-blue-500',
-      position: 'left'
+      color: 'from-blue-500 to-cyan-500',
+      icon: '🎓'
     },
     {
       year: '2023',
@@ -218,16 +217,16 @@ const Index = () => {
       grade: '12th Grade',
       score: '77%',
       color: 'from-orange-500 to-red-500',
-      position: 'right'
+      icon: '📚'
     },
     {
       year: '2023-2027',
-      title: 'Current Journey',
+      title: 'Bachelor\'s Degree',
       institution: 'K.S. Rangasamy College of Technology',
       grade: 'AIML Department',
       score: 'CGPA: 9.0',
       color: 'from-green-500 to-emerald-500',
-      position: 'left',
+      icon: '🎯',
       current: true
     }
   ];
@@ -313,12 +312,18 @@ const Index = () => {
     const timeline = timelineRef.current;
     const cards = timeline.querySelectorAll('.timeline-card');
     const pathElement = pathRef.current;
+    const dots = timeline.querySelectorAll('.timeline-dot');
 
-    // Initial setup - hide cards
+    // Initial setup - hide cards and dots
     gsap.set(cards, {
       y: 100,
       opacity: 0,
       scale: 0.8
+    });
+
+    gsap.set(dots, {
+      scale: 0,
+      opacity: 0
     });
 
     // Path animation
@@ -345,18 +350,29 @@ const Index = () => {
       });
     }
 
-    // Cards animation
+    // Cards and dots animation
     cards.forEach((card, index) => {
+      const dot = dots[index];
+      
       ScrollTrigger.create({
         trigger: card,
-        start: 'top 85%',
+        start: 'top 90%',
         onEnter: () => {
+          // Animate dot first
+          gsap.to(dot, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.5,
+            ease: 'back.out(2)'
+          });
+          
+          // Then animate card
           gsap.to(card, {
             y: 0,
             opacity: 1,
             scale: 1,
             duration: 0.8,
-            delay: index * 0.2,
+            delay: 0.2,
             ease: 'back.out(1.7)'
           });
         }
@@ -818,141 +834,145 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Completely Rewritten Education Timeline Section */}
-      <section id="education" className="py-16 px-6 bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden">
-        <div className="max-w-5xl mx-auto relative z-10">
+      {/* Redesigned Education Timeline Section */}
+      <section id="education" className="py-20 px-6 bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
-              Educational Journey
+              Educational Pathway
             </h2>
-            <p className="text-lg text-muted-foreground">From 2021 to 2027</p>
+            <p className="text-lg text-muted-foreground">My Journey • 2021 - 2027</p>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-4"></div>
           </div>
           
           <div ref={timelineRef} className="relative">
-            {/* Central SVG Timeline Path */}
-            <div className="absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2 w-1 pointer-events-none">
+            {/* Central Timeline Path */}
+            <div className="absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2 pointer-events-none">
               <svg 
-                className="w-full h-full" 
-                style={{ minHeight: '800px' }}
-                viewBox="0 0 20 800" 
+                className="w-6 h-full" 
+                viewBox="0 0 24 600" 
                 preserveAspectRatio="xMidYMid meet"
               >
                 <defs>
                   <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="33%" stopColor="#f97316" />
-                    <stop offset="66%" stopColor="#10b981" />
+                    <stop offset="50%" stopColor="#f97316" />
                     <stop offset="100%" stopColor="#10b981" />
                   </linearGradient>
                 </defs>
                 
-                {/* Main connecting path */}
                 <path
                   ref={pathRef}
-                  d="M 10 50 L 10 750"
+                  d="M 12 20 L 12 580"
                   stroke="url(#pathGradient)"
-                  strokeWidth="4"
+                  strokeWidth="3"
                   fill="none"
                   strokeLinecap="round"
-                  className="drop-shadow-lg"
+                  className="drop-shadow-sm"
                 />
-                
-                {/* Connection points for each card */}
-                <circle cx="10" cy="120" r="8" fill="#3b82f6" className="drop-shadow-lg">
-                  <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
-                </circle>
-                <circle cx="10" cy="320" r="8" fill="#f97316" className="drop-shadow-lg">
-                  <animate attributeName="r" values="8;12;8" dur="2s" begin="0.5s" repeatCount="indefinite" />
-                </circle>
-                <circle cx="10" cy="520" r="10" fill="#10b981" className="drop-shadow-lg">
-                  <animate attributeName="r" values="10;14;10" dur="2s" begin="1s" repeatCount="indefinite" />
-                </circle>
               </svg>
             </div>
 
-            {/* Education Cards */}
-            <div className="space-y-20">
+            {/* Timeline Cards */}
+            <div className="space-y-16">
               {educationData.map((item, index) => (
                 <div
                   key={index}
-                  className={`timeline-card flex items-center gap-8 ${
-                    item.position === 'right' ? 'flex-row-reverse' : ''
-                  }`}
+                  className="timeline-card relative"
                 >
-                  {/* Year Badge */}
-                  <div className="flex-shrink-0 z-20 relative">
+                  {/* Timeline Dot */}
+                  <div className="timeline-dot absolute left-1/2 transform -translate-x-1/2 z-20">
                     <div className={`
-                      relative p-6 rounded-2xl bg-gradient-to-br ${item.color} 
-                      shadow-xl border border-white/20 backdrop-blur-sm
-                      transform-gpu hover:scale-110 transition-all duration-300
+                      w-6 h-6 rounded-full bg-gradient-to-br ${item.color} 
+                      shadow-lg border-4 border-background
                       ${item.current ? 'animate-pulse' : ''}
-                      min-w-[120px] text-center
                     `}>
-                      <div className="text-2xl font-bold text-white mb-1">
-                        {item.year}
-                      </div>
                       {item.current && (
-                        <div className="absolute -top-2 -right-2">
-                          <div className="w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
-                          <div className="absolute top-0 w-4 h-4 bg-green-500 rounded-full"></div>
+                        <div className="absolute -top-1 -right-1">
+                          <div className="w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                          <div className="absolute top-0 w-3 h-3 bg-green-500 rounded-full"></div>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  {/* Connecting Line to Center */}
-                  <div className={`flex-shrink-0 w-16 h-0.5 bg-gradient-to-r ${item.color} opacity-60`}></div>
-
-                  {/* Card Content */}
-                  <Card className={`
-                    flex-1 max-w-md transform-gpu hover:shadow-xl 
-                    transition-all duration-500 group hover:scale-105
-                    border-2 hover:border-primary/40 bg-background/95 backdrop-blur-sm
-                    ${item.current ? 'ring-2 ring-green-500/30' : ''}
+                  {/* Card Container */}
+                  <div className={`
+                    flex items-center gap-8
+                    ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}
                   `}>
-                    <CardContent className="p-6">
-                      <div className="space-y-4">
-                        <div>
-                          <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                            {item.title}
-                          </h3>
-                          <p className="text-muted-foreground font-medium mt-1">
-                            {item.institution}
-                          </p>
-                          <p className="text-sm text-muted-foreground/80">
-                            {item.grade}
-                          </p>
+                    {/* Spacer for center alignment */}
+                    <div className="flex-1"></div>
+                    
+                    {/* Year Badge */}
+                    <div className="flex-shrink-0 z-10">
+                      <div className={`
+                        relative p-4 rounded-xl bg-gradient-to-br ${item.color} 
+                        shadow-lg border border-white/20 backdrop-blur-sm
+                        transform-gpu hover:scale-110 transition-all duration-300
+                        min-w-[100px] text-center
+                      `}>
+                        <div className="text-lg font-bold text-white">
+                          {item.year}
                         </div>
-                        
-                        <Badge 
-                          className={`
-                            bg-gradient-to-r ${item.color} text-white border-none 
-                            px-4 py-2 font-semibold hover:scale-105 transition-transform duration-300
-                          `}
-                        >
-                          {item.score}
-                        </Badge>
-
-                        {item.current && (
-                          <div className="flex items-center gap-2 mt-4 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span className="text-green-600 font-medium text-sm">Currently Studying</span>
-                          </div>
-                        )}
+                        <div className="text-xs text-white/80 mt-1">
+                          {item.icon}
+                        </div>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="flex-1 max-w-sm">
+                      <Card className={`
+                        transform-gpu hover:shadow-xl transition-all duration-500 
+                        group hover:scale-105 border-2 hover:border-primary/40 
+                        bg-background/95 backdrop-blur-sm
+                        ${item.current ? 'ring-2 ring-green-500/30' : ''}
+                      `}>
+                        <CardContent className="p-6">
+                          <div className="space-y-3">
+                            <div>
+                              <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                                {item.title}
+                              </h3>
+                              <p className="text-muted-foreground font-medium text-sm mt-1">
+                                {item.institution}
+                              </p>
+                              <p className="text-xs text-muted-foreground/80">
+                                {item.grade}
+                              </p>
+                            </div>
+                            
+                            <Badge 
+                              className={`
+                                bg-gradient-to-r ${item.color} text-white border-none 
+                                px-3 py-1 text-xs font-semibold hover:scale-105 transition-transform duration-300
+                              `}
+                            >
+                              {item.score}
+                            </Badge>
+
+                            {item.current && (
+                              <div className="flex items-center gap-2 p-2 bg-green-500/10 rounded-lg border border-green-500/20">
+                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <span className="text-green-600 font-medium text-xs">Currently Studying</span>
+                              </div>
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
 
-            {/* Journey Status */}
-            <div className="text-center mt-16">
+            {/* Journey Progress Indicator */}
+            <div className="text-center mt-12">
               <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20 backdrop-blur-sm">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-green-600 font-semibold">Journey in Progress</span>
-                <span className="text-sm text-muted-foreground">Expected completion: 2027</span>
+                <span className="text-green-600 font-semibold text-sm">Journey in Progress</span>
+                <span className="text-xs text-muted-foreground">Expected completion: 2027</span>
               </div>
             </div>
           </div>
