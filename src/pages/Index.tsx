@@ -12,6 +12,8 @@ import ContactSection from '@/components/ContactSection';
 import ThemeToggle from '@/components/ThemeToggle';
 import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
+import NavigationDock from '@/components/NavigationDock';
+import ScrollRevealAnimation from '@/components/ScrollRevealAnimation';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
@@ -40,15 +42,38 @@ const Index = () => {
         setIsDark={setIsDark} 
         onDownloadResume={handleDownloadResume} 
       />
+      <NavigationDock />
       
       <HeroSection isDark={isDark} />
-      <AboutSection isDark={isDark} />
-      <SkillsSection isDark={isDark} />
-      <ToolsSection isDark={isDark} />
-      <InterestsSection />
-      <ProjectsSection isDark={isDark} />
-      <EducationSection />
-      <ContactSection />
+      
+      <ScrollRevealAnimation direction="up" delay={0.1}>
+        <AboutSection isDark={isDark} />
+      </ScrollRevealAnimation>
+      
+      <ScrollRevealAnimation direction="up" delay={0.2}>
+        <SkillsSection isDark={isDark} />
+      </ScrollRevealAnimation>
+      
+      <ScrollRevealAnimation direction="left" delay={0.1}>
+        <ToolsSection isDark={isDark} />
+      </ScrollRevealAnimation>
+      
+      <ScrollRevealAnimation direction="scale" delay={0.2}>
+        <InterestsSection />
+      </ScrollRevealAnimation>
+      
+      <ScrollRevealAnimation direction="up" delay={0.1}>
+        <ProjectsSection isDark={isDark} />
+      </ScrollRevealAnimation>
+      
+      <ScrollRevealAnimation direction="right" delay={0.2}>
+        <EducationSection />
+      </ScrollRevealAnimation>
+      
+      <ScrollRevealAnimation direction="fade" delay={0.1}>
+        <ContactSection />
+      </ScrollRevealAnimation>
+      
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 
 import Threads from '@/components/Threads';
 import GradientText from '@/components/GradientText';
-import ScrollReveal from '@/components/ScrollReveal';
+import ScrollRevealAnimation from '@/components/ScrollRevealAnimation';
 
 interface AboutSectionProps {
   isDark: boolean;
@@ -21,11 +21,11 @@ const AboutSection = ({ isDark }: AboutSectionProps) => {
       </div>
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <ScrollReveal direction="up" delay={0.2}>
+        <ScrollRevealAnimation direction="fade" delay={0.2}>
           <h2 className="text-4xl font-bold text-center mb-16 text-foreground">About Me</h2>
-        </ScrollReveal>
+        </ScrollRevealAnimation>
         
-        <ScrollReveal direction="up" delay={0.4}>
+        <ScrollRevealAnimation direction="up" delay={0.4} duration={1}>
           <div className="text-center">
             <GradientText
               className="text-lg leading-relaxed max-w-4xl mx-auto"
@@ -34,7 +34,7 @@ const AboutSection = ({ isDark }: AboutSectionProps) => {
               Strong interest in open-source, multimedia processing, and creating solutions using free, accessible resources. I build smart tools that help people, focusing on innovation through artificial intelligence and automation. My approach combines technical expertise with user-centered design to create meaningful digital experiences.
             </GradientText>
           </div>
-        </ScrollReveal>
+        </ScrollRevealAnimation>
       </div>
     </section>
   );
