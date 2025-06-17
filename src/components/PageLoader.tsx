@@ -20,8 +20,8 @@ const PageLoader = () => {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"
         >
           <style>{`
             .container {
@@ -144,12 +144,12 @@ const PageLoader = () => {
             <div className="loader"></div>
           </div>
           
-          {/* Loading text */}
+          {/* Loading text - properly centered */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="absolute bottom-32 text-center"
+            className="mt-8 text-center"
           >
             <motion.h2
               className="text-xl font-bold text-white mb-2 tracking-wide"

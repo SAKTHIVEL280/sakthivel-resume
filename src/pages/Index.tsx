@@ -1,5 +1,7 @@
+
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { motion, AnimatePresence } from 'framer-motion';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
@@ -47,63 +49,72 @@ const Index = () => {
 
   return (
     <>
-      {/* Always render the main content but show loader overlay */}
-      <div className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-        <SmoothScroll />
-        <ThemeToggle 
-          isDark={isDark} 
-          setIsDark={setIsDark} 
-          onDownloadResume={handleDownloadResume} 
-        />
-        <LeftNavDock />
-        
-        <div id="hero">
-          <HeroSection isDark={isDark} />
-        </div>
-        
-        <ScrollRevealAnimation direction="up" delay={0.1}>
-          <div id="about">
-            <AboutSection isDark={isDark} />
-          </div>
-        </ScrollRevealAnimation>
-        
-        <ScrollRevealAnimation direction="up" delay={0.2}>
-          <div id="skills">
-            <SkillsSection isDark={isDark} />
-          </div>
-        </ScrollRevealAnimation>
-        
-        <ScrollRevealAnimation direction="left" delay={0.1}>
-          <ToolsSection isDark={isDark} />
-        </ScrollRevealAnimation>
-        
-        <ScrollRevealAnimation direction="scale" delay={0.2}>
-          <InterestsSection />
-        </ScrollRevealAnimation>
-        
-        <ScrollRevealAnimation direction="up" delay={0.1}>
-          <div id="projects">
-            <ProjectsSection isDark={isDark} />
-          </div>
-        </ScrollRevealAnimation>
-        
-        <ScrollRevealAnimation direction="right" delay={0.2}>
-          <div id="education">
-            <EducationSection />
-          </div>
-        </ScrollRevealAnimation>
-        
-        <ScrollRevealAnimation direction="fade" delay={0.1}>
-          <div id="contact">
-            <ContactSection />
-          </div>
-        </ScrollRevealAnimation>
-        
-        <Footer />
-      </div>
-      
       {/* Show loader overlay */}
       {isLoading && <PageLoader />}
+      
+      {/* Main content with smooth transition */}
+      <AnimatePresence>
+        {!isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}
+          >
+            <SmoothScroll />
+            <ThemeToggle 
+              isDark={isDark} 
+              setIsDark={setIsDark} 
+              onDownloadResume={handleDownloadResume} 
+            />
+            <LeftNavDock />
+            
+            <div id="hero">
+              <HeroSection isDark={isDark} />
+            </div>
+            
+            <ScrollRevealAnimation direction="up" delay={0.1}>
+              <div id="about">
+                <AboutSection isDark={isDark} />
+              </div>
+            </ScrollRevealAnimation>
+            
+            <ScrollRevealAnimation direction="up" delay={0.2}>
+              <div id="skills">
+                <SkillsSection isDark={isDark} />
+              </div>
+            </ScrollRevealAnimation>
+            
+            <ScrollRevealAnimation direction="left" delay={0.1}>
+              <ToolsSection isDark={isDark} />
+            </ScrollRevealAnimation>
+            
+            <ScrollRevealAnimation direction="scale" delay={0.2}>
+              <InterestsSection />
+            </ScrollRevealAnimation>
+            
+            <ScrollRevealAnimation direction="up" delay={0.1}>
+              <div id="projects">
+                <ProjectsSection isDark={isDark} />
+              </div>
+            </ScrollRevealAnimation>
+            
+            <ScrollRevealAnimation direction="right" delay={0.2}>
+              <div id="education">
+                <EducationSection />
+              </div>
+            </ScrollRevealAnimation>
+            
+            <ScrollRevealAnimation direction="fade" delay={0.1}>
+              <div id="contact">
+                <ContactSection />
+              </div>
+            </ScrollRevealAnimation>
+            
+            <Footer />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
