@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import HeroSection from '@/components/HeroSection';
@@ -30,10 +29,11 @@ const Index = () => {
   }, [isDark]);
 
   useEffect(() => {
-    // Simulate loading time and ensure all components are ready
+    // Website starts loading immediately when component mounts
+    // Loader will hide after 3 seconds, giving enough time for initial render
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -45,64 +45,66 @@ const Index = () => {
     });
   };
 
-  if (isLoading) {
-    return <PageLoader />;
-  }
-
   return (
-    <div className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-      <SmoothScroll />
-      <ThemeToggle 
-        isDark={isDark} 
-        setIsDark={setIsDark} 
-        onDownloadResume={handleDownloadResume} 
-      />
-      <LeftNavDock />
-      
-      <div id="hero">
-        <HeroSection isDark={isDark} />
+    <>
+      {/* Always render the main content but show loader overlay */}
+      <div className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+        <SmoothScroll />
+        <ThemeToggle 
+          isDark={isDark} 
+          setIsDark={setIsDark} 
+          onDownloadResume={handleDownloadResume} 
+        />
+        <LeftNavDock />
+        
+        <div id="hero">
+          <HeroSection isDark={isDark} />
+        </div>
+        
+        <ScrollRevealAnimation direction="up" delay={0.1}>
+          <div id="about">
+            <AboutSection isDark={isDark} />
+          </div>
+        </ScrollRevealAnimation>
+        
+        <ScrollRevealAnimation direction="up" delay={0.2}>
+          <div id="skills">
+            <SkillsSection isDark={isDark} />
+          </div>
+        </ScrollRevealAnimation>
+        
+        <ScrollRevealAnimation direction="left" delay={0.1}>
+          <ToolsSection isDark={isDark} />
+        </ScrollRevealAnimation>
+        
+        <ScrollRevealAnimation direction="scale" delay={0.2}>
+          <InterestsSection />
+        </ScrollRevealAnimation>
+        
+        <ScrollRevealAnimation direction="up" delay={0.1}>
+          <div id="projects">
+            <ProjectsSection isDark={isDark} />
+          </div>
+        </ScrollRevealAnimation>
+        
+        <ScrollRevealAnimation direction="right" delay={0.2}>
+          <div id="education">
+            <EducationSection />
+          </div>
+        </ScrollRevealAnimation>
+        
+        <ScrollRevealAnimation direction="fade" delay={0.1}>
+          <div id="contact">
+            <ContactSection />
+          </div>
+        </ScrollRevealAnimation>
+        
+        <Footer />
       </div>
       
-      <ScrollRevealAnimation direction="up" delay={0.1}>
-        <div id="about">
-          <AboutSection isDark={isDark} />
-        </div>
-      </ScrollRevealAnimation>
-      
-      <ScrollRevealAnimation direction="up" delay={0.2}>
-        <div id="skills">
-          <SkillsSection isDark={isDark} />
-        </div>
-      </ScrollRevealAnimation>
-      
-      <ScrollRevealAnimation direction="left" delay={0.1}>
-        <ToolsSection isDark={isDark} />
-      </ScrollRevealAnimation>
-      
-      <ScrollRevealAnimation direction="scale" delay={0.2}>
-        <InterestsSection />
-      </ScrollRevealAnimation>
-      
-      <ScrollRevealAnimation direction="up" delay={0.1}>
-        <div id="projects">
-          <ProjectsSection isDark={isDark} />
-        </div>
-      </ScrollRevealAnimation>
-      
-      <ScrollRevealAnimation direction="right" delay={0.2}>
-        <div id="education">
-          <EducationSection />
-        </div>
-      </ScrollRevealAnimation>
-      
-      <ScrollRevealAnimation direction="fade" delay={0.1}>
-        <div id="contact">
-          <ContactSection />
-        </div>
-      </ScrollRevealAnimation>
-      
-      <Footer />
-    </div>
+      {/* Show loader overlay */}
+      {isLoading && <PageLoader />}
+    </>
   );
 };
 

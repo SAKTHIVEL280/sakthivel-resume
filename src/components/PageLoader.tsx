@@ -6,9 +6,10 @@ const PageLoader = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Start loading the website immediately while showing the loader
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2500);
+    }, 3000); // 3 seconds to match the CSS animation duration
 
     return () => clearTimeout(timer);
   }, []);
@@ -22,107 +23,142 @@ const PageLoader = () => {
           transition={{ duration: 0.5 }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"
         >
-          {/* Background particles */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
-                animate={{
-                  x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-                  y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-                }}
-                transition={{
-                  duration: 8 + i * 2,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                style={{
-                  left: Math.random() * 100 + '%',
-                  top: Math.random() * 100 + '%',
-                }}
-              />
-            ))}
+          <style jsx>{`
+            .container {
+              position: relative;
+              width: 200px;
+              height: 200px;
+            }
+            
+            .loader {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              z-index: 10;
+              width: 160px;
+              height: 100px;
+              margin-left: -80px;
+              margin-top: -50px;
+              border-radius: 5px;
+              background: #1e3f57;
+              animation: dot1_ 3s cubic-bezier(0.55,0.3,0.24,0.99) infinite;
+            }
+
+            .loader:nth-child(2) {
+              z-index: 11;
+              width: 150px;
+              height: 90px;
+              margin-top: -45px;
+              margin-left: -75px;
+              border-radius: 3px;
+              background: #3c517d;
+              animation-name: dot2_;
+            }
+
+            .loader:nth-child(3) {
+              z-index: 12;
+              width: 40px;
+              height: 20px;
+              margin-top: 50px;
+              margin-left: -20px;
+              border-radius: 0 0 5px 5px;
+              background: #6bb2cd;
+              animation-name: dot3_;
+            }
+
+            @keyframes dot1_ {
+              3%,97% {
+                width: 160px;
+                height: 100px;
+                margin-top: -50px;
+                margin-left: -80px;
+              }
+
+              30%,36% {
+                width: 80px;
+                height: 120px;
+                margin-top: -60px;
+                margin-left: -40px;
+              }
+
+              63%,69% {
+                width: 40px;
+                height: 80px;
+                margin-top: -40px;
+                margin-left: -20px;
+              }
+            }
+
+            @keyframes dot2_ {
+              3%,97% {
+                height: 90px;
+                width: 150px;
+                margin-left: -75px;
+                margin-top: -45px;
+              }
+
+              30%,36% {
+                width: 70px;
+                height: 96px;
+                margin-left: -35px;
+                margin-top: -48px;
+              }
+
+              63%,69% {
+                width: 32px;
+                height: 60px;
+                margin-left: -16px;
+                margin-top: -30px;
+              }
+            }
+
+            @keyframes dot3_ {
+              3%,97% {
+                height: 20px;
+                width: 40px;
+                margin-left: -20px;
+                margin-top: 50px;
+              }
+
+              30%,36% {
+                width: 8px;
+                height: 8px;
+                margin-left: -5px;
+                margin-top: 49px;
+                border-radius: 8px;
+              }
+
+              63%,69% {
+                width: 16px;
+                height: 4px;
+                margin-left: -8px;
+                margin-top: -37px;
+                border-radius: 10px;
+              }
+            }
+          `}</style>
+          
+          <div className="container">
+            <div className="loader"></div>
+            <div className="loader"></div>
+            <div className="loader"></div>
           </div>
-
-          {/* Main loader content */}
-          <div className="relative flex flex-col items-center">
-            {/* Animated logo/icon */}
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="mb-8"
+          
+          {/* Loading text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="absolute bottom-32 text-center"
+          >
+            <motion.h2
+              className="text-xl font-bold text-white mb-2 tracking-wide"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
-              <div className="relative">
-                {/* Outer ring */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  className="w-20 h-20 border-2 border-blue-500/30 rounded-full"
-                />
-                
-                {/* Inner rotating elements */}
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-2 border-2 border-purple-500/40 rounded-full"
-                />
-                
-                {/* Center dot */}
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.7, 1, 0.7]
-                  }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="absolute top-1/2 left-1/2 w-3 h-3 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"
-                />
-              </div>
-            </motion.div>
-
-            {/* Loading text */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-center"
-            >
-              <motion.h2
-                className="text-2xl font-bold text-white mb-2 tracking-wide"
-                animate={{ opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                Sakthivel E.
-              </motion.h2>
-              
-              <motion.p
-                className="text-blue-400/80 text-sm font-medium"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-              >
-                AI Enthusiast & Python Developer
-              </motion.p>
-            </motion.div>
-
-            {/* Loading progress bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="mt-8 w-64"
-            >
-              <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 2, ease: "easeInOut" }}
-                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
-                />
-              </div>
-            </motion.div>
-          </div>
+              Loading...
+            </motion.h2>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
