@@ -13,8 +13,8 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
   return (
     <section id="hero" className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
       <Waves
-        lineColor="#fff"
-        backgroundColor="rgba(255, 255, 255, 0.2)"
+        lineColor={isDark ? 'rgba(96, 165, 250, 0.6)' : 'rgba(59, 130, 246, 0.4)'}
+        backgroundColor={isDark ? 'rgba(17, 24, 39, 0.1)' : 'rgba(249, 250, 251, 0.1)'}
         waveSpeedX={0.02}
         waveSpeedY={0.01}
         waveAmpX={40}
