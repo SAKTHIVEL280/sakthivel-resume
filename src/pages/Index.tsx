@@ -74,43 +74,39 @@ const Index = () => {
             </div>
             
             <ScrollRevealAnimation direction="up" delay={0.1}>
-              <div id="about" className="section-soft-edge">
+              <div id="about">
                 <AboutSection isDark={isDark} />
               </div>
             </ScrollRevealAnimation>
             
             <ScrollRevealAnimation direction="up" delay={0.2}>
-              <div id="skills" className="section-soft-edge">
+              <div id="skills">
                 <SkillsSection isDark={isDark} />
               </div>
             </ScrollRevealAnimation>
             
             <ScrollRevealAnimation direction="left" delay={0.1}>
-              <div className="section-soft-edge">
-                <ToolsSection isDark={isDark} />
-              </div>
+              <ToolsSection isDark={isDark} />
             </ScrollRevealAnimation>
             
             <ScrollRevealAnimation direction="scale" delay={0.2}>
-              <div className="section-soft-edge">
-                <InterestsSection />
-              </div>
+              <InterestsSection />
             </ScrollRevealAnimation>
             
             <ScrollRevealAnimation direction="up" delay={0.1}>
-              <div id="projects" className="section-soft-edge">
+              <div id="projects">
                 <ProjectsSection isDark={isDark} />
               </div>
             </ScrollRevealAnimation>
             
             <ScrollRevealAnimation direction="right" delay={0.2}>
-              <div id="education" className="section-soft-edge">
+              <div id="education">
                 <EducationSection />
               </div>
             </ScrollRevealAnimation>
             
             <ScrollRevealAnimation direction="fade" delay={0.1}>
-              <div id="contact" className="section-soft-edge">
+              <div id="contact">
                 <ContactSection />
               </div>
             </ScrollRevealAnimation>
