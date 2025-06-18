@@ -144,4 +144,40 @@
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+
+  /* Mobile responsive text sizing */
+  @media (max-width: 640px) {
+    .text-responsive {
+      font-size: clamp(0.875rem, 2.5vw, 1rem);
+    }
+    
+    .text-responsive-lg {
+      font-size: clamp(1.125rem, 4vw, 1.25rem);
+    }
+    
+    .text-responsive-xl {
+      font-size: clamp(1.25rem, 5vw, 1.5rem);
+    }
+  }
+}
+
+/* Add xs breakpoint for extra small screens */
+@media (min-width: 475px) {
+  .xs\:inline {
+    display: inline;
+  }
+  
+  .xs\:hidden {
+    display: none;
+  }
+}
+
+@media (max-width: 474px) {
+  .xs\:inline {
+    display: none;
+  }
+  
+  .xs\:hidden {
+    display: inline;
+  }
 }

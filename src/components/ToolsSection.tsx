@@ -60,28 +60,77 @@ const ToolsSection = ({ isDark }: ToolsSectionProps) => {
   ];
 
   return (
-    <section id="tools" className="py-20 px-6 relative overflow-hidden">
+    <section id="tools" className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Silk
           speed={4}
           scale={1.5}
-          color={isDark ? "#1e293b" : "#f1f5f9"}
+          color={isDark ? "#1e293b" : "#e2e8f0"}
           noiseIntensity={1.5}
           rotation={0.2}
         />
       </div>
       
-      <div className="absolute inset-0 bg-black/15 z-10"></div>
+      <div className={`absolute inset-0 z-10 ${
+        isDark ? 'bg-black/15' : 'bg-white/20'
+      }`}></div>
       
       <div className="max-w-6xl mx-auto relative z-20">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-foreground drop-shadow-lg">Technology Tools</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto drop-shadow-md">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className={`text-3xl sm:text-4xl font-bold mb-4 drop-shadow-lg ${
+            isDark ? 'text-foreground' : 'text-gray-900'
+          }`}>
+            Technology Tools
+          </h2>
+          <p className={`text-base sm:text-lg max-w-3xl mx-auto drop-shadow-md px-4 ${
+            isDark ? 'text-muted-foreground' : 'text-gray-700'
+          }`}>
             Cutting-edge tools and platforms I leverage to create innovative AI-powered solutions
           </p>
         </div>
         
-        <div className="relative h-32 overflow-hidden mask-gradient">
+        {/* Mobile view - Grid layout */}
+        <div className="block sm:hidden">
+          <div className="grid grid-cols-1 gap-4 px-4">
+            {tools.map((tool, index) => (
+              <div
+                key={`mobile-${index}`}
+                className={`group relative bg-gradient-to-br ${tool.gradient} rounded-2xl p-6 shadow-2xl border border-white/20 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-3xl`}
+              >
+                <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-10 translate-x-10 transition-transform duration-500 group-hover:scale-110"></div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-8 -translate-x-8 transition-transform duration-500 group-hover:scale-110"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1 tracking-tight transition-all duration-300 group-hover:text-yellow-200">
+                        {tool.name}
+                      </h3>
+                      <p className="text-white/80 text-sm font-medium">
+                        {tool.category}
+                      </p>
+                    </div>
+                    <Badge 
+                      variant="secondary" 
+                      className="bg-white/20 text-white border-white/30 text-xs font-semibold backdrop-blur-sm transition-all duration-300 group-hover:bg-white/30"
+                    >
+                      {tool.tech}
+                    </Badge>
+                  </div>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    {tool.description}
+                  </p>
+                </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl transition-opacity duration-300 group-hover:from-black/10"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Desktop view - Horizontal scroll */}
+        <div className="hidden sm:block relative h-32 overflow-hidden mask-gradient">
           <div className="absolute inset-0 flex items-center">
             <div className="flex animate-scroll-smooth space-x-8 min-w-max">
               {tools.map((tool, index) => (

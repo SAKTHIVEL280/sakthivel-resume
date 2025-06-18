@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Home, User, Code, Briefcase, GraduationCap, Mail } from 'lucide-react';
+import { Home, User, Code, Briefcase, GraduationCap, Mail, Heart } from 'lucide-react';
 
 const LeftNavDock = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -9,6 +9,7 @@ const LeftNavDock = () => {
     { id: 'hero', icon: Home, label: 'Home' },
     { id: 'about', icon: User, label: 'About' },
     { id: 'skills', icon: Code, label: 'Skills' },
+    { id: 'interests', icon: Heart, label: 'Interests' },
     { id: 'projects', icon: Briefcase, label: 'Projects' },
     { id: 'education', icon: GraduationCap, label: 'Education' },
     { id: 'contact', icon: Mail, label: 'Contact' },
