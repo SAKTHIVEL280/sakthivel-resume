@@ -144,4 +144,35 @@
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+
+  /* Soft edge transitions for sections */
+  .section-soft-edge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent 0%, currentColor 100%);
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .section-soft-edge::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, transparent 0%, currentColor 100%);
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .section-soft-edge {
+    position: relative;
+  }
 }
