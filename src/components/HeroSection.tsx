@@ -13,19 +13,26 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
   return (
     <section id="hero" className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
       <Waves
-        lineColor={isDark ? 'rgba(96, 165, 250, 0.6)' : 'rgba(59, 130, 246, 0.4)'}
-        backgroundColor={isDark ? 'rgba(17, 24, 39, 0.1)' : 'rgba(249, 250, 251, 0.1)'}
-        waveSpeedX={0.02}
-        waveSpeedY={0.01}
-        waveAmpX={40}
-        waveAmpY={20}
-        friction={0.9}
-        tension={0.01}
-        maxCursorMove={120}
-        xGap={12}
-        yGap={36}
+        lineColor={isDark ? 'rgba(59, 130, 246, 0.3)' : 'rgba(147, 197, 253, 0.4)'}
+        backgroundColor={isDark ? 'rgba(17, 24, 39, 0.05)' : 'rgba(239, 246, 255, 0.1)'}
+        waveSpeedX={0.015}
+        waveSpeedY={0.008}
+        waveAmpX={35}
+        waveAmpY={18}
+        friction={0.92}
+        tension={0.008}
+        maxCursorMove={100}
+        xGap={14}
+        yGap={32}
         className="absolute inset-0 z-0"
       />
+      
+      {/* Gradient overlay for better text contrast */}
+      <div className={`absolute inset-0 z-[1] ${
+        isDark 
+          ? 'bg-gradient-to-br from-gray-900/80 via-gray-900/40 to-blue-900/60' 
+          : 'bg-gradient-to-br from-white/90 via-blue-50/60 to-indigo-100/70'
+      }`} />
       
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div className="space-y-8">
@@ -33,11 +40,11 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
             <div className="mb-4">
               <TextPressure 
                 text="SAKTHIVEL E"
-                textColor={isDark ? '#60a5fa' : '#3b82f6'}
-                strokeColor={isDark ? '#1e40af' : '#1d4ed8'}
+                textColor={isDark ? '#ffffff' : '#1e293b'}
+                strokeColor={isDark ? '#3b82f6' : '#0f172a'}
                 stroke={true}
                 minFontSize={72}
-                className="leading-none"
+                className="leading-none drop-shadow-2xl"
               />
             </div>
           </ScrollReveal>
@@ -46,8 +53,8 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
             <div className="mb-8">
               <TextPressure 
                 text="AI ENTHUSIAST"
-                textColor={isDark ? '#93c5fd' : '#2563eb'}
-                strokeColor={isDark ? '#3b82f6' : '#1e40af'}
+                textColor={isDark ? '#f1f5f9' : '#334155'}
+                strokeColor={isDark ? '#64748b' : '#475569'}
                 stroke={false}
                 minFontSize={16}
                 className="leading-none"
@@ -57,23 +64,50 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
 
           <ScrollReveal direction="up" delay={0.6}>
             <div className="mb-12 max-w-4xl mx-auto">
-              <p className={`text-xl md:text-2xl leading-relaxed ${
-                isDark ? 'text-blue-200' : 'text-blue-700'
+              <p className={`text-xl md:text-2xl leading-relaxed font-medium ${
+                isDark 
+                  ? 'text-slate-200 drop-shadow-md' 
+                  : 'text-slate-700'
               }`}>
-                Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
+                Passionate about building innovative{' '}
+                <span className={`font-semibold ${
+                  isDark 
+                    ? 'bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent' 
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent'
+                }`}>
+                  AI-powered tools
+                </span>{' '}
+                and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.8}>
             <div className="flex flex-wrap justify-center gap-6">
-              <Button asChild size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
+              <Button 
+                asChild 
+                size="lg" 
+                className={`hover:scale-105 transition-all duration-300 text-lg px-8 py-6 shadow-lg ${
+                  isDark 
+                    ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 shadow-blue-500/25' 
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-blue-500/30'
+                }`}
+              >
                 <a href="#contact">
                   <Mail className="w-5 h-5 mr-2" />
                   Get In Touch
                 </a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200 text-lg px-8 py-6">
+              <Button 
+                asChild 
+                variant="outline" 
+                size="lg" 
+                className={`hover:scale-105 transition-all duration-300 text-lg px-8 py-6 ${
+                  isDark 
+                    ? 'border-slate-600 text-slate-200 hover:bg-slate-800 hover:border-slate-500 backdrop-blur-sm' 
+                    : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                } shadow-lg backdrop-blur-sm`}
+              >
                 <a href="#projects">
                   <ExternalLink className="w-5 h-5 mr-2" />
                   View Projects
