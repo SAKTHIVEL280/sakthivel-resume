@@ -12,9 +12,18 @@ interface HeroSectionProps {
 const HeroSection = ({ isDark }: HeroSectionProps) => {
   return (
     <section id="hero" className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
-      <Waves 
-        lineColor={isDark ? 'rgba(156, 163, 175, 0.4)' : 'rgba(107, 114, 128, 0.3)'} 
-        backgroundColor="transparent"
+      <Waves
+        lineColor="#fff"
+        backgroundColor="rgba(255, 255, 255, 0.2)"
+        waveSpeedX={0.02}
+        waveSpeedY={0.01}
+        waveAmpX={40}
+        waveAmpY={20}
+        friction={0.9}
+        tension={0.01}
+        maxCursorMove={120}
+        xGap={12}
+        yGap={36}
         className="absolute inset-0 z-0"
       />
       
