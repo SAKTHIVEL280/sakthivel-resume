@@ -33,8 +33,8 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
             <div className="mb-4">
               <TextPressure 
                 text="SAKTHIVEL E"
-                textColor={isDark ? '#ffffff' : '#1f2937'}
-                strokeColor={isDark ? '#4b5563' : '#6b7280'}
+                textColor={isDark ? '#60a5fa' : '#3b82f6'}
+                strokeColor={isDark ? '#1e40af' : '#1d4ed8'}
                 stroke={true}
                 minFontSize={72}
                 className="leading-none"
@@ -46,8 +46,8 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
             <div className="mb-8">
               <TextPressure 
                 text="AI ENTHUSIAST"
-                textColor={isDark ? '#9ca3af' : '#374151'}
-                strokeColor={isDark ? '#6b7280' : '#4b5563'}
+                textColor={isDark ? '#93c5fd' : '#2563eb'}
+                strokeColor={isDark ? '#3b82f6' : '#1e40af'}
                 stroke={false}
                 minFontSize={16}
                 className="leading-none"
@@ -57,7 +57,9 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
 
           <ScrollReveal direction="up" delay={0.6}>
             <div className="mb-12 max-w-4xl mx-auto">
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+              <p className={`text-xl md:text-2xl leading-relaxed ${
+                isDark ? 'text-blue-200' : 'text-blue-700'
+              }`}>
                 Passionate about building innovative AI-powered tools and platforms that blend artificial intelligence, automation, and user-focused design to create meaningful digital experiences.
               </p>
             </div>
