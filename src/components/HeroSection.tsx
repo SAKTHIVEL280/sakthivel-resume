@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
 import ScrollReveal from '@/components/ScrollReveal';
+import FloatingParticles from '@/components/FloatingParticles';
 
 interface HeroSectionProps {
   isDark: boolean;
@@ -12,6 +13,13 @@ interface HeroSectionProps {
 const HeroSection = ({ isDark }: HeroSectionProps) => {
   return (
     <section id="hero" className="pt-20 pb-20 px-4 sm:px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Floating Particles Background */}
+      <FloatingParticles 
+        particleCount={200} 
+        isDark={isDark}
+        className="opacity-60"
+      />
+      
       <Waves
         lineColor={isDark ? 'rgba(59, 130, 246, 0.4)' : 'rgba(37, 99, 235, 0.6)'}
         backgroundColor={isDark ? 'rgba(17, 24, 39, 0.05)' : 'rgba(239, 246, 255, 0.1)'}
@@ -24,11 +32,11 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
         maxCursorMove={100}
         xGap={14}
         yGap={32}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-[1]"
       />
       
       {/* Gradient overlay for better text contrast */}
-      <div className={`absolute inset-0 z-[1] ${
+      <div className={`absolute inset-0 z-[2] ${
         isDark 
           ? 'bg-gradient-to-br from-gray-900/80 via-gray-900/40 to-blue-900/60' 
           : 'bg-gradient-to-br from-white/85 via-blue-50/70 to-indigo-100/80'
@@ -87,7 +95,7 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
               <Button 
                 asChild 
                 size="lg" 
-                className={`hover:scale-105 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg w-full sm:w-auto ${
+                className={`hover:scale-105 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg w-full sm:w-auto backdrop-blur-sm ${
                   isDark 
                     ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 shadow-blue-500/25' 
                     : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-blue-500/30'
