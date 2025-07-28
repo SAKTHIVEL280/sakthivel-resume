@@ -1,6 +1,6 @@
+
 import { Mail, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
 import TextPressure from '@/components/TextPressure';
 import Waves from '@/components/Waves';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -10,28 +10,6 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ isDark }: HeroSectionProps) => {
-  const navigate = useNavigate();
-
-  const handleContactClick = () => {
-    navigate('/sections#contact');
-    setTimeout(() => {
-      const element = document.getElementById('contact');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
-
-  const handleProjectsClick = () => {
-    navigate('/sections#projects');
-    setTimeout(() => {
-      const element = document.getElementById('projects');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
-
   return (
     <section id="hero" className="pt-20 pb-20 px-4 sm:px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
       <Waves
@@ -49,6 +27,7 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
         className="absolute inset-0 z-0"
       />
       
+      {/* Gradient overlay for better text contrast */}
       <div className={`absolute inset-0 z-[1] ${
         isDark 
           ? 'bg-gradient-to-br from-gray-900/80 via-gray-900/40 to-blue-900/60' 
@@ -106,7 +85,7 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
           <ScrollReveal direction="up" delay={0.8}>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
               <Button 
-                onClick={handleContactClick}
+                asChild 
                 size="lg" 
                 className={`hover:scale-105 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg w-full sm:w-auto ${
                   isDark 
@@ -114,11 +93,13 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
                     : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-blue-500/30'
                 }`}
               >
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Get In Touch
+                <a href="#contact">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  Get In Touch
+                </a>
               </Button>
               <Button 
-                onClick={handleProjectsClick}
+                asChild 
                 variant="outline" 
                 size="lg" 
                 className={`hover:scale-105 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto ${
@@ -127,8 +108,10 @@ const HeroSection = ({ isDark }: HeroSectionProps) => {
                     : 'border-slate-400 text-slate-700 hover:bg-slate-100 hover:border-slate-500 backdrop-blur-sm'
                 } shadow-lg backdrop-blur-sm`}
               >
-                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                View Projects
+                <a href="#projects">
+                  <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  View Projects
+                </a>
               </Button>
             </div>
           </ScrollReveal>
